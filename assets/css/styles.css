@@ -1,0 +1,32 @@
+body {
+  background-image: url(../images/fons.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.dropdown-menu[data-bs-popper] {
+  min-width: unset;
+  left: -0.3rem;
+}
+
+li > a > i {
+  margin-right: 0.5rem;
+}
+
+.vertical-bar {
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+
+.navbar-brand {
+  margin-right: 0.5rem;
+
+  h4 {
+    margin-bottom: 0;
+  }
+}
+
+.nom-pagina {
+  margin: 0;
+  margin-left: 0.5rem;
+}
