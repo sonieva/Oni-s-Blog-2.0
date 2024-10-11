@@ -13,6 +13,7 @@ $userLogged = isset($_SESSION['user_id']);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <base href="<?php echo BASE_PATH . '/' ?>">
   <title>Oni's Blog 2.0 | <?php echo Config::getTitol() ?></title>
+  <link rel="icon" href="assets/images/logo.png" type="image/x-icon">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -25,7 +26,7 @@ $userLogged = isset($_SESSION['user_id']);
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
 
-      <a class="navbar-brand row align-items-center" href="#">
+      <a class="navbar-brand row align-items-center" href="<?php echo BASE_PATH ?>">
         <img src="assets/images/logo.png" alt="Logo" width="40" height="40" class="d-inline-block align-text-top col-auto">
         <h4 class="col-auto px-0">Oni's Blog 2.0</h4>
       </a>
@@ -37,20 +38,20 @@ $userLogged = isset($_SESSION['user_id']);
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
 
-          <li class="nav-item"><a class="nav-link" href="<?php echo BASE_PATH ?>"><i class="bi bi-house-door-fill"></i>Inici</a></li>
+          <li class="nav-item"><a class="nav-link" href="<?php echo BASE_PATH ?>"><i class="bi bi-house-door-fill pe-2"></i>Inici</a></li>
 
           <li class="nav-item dropdown-center">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-              <i class="bi bi-person-fill"></i>No loguejat
+              <i class="bi bi-person-fill pe-2"></i>No loguejat
             </a>
 
             <ul class="dropdown-menu">
               <? if ($userLogged): ?>
-                <li><a class="dropdown-item" href="#"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
-                <li><a class="dropdown-item" href="auth/logout.php"><i class="bi bi-box-arrow-in-left"></i>Tancar sessió</a></li>
+                <li><a class="dropdown-item" href="#"><i class="bi bi-speedometer2 pe-2"></i>Dashboard</a></li>
+                <li><a class="dropdown-item" href="auth/logout.php"><i class="bi bi-box-arrow-in-left pe-2"></i>Tancar sessió</a></li>
               <? else: ?>
-                <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-in-right"></i>Iniciar sessio</a></li>
-                <li><a class="dropdown-item" href="view/register.view.php"><i class="bi bi-person-plus-fill"></i>Crear compte</a></li>
+                <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-in-right pe-2"></i>Iniciar sessio</a></li>
+                <li><a class="dropdown-item" href="view/register.view.php"><i class="bi bi-person-plus-fill pe-2"></i>Crear compte</a></li>
               <? endif; ?>
             </ul>
           </li>
