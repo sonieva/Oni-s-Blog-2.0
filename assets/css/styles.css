@@ -1,7 +1,11 @@
+ul.dropdown-menu li {
+  --bs-dropdown-link-active-bg: chocolate !important;
+}
+
 body {
   background-image: url(../images/fons.png);
-  background-repeat: no-repeat;
-  background-size: cover;
+  /* background-repeat: repeat; */
+  /* background-size: contain; */
 }
 
 .dropdown-menu[data-bs-popper] {
@@ -29,4 +33,25 @@ li > a > i {
 .nom-pagina {
   margin: 0;
   margin-left: 0.5rem;
+}
+
+.form-registre {
+  max-width: 40rem;
+  margin-top: 6rem;
+  background-color: white;
+  border: 1px chocolate solid;
+
+  form div.input{
+    width: 25.7rem;
+  }
+
+  button {
+    width: 100%;
+    border: unset;
+    background-color: chocolate;
+  }
+
+  button:hover {
+    background-color: #df813e;
+  }
 }

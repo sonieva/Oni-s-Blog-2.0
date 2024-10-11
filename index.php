@@ -1,3 +1,5 @@
 <?
-define('BASE_PATH', $_SERVER['REQUEST_URI']);
+include_once 'config/Config.php';
+Config::setTitol('Inici');
+
 include 'view/header.php';
