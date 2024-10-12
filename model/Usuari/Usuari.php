@@ -5,9 +5,9 @@ class Usuari {
   private string $alies;
   private string $email;
   private string $password;
-  private string $nom_complet;
+  private ?string $nom_complet;
 
-  public function __construct(string $alies, string $email, string $password, string $nom_complet, ?int $id = null) {
+  public function __construct(string $alies, string $email, string $password, ?string $nom_complet = null, ?int $id = null) {
     $this->id = $id;
     $this->alies = $alies;
     $this->email = $email;

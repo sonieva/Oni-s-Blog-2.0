@@ -1,9 +1,8 @@
 <?
 // Santi Onieva
-
 session_start();
 // $_SESSION['user_id'] = 1;
-$userLogged = isset($_SESSION['user_id']);
+$userLogged = isset($_SESSION['usuari']);
 ?>
 
 <!DOCTYPE html>
@@ -15,48 +14,50 @@ $userLogged = isset($_SESSION['user_id']);
   <title>Oni's Blog 2.0 | <?php echo Config::getTitol() ?></title>
   <link rel="icon" href="assets/images/logo.png" type="image/x-icon">
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="assets/css/styles.css">
+
+  <script defer src="assets/js/navbar-dropdown.js"></script>
 </head>
 <body>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-  
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
+  <nav class="navbar">
 
-      <a class="navbar-brand row align-items-center" href="<?php echo BASE_PATH ?>">
-        <img src="assets/images/logo.png" alt="Logo" width="40" height="40" class="d-inline-block align-text-top col-auto">
-        <h4 class="col-auto px-0">Oni's Blog 2.0</h4>
+    <div class="logo">
+      <a class="logo" href="<?php echo BASE_PATH ?>">
+        <img src="assets/images/logo.png" alt="Logo" width="40" height="40" class="logo-img">
+        <h4 class="logo-name">Oni's Blog 2.0</h4>
       </a>
 
       <h2 class="vertical-bar">|</h2>
 
-      <h4 class="nom-pagina"><?php echo Config::getTitol() ?></h4>
+      <h4 class="nom-pantalla"><?php echo Config::getTitol() ?></h4>
+    </div>
 
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
+    <div class="nav-items">
+      <a class="nav-item" href="<?php echo BASE_PATH ?>">
+        <i class="fa-solid fa-house"></i> Inici
+      </a>
 
-          <li class="nav-item"><a class="nav-link" href="<?php echo BASE_PATH ?>"><i class="bi bi-house-door-fill pe-2"></i>Inici</a></li>
+      <div class="nav-item">
+        <button id="dropdown-toggle">
+            <i class="fa-solid fa-user"></i> <? echo $userLogged ? $_SESSION['usuari'] : 'Identifica\'t'?> <i id="caret" class="fa-solid fa-caret-left"></i>
+        </button>
 
-          <li class="nav-item dropdown-center">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-              <i class="bi bi-person-fill pe-2"></i>No loguejat
+        <div id="dropdown" class="dropdown-content">
+          <? if ($userLogged): ?>
+            <a class="dropdown-item" href="#"><i class="bi bi-speedometer2 pe-2"></i>Dashboard</a>
+            <a class="dropdown-item" href="auth/logout.php"><i class="bi bi-box-arrow-in-left pe-2"></i>Tancar sessió</a>
+          <? else: ?>
+            <a class="dropdown-item" href="view/login.view.php">
+              <i class="fa-solid fa-right-to-bracket"></i> Iniciar sessio
             </a>
-
-            <ul class="dropdown-menu">
-              <? if ($userLogged): ?>
-                <li><a class="dropdown-item" href="#"><i class="bi bi-speedometer2 pe-2"></i>Dashboard</a></li>
-                <li><a class="dropdown-item" href="auth/logout.php"><i class="bi bi-box-arrow-in-left pe-2"></i>Tancar sessió</a></li>
-              <? else: ?>
-                <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-in-right pe-2"></i>Iniciar sessio</a></li>
-                <li><a class="dropdown-item" href="view/register.view.php"><i class="bi bi-person-plus-fill pe-2"></i>Crear compte</a></li>
-              <? endif; ?>
-            </ul>
-          </li>
-
-        </ul>
+            <a class="dropdown-item" href="view/register.view.php">
+              <i class="fa-solid fa-user-plus"></i> Crear compte
+            </a>
+          <? endif; ?>
+        </div>
       </div>
+
     </div>
   </nav>

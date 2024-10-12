@@ -2,7 +2,7 @@
 
 require_once 'Usuari.php';
 
-class UsuariDTO {
+class UsuariDAO {
   private PDO $pdo;
 
   public function __construct(PDO $pdo) {
@@ -10,13 +10,12 @@ class UsuariDTO {
   }
 
   public function inserir(Usuari $usuari) {
-    $sentenciaAfegir = $this->pdo->prepare("INSERT INTO usuaris (alies, email, password, nom_complet) VALUES (:alies, :email, :password, :nom_complet)");
+    $sentenciaAfegir = $this->pdo->prepare("INSERT INTO usuaris (alies, email, password) VALUES (:alies, :email, :password)");
 
     return $sentenciaAfegir->execute([
       'alies' => $usuari->getAlies(),
       'email' => $usuari->getEmail(),
       'password' => $usuari->getPassword(),
-      'nom_complet' => $usuari->getNomComplet()
     ]);
   }
 

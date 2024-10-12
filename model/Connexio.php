@@ -19,7 +19,7 @@ class Connexio {
   }
 
   // Mètode per obtenir la instància de la connexió a la base de dades per no haver de fer una nova connexió cada vegada
-  public static function getInstance() {
+  public static function getInstance(): Connexio {
     if (self::$instance == null) {
       self::$instance = new Connexio();
     }
@@ -28,7 +28,7 @@ class Connexio {
   }
 
   // Metode per obtenir la connexió a la base de dades
-  public function getConnection() {
+  public function getConnection(): PDO {
     return $this->pdo;
   }
 }
