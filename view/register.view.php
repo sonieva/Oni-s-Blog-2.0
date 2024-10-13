@@ -2,7 +2,7 @@
 include_once '../config/Config.php';
 Config::setTitol('Registre');
 
-include 'header.php';
+include 'components/header.php';
 
 if (isset($_SESSION['dadesRegistre'])) {
   $alies = $_SESSION['dadesRegistre']['alies'];

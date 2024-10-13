@@ -46,8 +46,12 @@ $userLogged = isset($_SESSION['usuari']);
 
         <div id="dropdown" class="dropdown-content">
           <? if ($userLogged): ?>
-            <a class="dropdown-item" href="#"><i class="bi bi-speedometer2 pe-2"></i>Dashboard</a>
-            <a class="dropdown-item" href="auth/logout.php"><i class="bi bi-box-arrow-in-left pe-2"></i>Tancar sessió</a>
+            <a class="dropdown-item" href="view/dashboard.view.php">
+              <i class="fa-solid fa-gauge-high"></i> Dashboard
+            </a>
+            <a class="dropdown-item" href="auth/logout.php">
+              <i class="fa-solid fa-right-from-bracket"></i> Sortir
+            </a>
           <? else: ?>
             <a class="dropdown-item" href="view/login.view.php">
               <i class="fa-solid fa-right-to-bracket"></i> Iniciar sessio

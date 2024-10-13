@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $_SESSION['error'][] = 'El correu electrònic o la contrasenya són incorrectes';
     } else {
       if (password_verify($password, $usuari->getPassword())) {
-        $_SESSION['usuari'] = $usuari->getAlies();
+        $_SESSION['usuari'] = $usuari->getNomComplet() ?? $usuari->getAlies();
         header('Location: ..');
         exit;
       } else {

@@ -1,8 +1,8 @@
 <?php
-include_once '../config/Config.php';
+require_once '../config/Config.php';
 Config::setTitol('Login');
 
-include 'header.php';
+include 'components/header.php';
 
 if (isset($_SESSION['dadesLogin'])) {
   $email = $_SESSION['dadesLogin']['email'];

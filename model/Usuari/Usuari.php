@@ -19,40 +19,36 @@ class Usuari {
     return $this->id;
   }
 
-  public function setId($id) {
-      $this->id = $id;
-  }
-
   public function getAlies() {
-      return $this->alies;
+    return $this->alies;
   }
 
   public function setAlies($alies) {
-      $this->alies = $alies;
+    $this->alies = $alies;
   }
 
   public function getEmail() {
-      return $this->email;
+    return $this->email;
   }
 
   public function setEmail($email) {
-      $this->email = $email;
+    $this->email = $email;
   }
 
   public function getPassword() {
-      return $this->password;
+    return $this->password;
   }
 
   public function setPassword($password) {
-      $this->password = $password;
+    $this->password = $password;
   }
 
   public function getNomComplet() {
-      return $this->nom_complet;
+    return $this->nom_complet;
   }
 
   public function setNomComplet($nom_complet) {
-      $this->nom_complet = $nom_complet;
+    $this->nom_complet = $nom_complet;
   }
 
 }
