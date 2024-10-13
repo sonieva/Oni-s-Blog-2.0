@@ -19,6 +19,8 @@ $userLogged = isset($_SESSION['usuari']);
   <link rel="stylesheet" href="assets/css/styles.css">
 
   <script defer src="assets/js/navbar-dropdown.js"></script>
+  <script defer src="assets/js/btn-imatge.js"></script>
+
 </head>
 <body>
   <nav class="navbar">
