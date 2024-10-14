@@ -30,7 +30,7 @@ function getDiaSetmana() {
     'Diumenge',
   ];
 
-  return $diesSetmana[date('N') - 1];
+  return $diesSetmana[date('N')];
 }
 
 $llistatBenvingudes = [
@@ -45,30 +45,52 @@ $llistatBenvingudes = [
 ?>
 
 <div class="dashboard">
-  <h1 class="benvinguda"><?= $llistatBenvingudes[array_rand($llistatBenvingudes)] . ', ' . $_SESSION['usuari'] ?></h1>
+  <h1 class="benvinguda"><?= $llistatBenvingudes[array_rand($llistatBenvingudes)] . ', ' . $_SESSION['usuari']->getNomComplet() ??  $_SESSION['usuari']->getAlies() ?></h1>
+
+  <hr>
+
+  <h2>Afegir article</h2>
 
   <div class="apartats-titol">
-    <h3>Afegir article</h3>
+    <h3>Editar article</h3>
     <h3>Vista previa</h3>
   </div>
 
-  <div class="form-afegir">
-    <form action="" method="POST">
 
-      <label for="titol">Títol</label>
-      <input type="text" name="titol" required>
+  <div class="apartats">
+    <div class="form-afegir">
+      <form action="" method="POST" id="form-afegir">
+  
+        <label for="titol">Títol</label>
+        <input type="text" name="titol" id="titolArticle" required>
+  
+        <label for="cos">Cos</label>
+        <textarea name="cos" rows="10" id="cosArticle" required></textarea>
+  
+        <label for="imatge">Imatge</label>
+        <div class="imatge">
+          <button type="button" class="btn-imatge" id="btn-imatge">Examinar</button>
+          <p id="nom-imatge"></p>
+        </div>
+        <input type="file" name="imatge" id="imatge-input" required>
+  
+        <button type="submit">Afegir</button>
+      </form>
+    </div>
+  
+    <div class="vista-previa">
+      <article>
 
-      <label for="contingut">Contingut</label>
-      <textarea name="contingut" rows="10" required></textarea>
+        <figure>
+          <img src="<?= BASE_PATH ?>/assets/images/placeholder.png" alt="Imatge no disponible" id="imatge-preview"/>
+        </figure>
 
-      <label for="imatge">Imatge</label>
-      <div class="imatge">
-        <button type="button" class="btn-imatge" id="btn-imatge">Examinar</button>
-        <p id="nom-imatge"></p>
-      </div>
-      <input type="file" name="imatge" id="imatge-input" required>
+        <div class="article-body" id="article-body">
+          <h2 id="titol-preview">Títol de l'article</h2>
+          <p id="cos-preview">Cos de l'article</p>
+        </div>
 
-      <button type="submit">Afegir</button>
-    </form>
+      </article>
+    </div>
   </div>
 </div>

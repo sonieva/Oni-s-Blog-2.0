@@ -13,15 +13,15 @@ if (isset($_SESSION['dadesLogin'])) {
 <div class="form-login">
   <h1>Iniciar sessió</h1>
 
-  <?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])): ?>
+  <?php if (isset($_SESSION['errorsLogin']) && !empty($_SESSION['errorsLogin'])): ?>
     <div class="missatge-error">
       <ul>
-        <?php foreach ($_SESSION['error'] as $error): ?>
+        <?php foreach ($_SESSION['errorsLogin'] as $error): ?>
           <li><?php echo $error ?></li>
         <?php endforeach; ?>
       </ul>
     </div>
-    <?php unset($_SESSION['error']); ?>
+    <?php unset($_SESSION['errorsLogin']); ?>
   <?php endif; ?>
     
   <form action="auth/login.php" method="POST">

@@ -2,7 +2,7 @@
 require_once '../model/Connexio.php';
 require_once '../model/Usuari/UsuariDAO.php';
 
-$_SESSION['error'] = [];
+$_SESSION['errorsLogin'] = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   session_start();
@@ -14,25 +14,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $password = $_POST['password'];
 
   if (empty($email)) {
-    $_SESSION['error'][] = 'El correu electrònic és obligatori';
+    $_SESSION['errorsLogin'][] = 'El correu electrònic és obligatori';
   }
 
   if (empty($password)) {
-    $_SESSION['error'][] = 'La contrasenya és obligatòria';
+    $_SESSION['errorsLogin'][] = 'La contrasenya és obligatòria';
   }
 
   if (!empty($email) && !empty($password)) {
     $usuari = $usuariDAO->getUsuariPerEmail($email);
 
     if ($usuari === null) {
-      $_SESSION['error'][] = 'El correu electrònic o la contrasenya són incorrectes';
+      $_SESSION['errorsLogin'][] = 'El correu electrònic o la contrasenya són incorrectes';
     } else {
       if (password_verify($password, $usuari->getPassword())) {
-        $_SESSION['usuari'] = $usuari->getNomComplet() ?? $usuari->getAlies();
+        $_SESSION['usuari'] = $usuari;
         header('Location: ..');
         exit;
       } else {
-        $_SESSION['error'][] = 'El correu electrònic o la contrasenya són incorrectes';
+        $_SESSION['errorsLogin'][] = 'El correu electrònic o la contrasenya són incorrectes';
       }
     }
   }

@@ -1,5 +1,8 @@
 <?
 // Santi Onieva
+
+require_once $_SERVER['DOCUMENT_ROOT'] . BASE_PATH . '/model/Usuari/Usuari.php';
+
 session_start();
 // $_SESSION['user_id'] = 1;
 $userLogged = isset($_SESSION['usuari']);
@@ -20,6 +23,8 @@ $userLogged = isset($_SESSION['usuari']);
 
   <script defer src="assets/js/navbar-dropdown.js"></script>
   <script defer src="assets/js/btn-imatge.js"></script>
+  <script defer src="assets/js/article-preview.js"></script>
+
 
 </head>
 <body>
@@ -43,7 +48,7 @@ $userLogged = isset($_SESSION['usuari']);
 
       <div class="nav-item">
         <button id="dropdown-toggle">
-            <i class="fa-solid fa-user"></i> <? echo $userLogged ? $_SESSION['usuari'] : 'Identifica\'t'?> <i id="caret" class="fa-solid fa-caret-left"></i>
+            <i class="fa-solid fa-user"></i> <? echo $userLogged ? $_SESSION['usuari']->getNomComplet() ??  $_SESSION['usuari']->getAlies() : 'Identifica\'t'?> <i id="caret" class="fa-solid fa-caret-left"></i>
         </button>
 
         <div id="dropdown" class="dropdown-content">

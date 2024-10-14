@@ -224,6 +224,7 @@ button#dropdown-toggle {
   }
 }
 
+
 .dashboard {
   width: 1470px;
   padding: 25px 25px;
@@ -237,6 +238,11 @@ button#dropdown-toggle {
     margin-bottom: 25px;
   }
 
+  hr + h2 {
+    text-align: center;
+    margin: 25px 0;
+  }
+
   .apartats-titol {
     display: flex;
     width: 100%;
@@ -248,59 +254,156 @@ button#dropdown-toggle {
     }
   }
 
-  .form-afegir {
-    width: 650px;
-    margin: 15px 0;
+  .apartats {
+    display: flex;
+    gap: 120px;
+    justify-content: space-between;
+    align-items: center;
 
-    form label:first-child {
-      margin-top: 0;
-    }
-
-    input:not([type="file"]), textarea {
-      color: #1d1d1d;
-      font-size: 16px;
-      font-weight: 500;
-      width: 100%;
-      height: 46px;
-      letter-spacing: 0.03rem;
-      border: 1px solid #1d1d1d;
-      background: transparent;
-      outline: none;
-      border-radius: 8px;
-      text-indent: 20px;
-      margin-top: 6px;
-      transition: all 0.3s ease;
-    }
-
-    textarea {
-      transition: unset;
-      height: unset;
-      resize: none;
-      padding: 10px 15px;
-      text-indent: unset;
-    }
-
-    .imatge {
-      display: flex;
-      margin-top: 6px;
-      align-items: center;
-
-      .btn-imatge {
-        margin-top: unset;
-        width: 20%;
-        font-size: 14px;
-        line-height: 35px;
-      }
-
-      p {
-        margin-left: 10px;
-        width: 78%;
-      }
+    > div {
+      margin: 15px 0;
     }
     
+    .form-afegir {
+      width: 650px;
+  
+      form label:first-child {
+        margin-top: 0;
+      }
+  
+      input:not([type="file"]), textarea {
+        color: #1d1d1d;
+        font-size: 16px;
+        font-weight: 500;
+        width: 100%;
+        height: 46px;
+        letter-spacing: 0.03rem;
+        border: 1px solid #1d1d1d;
+        background: transparent;
+        outline: none;
+        border-radius: 8px;
+        text-indent: 20px;
+        margin-top: 6px;
+        transition: all 0.3s ease;
 
-    input[type="file"] {
-      display: none;
+      }
+      
+      input:focus, textarea:focus {
+        border-color: chocolate;
+      }
+  
+      textarea {
+        transition: unset;
+        height: unset;
+        resize: none;
+        padding: 10px 15px;
+        text-indent: unset;
+      }
+  
+      .imatge {
+        display: flex;
+        margin-top: 6px;
+        align-items: center;
+  
+        .btn-imatge {
+          margin-top: unset;
+          width: 20%;
+          font-size: 14px;
+          line-height: 35px;
+        }
+  
+        p {
+          margin-left: 10px;
+          width: 78%;
+        }
+      }
+      
+  
+      input[type="file"] {
+        display: none;
+      }
+    }
+
+    .vista-previa {
+      width: 500px;
+
+      article {
+        --img-scale: 1.001;
+        --link-icon-translate: -20px;
+        --link-icon-opacity: 0;
+        position: relative;
+        border-radius: 16px;
+        box-shadow: none;
+        background: #fff;
+        transform-origin: center;
+        transition: all 0.4s ease-in-out;
+        overflow: hidden;
+        max-width: 75%;
+        box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+
+        :has(:hover, :focus) {
+          --img-scale: 1.1;
+          --link-icon-translate: 0;
+          --link-icon-opacity: 1;
+        }
+
+        figure {
+          margin: 0;
+          padding: 0;
+          aspect-ratio: 15 / 9;
+          overflow: hidden;
+  
+          img {
+            width: 100%;
+            height: 100%;
+            transform-origin: center;
+            transform: scale(var(--img-scale));
+            transition: transform 0.4s ease-in-out;
+          }
+        }
+
+      }
+      
+      .article-body {
+        padding: 24px;
+
+        h2 {
+          font-size: 1.4rem;
+          letter-spacing: 0.06em;
+          color: black;
+          transition: color 0.3s ease-out;
+          word-wrap: break-word;
+          word-break: break-all;
+          white-space: normal;
+        }
+
+        p {
+          margin: 10px 0;
+          font-size: small;
+          word-wrap: break-word;
+          word-break: break-all;
+          white-space: normal;
+        }
+
+        a {
+          display: inline-flex;
+          align-items: center;
+          text-decoration: none;
+          color: #28666e;
+
+          :focus {
+            outline: 1px dotted #28666e;
+          }
+
+          i {
+            min-width: 24px;
+            margin-left: 6px;
+            transform: translateX(var(--link-icon-translate));
+            opacity: var(--link-icon-opacity);
+            transition: all 0.3s;
+          }
+        }
+      } 
     }
   }
 }
