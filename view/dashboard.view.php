@@ -39,7 +39,19 @@ $articles = $articleDAO->getArticlePerAutor($_SESSION['usuari']->getId());
 
   <div class="apartats">
     <div class="form-afegir">
-      <form action="controller/article.controller.php?action=add" method="POST" id="form-afegir" enctype="multipart/form-data">
+
+      <?php if (isset($_SESSION['errorAdd']) && !empty($_SESSION['errorAdd'])): ?>
+        <div class="missatge-error">
+          <ul>
+            <?php foreach ($_SESSION['errorAdd'] as $error): ?>
+              <li><?php echo $error ?></li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+        <?php unset($_SESSION['errorAdd']); ?>
+      <?php endif; ?>
+
+      <form action="controller/article.controller.php?action=add&autor=<?= $_SESSION['usuari']->getId() ?>" method="POST" id="form-afegir" enctype="multipart/form-data">
   
         <label for="titol">Títol</label>
         <input type="text" name="titol" id="titolArticle" required>
@@ -76,13 +88,13 @@ $articles = $articleDAO->getArticlePerAutor($_SESSION['usuari']->getId());
 
   <hr>
 
-  <h2>Llistat d'articles publicats</h2>
+  <h2>Articles publicats per mi</h2>
 
   <div class="llistat-articles">
-    <?php foreach ($articles as $article) { ?>
+    <?php foreach ($articles as $article): ?>
       <article>
         <figure>
-          <img src="<?= BASE_PATH . '/assets/images/' . $article->getRutaImatge() ?>" alt="<?= $article->getTitol() ?>">
+          <img src="<?= BASE_PATH . $article->getRutaImatge() ?>" alt="<?= $article->getTitol() ?>">
         </figure>
 
         <div class="article-body">
@@ -90,7 +102,5 @@ $articles = $articleDAO->getArticlePerAutor($_SESSION['usuari']->getId());
           <p><?= $article->getCos() ?></p>
         </div>
       </article>
-    <?php
-    }
-    ?>
+    <?php endforeach; ?>
 </div>

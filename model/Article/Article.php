@@ -5,8 +5,8 @@ class Article {
   private ?int $id;
   private string $titol;
   private string $cos;
-  private DateTime $data_creacio;
-  private DateTime $data_modificacio;
+  private ?DateTime $data_creacio;
+  private ?DateTime $data_modificacio;
   private int $id_autor;
   private string $ruta_imatge;
 

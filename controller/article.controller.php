@@ -3,8 +3,6 @@
 
 session_start();
 
-$allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (isset($_GET['action'])) {
     switch ($_GET['action']) {
@@ -21,12 +19,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           break;
     }
   }
+} else {
+  header('Location: ../view/dashboard.view.php');
+  exit();
 }
 
 function crearArticulo($titol, $cos, $imatge) {
-  global $allowedExtensions;
-
   $_SESSION['errorAdd'] = [];
+
+  if (!isset($_GET['autor']) || empty($_GET['autor'] || !is_numeric($_GET['autor']))) {
+    $_SESSION['errorAdd'][] = 'No s\'ha pogut trobar l\'autor de l\'article';
+  }
 
   if (empty($titol) || empty($cos) || empty($imatge)) {
     $_SESSION['errorAdd'][] = 'Falten camps per omplir';
@@ -40,19 +43,14 @@ function crearArticulo($titol, $cos, $imatge) {
     $_SESSION['errorAdd'][] = 'No s\'ha pogut pujar la imatge';
   }
 
-  $fileType = mime_content_type($_FILES['imatge']['tmp_name']);
+  $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
   $fileExtension = strtolower(pathinfo($_FILES['imatge']['name'], PATHINFO_EXTENSION));
-  $imageData = getimagesize($_FILES['imatge']['tmp_name']);
 
-  if (strpos($fileType, 'image/') !== 0 && !in_array($fileExtension, $allowedExtensions) && $imageData == false) {
-    $_SESSION['errorAdd'][] = 'L\'arxiu no és una imatge vàlida o no té una extensió vàlida';
+  if (!in_array($fileExtension, $allowedExtensions)) {
+    $_SESSION['errorAdd'][] = 'L\'arxiu no té una extensió vàlida';
   }
 
-  $uploadDirectory = '../uploads/'; // Carpeta de destino en tu servidor
-  $filename = basename($_FILES['imatge']['name']); // Obtiene el nombre del archivo original
-  $destination = $uploadDirectory . $filename;
-
-  if (!move_uploaded_file($_FILES['imatge']['tmp_name'], $destination)) {
+  if (!move_uploaded_file($_FILES['imatge']['tmp_name'], '../uploads/' . basename($_FILES['imatge']['name']))) {
     $_SESSION['errorAdd'][] = 'No s\'ha pogut pujar la imatge al servidor';
   }
 
@@ -61,10 +59,11 @@ function crearArticulo($titol, $cos, $imatge) {
     exit();
   }
 
-  require_once '../model/Article.php';
-  require_once '../model/ArticleDAO.php';
+  require_once '../model/Usuari/Usuari.php';
+  require_once '../model/Article/Article.php';
+  require_once '../model/Article/ArticleDAO.php';
 
-  $article = new Article($titol, $cos, $_SESSION['usuari']->getId(), $_FILES['imatge']['name']);
+  $article = new Article($titol, $cos, $_GET['autor'], '/uploads/' . $_FILES['imatge']['name']);
   
   $articleDAO = new ArticleDAO();
 
