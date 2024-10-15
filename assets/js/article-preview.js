@@ -7,41 +7,34 @@ function enviarFormulario() {
   })
   .then(response => response.text())
   .then(data => {
-      const article = JSON.parse(data);
-      console.log(article);
-      console.log("Longitud de cos:", article.cos.length);
+    const article = JSON.parse(data);
 
-      if (article.cos.length > 100) {
-          previewCos.innerText = article.cos.slice(0, 100) + '...';
-      } else {
-          previewCos.innerText = article.cos;
+    previewTitol.innerText = article.titol ?? 'Títol de l\'article';
+    
+    if (article.cos && article.cos.length > 100) {
+      previewCos.innerText = article.cos.slice(0, 100) + '...';
+
+      if (document.getElementsByClassName('read-more').length === 0) {
+        const readMore = document.createElement('a');
+        readMore.href = '';
+        readMore.classList.add('read-more');
+        readMore.id = 'continua-llegint';
+        readMore.innerHTML = 'Continua llegint <i class="fa-solid fa-arrow-right"></i>';
+        
+        articleBody.appendChild(readMore);
       }
+    } else {
+      previewCos.innerText = article.cos ?? 'Cos de l\'article';
 
-      console.log("Texto asignado a previewCos:", previewCos.innerText);
-
-      previewTitol.innerText = article.titol;
-      
-      if (article.titol.length === 0) previewTitol.innerText = 'Títol de l\'article';
-      if (article.cos.length < 1) previewCos.innerText = 'Cos de l\'article';
-
-      if (article.cos.length > 100 ) {
-        if (document.getElementsByClassName('read-more').length === 0) {
-          const readMore = document.createElement('a');
-          readMore.href = '#';
-          readMore.classList.add('read-more');
-          readMore.id = 'continua-llegint';
-          readMore.innerHTML = 'Continua llegint <i class="fa-solid fa-arrow-right"></i>';
-          
-          articleBody.appendChild(readMore);
-        }
-      } else {
-        if (document.getElementById('continua-llegint')) {
-          articleBody.removeChild(document.getElementById('continua-llegint'));
-        }
+      if (document.getElementById('continua-llegint')) {
+        articleBody.removeChild(document.getElementById('continua-llegint'));
       }
+    }
+    
+    if (article.imatge) {
+      previewImatge.src = article.imatge.slice(3);
       
-      if (article.imatge) previewImatge.src = article.imatge.slice(3);
-
+    }
   })
   .catch(error => console.error('Error:', error));
 }

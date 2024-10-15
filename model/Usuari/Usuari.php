@@ -1,4 +1,5 @@
 <?php
+// Santi Onieva
 
 class Usuari {
   private ?int $id;

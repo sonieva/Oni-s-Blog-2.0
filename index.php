@@ -1,4 +1,6 @@
 <?
+// Santi Onieva
+
 include_once 'config/Config.php';
 Config::setTitol('Inici');
 

@@ -1,37 +1,15 @@
 <?
+// Santi Onieva
+
 require_once '../config/Config.php';
 Config::setTitol('Dashboard');
+
+require_once '../config/utils.php';
 
 require_once '../model/Article/Article.php';
 require_once '../model/Article/ArticleDAO.php';
 
 include 'components/header.php';
-
-function getHoraDelDia() {
-  $hora = date('H');
-
-  if ($hora >= 6 && $hora < 12) {
-    return 'matí';
-  } else if ($hora >= 12 && $hora < 20) {
-    return 'a tarda';
-  } else {
-    return 'a nit';
-  }
-}
-
-function getDiaSetmana() {
-  $diesSetmana = [
-    'Dilluns',
-    'Dimarts',
-    'Dimecres',
-    'Dijous',
-    'Divendres',
-    'Dissabte',
-    'Diumenge',
-  ];
-
-  return $diesSetmana[date('N')];
-}
 
 $llistatBenvingudes = [
   'Hola', 
@@ -42,24 +20,26 @@ $llistatBenvingudes = [
   'Hola de nou', 
 ];
 
+$articleDAO = new ArticleDAO();
+$articles = $articleDAO->getArticlePerAutor($_SESSION['usuari']->getId());
+
 ?>
 
 <div class="dashboard">
-  <h1 class="benvinguda"><?= $llistatBenvingudes[array_rand($llistatBenvingudes)] . ', ' . $_SESSION['usuari']->getNomComplet() ??  $_SESSION['usuari']->getAlies() ?></h1>
+  <h1 class="benvinguda"><?= $llistatBenvingudes[array_rand($llistatBenvingudes)] . ', ' . ($_SESSION['usuari']->getNomComplet() ?? $_SESSION['usuari']->getAlies()) ?></h1>
 
   <hr>
 
   <h2>Afegir article</h2>
 
   <div class="apartats-titol">
-    <h3>Editar article</h3>
+    <h3>Camps</h3>
     <h3>Vista previa</h3>
   </div>
 
-
   <div class="apartats">
     <div class="form-afegir">
-      <form action="" method="POST" id="form-afegir">
+      <form action="controller/article.controller.php?action=add" method="POST" id="form-afegir" enctype="multipart/form-data">
   
         <label for="titol">Títol</label>
         <input type="text" name="titol" id="titolArticle" required>
@@ -93,4 +73,24 @@ $llistatBenvingudes = [
       </article>
     </div>
   </div>
+
+  <hr>
+
+  <h2>Llistat d'articles publicats</h2>
+
+  <div class="llistat-articles">
+    <?php foreach ($articles as $article) { ?>
+      <article>
+        <figure>
+          <img src="<?= BASE_PATH . '/assets/images/' . $article->getRutaImatge() ?>" alt="<?= $article->getTitol() ?>">
+        </figure>
+
+        <div class="article-body">
+          <h2><?= $article->getTitol() ?></h2>
+          <p><?= $article->getCos() ?></p>
+        </div>
+      </article>
+    <?php
+    }
+    ?>
 </div>

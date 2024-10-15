@@ -238,6 +238,14 @@ button#dropdown-toggle {
     margin-bottom: 25px;
   }
 
+  hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, #d2691e, #ff7f50, #d2691e);
+    margin: 20px 0;
+  }
+
+
   hr + h2 {
     text-align: center;
     margin: 25px 0;

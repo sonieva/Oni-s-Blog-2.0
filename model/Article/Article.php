@@ -1,4 +1,5 @@
 <?
+// Santi Onieva
 
 class Article {
   private ?int $id;
@@ -9,7 +10,7 @@ class Article {
   private int $id_autor;
   private string $ruta_imatge;
 
-  public function __construct(string $titol, string $cos, DateTime $data_creacio, int $id_autor, string $ruta_imatge, ?DateTime $data_modificacio = null, ?int $id = null) {
+  public function __construct(string $titol, string $cos,  int $id_autor, string $ruta_imatge, ?DateTime $data_creacio = null, ?DateTime $data_modificacio = null, ?int $id = null) {
     $this->id = $id;
     $this->titol = $titol;
     $this->cos = $cos;

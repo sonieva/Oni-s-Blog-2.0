@@ -1,4 +1,6 @@
 <? 
+// Santi Onieva
+
 define('BASE_PATH', rtrim(str_replace('/view', '', dirname($_SERVER['SCRIPT_NAME'])), '/'));
 
 class Config {

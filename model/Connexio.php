@@ -1,4 +1,6 @@
 <?php
+// Santi Onieva
+
 class Connexio {
   private static $instance = null;
   private $pdo;

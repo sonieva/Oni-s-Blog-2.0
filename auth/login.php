@@ -1,4 +1,6 @@
 <?
+// Santi Onieva
+
 require_once '../model/Connexio.php';
 require_once '../model/Usuari/UsuariDAO.php';
 
@@ -30,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       if (password_verify($password, $usuari->getPassword())) {
         $_SESSION['usuari'] = $usuari;
         header('Location: ..');
-        exit;
+        exit();
       } else {
         $_SESSION['errorsLogin'][] = 'El correu electrònic o la contrasenya són incorrectes';
       }

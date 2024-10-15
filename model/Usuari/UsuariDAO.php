@@ -1,12 +1,14 @@
 <?php
+// Santi Onieva
 
+require_once '../model/Connexio.php';
 require_once 'Usuari.php';
 
 class UsuariDAO {
   private PDO $pdo;
 
-  public function __construct(PDO $pdo) {
-    $this->pdo = $pdo;
+  public function __construct() {
+    $this->pdo = Connexio::getInstance()->getConnection();
   }
 
   public function inserir(Usuari $usuari) {

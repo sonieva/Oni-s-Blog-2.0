@@ -1,7 +1,11 @@
 <?php
+// Santi Onieva
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $titol = isset($_POST['titol']) ? htmlspecialchars($_POST['titol']) : '';
-  $cos = isset($_POST['cos']) ? htmlspecialchars($_POST['cos']) : '';
+  session_start();
+
+  $titol = isset($_POST['titol']) && !empty($_POST['titol']) ? htmlspecialchars($_POST['titol']) : null;
+  $cos = isset($_POST['cos']) && !empty($_POST['cos']) ? htmlspecialchars($_POST['cos']) : null;
 
   $camps = [
     'titol' => $titol,
@@ -9,18 +13,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   ];
 
   if (isset($_FILES['imatge']) && $_FILES['imatge']['error'] === UPLOAD_ERR_OK) {
-    $nombreArchivo = $_FILES['imatge']['name'];
+    $nomImatge = $_FILES['imatge']['name'];
     $rutaTemporal = $_FILES['imatge']['tmp_name'];
-    $rutaDestino = '../uploads/tmp/' . $nombreArchivo;
+    $rutaDesti = '../uploads/tmp/' . $nomImatge;
 
-    move_uploaded_file($rutaTemporal, $rutaDestino);
+    if (isset($_SESSION['imagen_anterior'])) {
+      $imagenAnteriorRuta = '../uploads/tmp/' . $_SESSION['imagen_anterior'];
+      
+      if (file_exists($imagenAnteriorRuta)) {
+          unlink($imagenAnteriorRuta);
+      }
+  }
 
-    $camps['imatge'] = $rutaDestino;
+    move_uploaded_file($rutaTemporal, $rutaDesti);
+    $_SESSION['imagen_anterior'] = $nomImatge;
+
+    $camps['imatge'] = $rutaDesti;
   }
 
   echo json_encode($camps);
-
-} else {
-  echo "No se ha proporcionado ningún valor.";
 }
 ?>

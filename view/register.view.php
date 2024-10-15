@@ -1,4 +1,6 @@
 <?php
+// Santi Onieva
+
 include_once '../config/Config.php';
 Config::setTitol('Registre');
 
@@ -9,21 +11,20 @@ if (isset($_SESSION['dadesRegistre'])) {
   $email = $_SESSION['dadesRegistre']['email'];
   unset($_SESSION['dadesRegistre']);
 }
-
 ?>
 
 <div class="form-registre">
   <h1>Crear compte</h1>
 
-  <?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])): ?>
+  <?php if (isset($_SESSION['errorRegister']) && !empty($_SESSION['errorRegister'])): ?>
     <div class="missatge-error">
       <ul>
-        <?php foreach ($_SESSION['error'] as $error): ?>
+        <?php foreach ($_SESSION['errorRegister'] as $error): ?>
           <li><?php echo $error ?></li>
         <?php endforeach; ?>
       </ul>
     </div>
-    <?php unset($_SESSION['error']); ?>
+    <?php unset($_SESSION['errorRegister']); ?>
   <?php endif; ?>
     
   <form action="auth/register.php" method="POST">

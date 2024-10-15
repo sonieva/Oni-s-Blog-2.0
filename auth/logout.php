@@ -1,4 +1,5 @@
 <?php
+// Santi Onieva
 
 session_start();
 session_unset();

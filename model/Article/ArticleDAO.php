@@ -1,10 +1,14 @@
 <?
+// Santi Onieva
+
+require_once '../model/Connexio.php';
+require_once 'Article.php';
 
 class ArticleDAO {
   private PDO $pdo;
 
-  public function __construct(PDO $pdo) {
-    $this->pdo = $pdo;
+  public function __construct() {
+    $this->pdo = Connexio::getInstance()->getConnection();
   }
 
   public function inserir(Article $article) {
@@ -27,13 +31,13 @@ class ArticleDAO {
 
     $resultat = $sentencia->fetch();
 
-    return new Article($resultat['titol'], $resultat['cos'], new DateTime($resultat['data_creacio']), $resultat['id_autor'], $resultat['ruta_imatge'], new DateTime($resultat['data_modificacio']), $resultat['id']);
+    return new Article($resultat['titol'], $resultat['cos'],  $resultat['id_autor'], $resultat['ruta_imatge'], new DateTime($resultat['data_creacio']), new DateTime($resultat['data_modificacio']), $resultat['id']);
   }
 
   public function getArticlePerAutor($id_autor) {
-    $sentencia = $this->pdo->prepare("SELECT * FROM articles WHERE id_autor = :id_autor");
+    $sentencia = $this->pdo->prepare("SELECT * FROM articles WHERE autor = :autor");
 
-    $sentencia->bindParam(':id_autor', $id_autor);
+    $sentencia->bindParam(':autor', $id_autor);
 
     $sentencia->execute();
 
@@ -42,7 +46,7 @@ class ArticleDAO {
     $articles = [];
 
     foreach ($resultats as $resultat) {
-      $articles[] = new Article($resultat['titol'], $resultat['cos'], new DateTime($resultat['data_creacio']), $resultat['id_autor'], $resultat['ruta_imatge'], new DateTime($resultat['data_modificacio']), $resultat['id']);
+      $articles[] = new Article($resultat['titol'], $resultat['cos'],  $resultat['id_autor'], $resultat['ruta_imatge'], new DateTime($resultat['data_creacio']), new DateTime($resultat['data_modificacio']), $resultat['id']);
     }
 
     return $articles;
@@ -58,7 +62,7 @@ class ArticleDAO {
     $articles = [];
 
     foreach ($resultats as $resultat) {
-      $articles[] = new Article($resultat['titol'], $resultat['cos'], new DateTime($resultat['data_creacio']), $resultat['id_autor'], $resultat['ruta_imatge'], new DateTime($resultat['data_modificacio']), $resultat['id']);
+      $articles[] = new Article($resultat['titol'], $resultat['cos'],  $resultat['id_autor'], $resultat['ruta_imatge'], new DateTime($resultat['data_creacio']), new DateTime($resultat['data_modificacio']), $resultat['id']);
     }
 
     return $articles;
