@@ -1,3 +1,5 @@
+// Santi Onieva
+
 const btnAdd = document.getElementById('btn-add');
 const btnCancel = document.getElementById('btn-cancel');
 

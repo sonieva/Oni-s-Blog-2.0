@@ -1,3 +1,5 @@
+// Santi Onieva
+
 function enviarFormulario() {
   const formData = new FormData(document.getElementById('form-afegir'));
 
@@ -18,7 +20,7 @@ function enviarFormulario() {
         const readMore = document.createElement('a');
         readMore.href = '';
         readMore.classList.add('read-more');
-        readMore.id = 'continua-llegint';
+        readMore.id = 'continua-llegint-preview';
         readMore.innerHTML = 'Continua llegint <i class="fa-solid fa-arrow-right"></i>';
         
         articleBody.appendChild(readMore);
@@ -26,8 +28,8 @@ function enviarFormulario() {
     } else {
       previewCos.innerText = article.cos ?? 'Cos de l\'article';
 
-      if (document.getElementById('continua-llegint')) {
-        articleBody.removeChild(document.getElementById('continua-llegint'));
+      if (document.getElementById('continua-llegint-preview')) {
+        articleBody.removeChild(document.getElementById('continua-llegint-preview'));
       }
     }
     

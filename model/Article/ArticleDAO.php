@@ -40,7 +40,7 @@ class ArticleDAO {
     );
   }
 
-  public function getArticlePerAutor($id_autor) {
+  public function getArticlesPerAutor($id_autor) {
     $sentencia = $this->pdo->prepare("SELECT * FROM articles WHERE autor = :autor");
     $sentencia->bindParam(':autor', $id_autor);
     $sentencia->execute();

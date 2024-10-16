@@ -1,3 +1,5 @@
+// Santi Onieva
+
 const toggler = document.getElementById('dropdown-toggle');
 const dropdown = document.getElementById('dropdown');
 const caretIcon = document.getElementById('caret');

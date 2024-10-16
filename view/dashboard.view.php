@@ -21,7 +21,8 @@ $llistatBenvingudes = [
 ];
 
 $articleDAO = new ArticleDAO();
-$articles = $articleDAO->getArticlePerAutor($_SESSION['usuari']->getId());
+$articles = $articleDAO->getArticlesPerAutor($_SESSION['usuari']->getId());
+
 ?>
 
 <div class="dashboard">
@@ -103,32 +104,16 @@ $articles = $articleDAO->getArticlePerAutor($_SESSION['usuari']->getId());
     </button>
   </h2>
 
-  <div class="llistat-articles">
-    <?php foreach ($articles as $article): ?>
-      <article>
-        <figure>
-          <img src="<?= BASE_PATH . $article->getRutaImatge() ?>" alt="<?= $article->getTitol() ?>">
-        </figure>
-        
-        <div class="article-body">
-          <h2><?= $article->getTitol() ?></h2>
-          
-          <p>
-            <?php
-            $cos = $article->getCos();
-            
-            if (strlen($cos) > 100) {
-              echo substr($cos, 0, 100) . '...';
-            } else {
-              echo $cos;
-            }
-            ?>
-          </p>
+  <? if (isset($_SESSION['missatgeDelete'])): ?>
+    <div id="toaster" class="toaster toaster-success"><?= $_SESSION['missatgeDelete'] ?></div>
+    <? unset($_SESSION['missatgeDelete']); ?>
+  <? endif; ?>
 
-          <? if (strlen($cos) > 100): ?> 
-            <a class="read-more" id="continua-llegint">Continua llegint <i class="fa-solid fa-arrow-right"></i></a>
-          <? endif; ?>
-        </div>
-      </article>
-    <?php endforeach; ?>
+  <? if (isset($_SESSION['errorDelete'])): ?>
+    <div id="toaster" class="toaster toaster-error"><?= $_SESSION['errorDelete'] ?></div>
+    <? unset($_SESSION['errorDelete']); ?>
+  <? endif; ?>
+
+  <? include 'components/llista-articles.php' ?>
+
 </div>

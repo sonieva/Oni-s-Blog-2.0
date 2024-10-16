@@ -3,21 +3,19 @@
 
 session_start();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  if (isset($_GET['action'])) {
-    switch ($_GET['action']) {
-        case 'add':
-          crearArticulo($_POST['titol'], $_POST['cos'], $_FILES['imatge']);
-          break;
-        case 'update':
-          // Lógica para modificar un artículo
-          modificarArticulo();
-          break;
-        case 'delete':
-          // Lógica para eliminar un artículo
-          eliminarArticulo();
-          break;
-    }
+if (isset($_GET['action'])) {
+  switch ($_GET['action']) {
+      case 'add':
+        crearArticulo($_POST['titol'], $_POST['cos'], $_FILES['imatge']);
+        break;
+      case 'update':
+        // Lógica para modificar un artículo
+        modificarArticulo();
+        break;
+      case 'delete':
+        // Lógica para eliminar un artículo
+        eliminarArticulo($_GET['id']);
+        break;
   }
 } else {
   header('Location: ../view/dashboard.view.php');
@@ -81,7 +79,24 @@ function modificarArticulo() {
   // Código para modificar un artículo
 }
 
-function eliminarArticulo() {
-  // Código para eliminar un artículo
+function eliminarArticulo($id) {
+  if (!isset($id) || empty($id) || !is_numeric($id)) {
+    $_SESSION['errorDelete'] = 'No s\'ha trobat l\'article a eliminar';
+    header('Location: ../view/dashboard.view.php');
+    exit();
+  }
+
+  require_once '../model/Article/ArticleDAO.php';
+
+  $articleDAO = new ArticleDAO();
+
+  if ($articleDAO->eliminar($id)) {
+    $_SESSION['missatgeDelete'] = 'Article eliminat correctament';
+  } else {
+    $_SESSION['errorDelete'] = 'No s\'ha pogut eliminar l\'article';
+  }
+
+  header('Location: ../view/dashboard.view.php');
+  exit();
 }
 ?>
