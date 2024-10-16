@@ -24,7 +24,7 @@ $userLogged = isset($_SESSION['usuari']);
   <script defer src="assets/js/navbar-dropdown.js"></script>
   <script defer src="assets/js/btn-imatge.js"></script>
   <script defer src="assets/js/article-preview.js"></script>
-
+  <script defer src="assets/js/show-add-article.js"></script>
 
 </head>
 <body>
