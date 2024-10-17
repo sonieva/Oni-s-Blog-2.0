@@ -13,6 +13,10 @@ $articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId()
 ?>
 
 <div class="llistat-articles">
+  <? if ($isDashboard && empty($articles)): ?>
+    <h2 class="no-articles">Encara no has publicat cap article</h2>
+  <? endif; ?>
+
   <?php foreach ($articles as $article): ?>
     <article>
       <figure>
@@ -20,6 +24,9 @@ $articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId()
         <? if ($isDashboard): ?>
           <a class="btn-delete" href="controller/article.controller.php?action=delete&id=<? echo $article->getId() ?>">
             <i class="fa-solid fa-trash-alt"></i>
+          </a>
+          <a class="btn-edit" href="controller/article.controller.php?action=update&id=<? echo $article->getId() ?>">
+            <i class="fa-solid fa-edit"></i>
           </a>
         <? endif; ?>
       </figure>

@@ -16,20 +16,34 @@ $llistatBenvingudes = [
   'Feliç ' . getDiaSetmana(), 
   'Hola de nou', 
 ];
+
+$editMode = ($_SESSION['editMode']) ?? false;
 ?>
+
+  <? if (isset($_SESSION['missatgeDashboard'])): ?>
+    <div id="toaster" class="toaster toaster-success"><?= $_SESSION['missatgeDashboard'] ?></div>
+    <? unset($_SESSION['missatgeDashboard']); ?>
+  <? endif; ?>
+
+  <? if (isset($_SESSION['errorDashboard'])): ?>
+    <div id="toaster" class="toaster toaster-error"><?= $_SESSION['errorDashboard'] ?></div>
+    <? unset($_SESSION['errorDashboard']); ?>
+  <? endif; ?>
 
 <div class="dashboard">
   <h1 class="benvinguda"><?= $llistatBenvingudes[array_rand($llistatBenvingudes)] . ', ' . ($_SESSION['usuari']->getNomComplet() ?? $_SESSION['usuari']->getAlies()) ?></h1>
   
-  <div class="afegir-article" id="afegir-article">
+  <div class="afegir-article <? if ($editMode) echo 'show' ?>" id="afegir-article">
     <hr>
 
     <h2>
-      Afegir article
-      <button class="btn-cancel" id="btn-cancel">
-        <i class="fa-solid fa-times"></i>
-        Cancel·lar
-      </button>
+      <? echo ($editMode) ? 'Editar' : 'Afegir'; ?> article
+      <? if (!$editMode): ?>
+        <button class="btn-cancel" id="btn-cancel">
+          <i class="fa-solid fa-times"></i>
+          Cancel·lar
+        </button>
+      <? endif; ?>
     </h2>
   
     <div class="apartats-titol">
@@ -51,22 +65,22 @@ $llistatBenvingudes = [
           <?php unset($_SESSION['errorAdd']); ?>
         <?php endif; ?>
   
-        <form action="controller/article.controller.php?action=add&autor=<?= $_SESSION['usuari']->getId() ?>" method="POST" id="form-afegir" enctype="multipart/form-data">
+        <form action="controller/article.controller.php?action=<?= ($editMode) ? 'update&id='. $_SESSION['articleUpdate']['id'] : 'add&autor='. $_SESSION['usuari']->getId() ?>" method="POST" id="form-afegir" enctype="multipart/form-data">
     
           <label for="titol">Títol</label>
-          <input type="text" name="titol" id="titolArticle" required>
+          <input type="text" name="titol" id="titolArticle" required value="<? if (isset($_SESSION['articleUpdate'])) echo $_SESSION['articleUpdate']['titol'] ?>">
     
           <label for="cos">Cos</label>
-          <textarea name="cos" rows="10" id="cosArticle" required></textarea>
+          <textarea name="cos" rows="10" id="cosArticle" required><? if (isset($_SESSION['articleUpdate'])) echo $_SESSION['articleUpdate']['cos'] ?></textarea>
     
           <label for="imatge">Imatge</label>
           <div class="imatge">
             <button type="button" class="btn-imatge" id="btn-imatge">Examinar</button>
-            <p id="nom-imatge"></p>
+            <p id="nom-imatge"><? if (isset($_SESSION['articleUpdate'])) echo substr($_SESSION['articleUpdate']['imatge'],9) ?></p>
           </div>
-          <input type="file" name="imatge" id="imatge-input" required>
+          <input type="file" name="imatge" id="imatge-input" <? if (!$editMode) echo 'required' ?>>
     
-          <button type="submit">Afegir</button>
+          <button type="submit"><?= ($editMode) ? 'Modificar' : 'Afegir' ?></button>
         </form>
       </div>
     
@@ -74,16 +88,29 @@ $llistatBenvingudes = [
         <article>
   
           <figure>
-            <img src="<?= BASE_PATH ?>/assets/images/placeholder.png" alt="Imatge no disponible" id="imatge-preview"/>
+            <img src="<?= ($editMode && isset($_SESSION['articleUpdate'])) ? substr($_SESSION['articleUpdate']['imatge'],1) : BASE_PATH . '/assets/images/placeholder.png' ?>" alt="Imatge no disponible" id="imatge-preview"/>
           </figure>
   
           <div class="article-body" id="article-body">
-            <h2 id="titol-preview">Títol de l'article</h2>
-            <p id="cos-preview">Cos de l'article</p>
+            <h2 id="titol-preview"><?= ($editMode && isset($_SESSION['articleUpdate'])) ? $_SESSION['articleUpdate']['titol'] : 'Títol de l\'article' ?></h2>
+            <p id="cos-preview">
+              <?= ($editMode && isset($_SESSION['articleUpdate'])) 
+                  ? ((strlen($_SESSION['articleUpdate']['cos']) > 100) 
+                    ? substr($_SESSION['articleUpdate']['cos'], 0, 100) . '...' 
+                    : $_SESSION['articleUpdate']['cos']) 
+                  : 'Cos de l\'article' 
+              ?>
+            </p>
+            <? if ($editMode && isset($_SESSION['articleUpdate']) && strlen($_SESSION['articleUpdate']['cos']) > 100): ?>
+              <a class="read-more" id="continua-llegint-preview">
+                Continua llegint <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            <? endif; ?>
           </div>
   
         </article>
       </div>
+      <? unset($_SESSION['articleUpdate']); ?>
     </div>
   </div>
 
@@ -96,16 +123,6 @@ $llistatBenvingudes = [
       Afegir article
     </button>
   </h2>
-
-  <? if (isset($_SESSION['missatgeDelete'])): ?>
-    <div id="toaster" class="toaster toaster-success"><?= $_SESSION['missatgeDelete'] ?></div>
-    <? unset($_SESSION['missatgeDelete']); ?>
-  <? endif; ?>
-
-  <? if (isset($_SESSION['errorDelete'])): ?>
-    <div id="toaster" class="toaster toaster-error"><?= $_SESSION['errorDelete'] ?></div>
-    <? unset($_SESSION['errorDelete']); ?>
-  <? endif; ?>
 
   <? include 'components/llista-articles.php' ?>
 

@@ -18,7 +18,6 @@ function enviarFormulario() {
 
       if (document.getElementsByClassName('read-more').length === 0) {
         const readMore = document.createElement('a');
-        readMore.href = '';
         readMore.classList.add('read-more');
         readMore.id = 'continua-llegint-preview';
         readMore.innerHTML = 'Continua llegint <i class="fa-solid fa-arrow-right"></i>';
