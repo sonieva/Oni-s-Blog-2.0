@@ -5,14 +5,18 @@ const btnCancel = document.getElementById('btn-cancel');
 
 const addArticleDiv = document.getElementById('afegir-article');
 
-btnAdd.addEventListener('click', () => {
-  if (!addArticleDiv.classList.contains('show')) {
-    addArticleDiv.classList.add('show');
-  }
-});
+if (btnAdd && addArticleDiv) {
+  btnAdd.addEventListener('click', () => {
+    if (!addArticleDiv.classList.contains('show')) {
+      addArticleDiv.classList.add('show');
+    }
+  });
+}
 
-btnCancel.addEventListener('click', () => {
-  if (addArticleDiv.classList.contains('show')) {
-    addArticleDiv.classList.remove('show');
-  }
-});
+if (btnCancel && addArticleDiv) {
+  btnCancel.addEventListener('click', () => {
+    if (addArticleDiv.classList.contains('show')) {
+      addArticleDiv.classList.remove('show');
+    }
+  });
+}

@@ -1,7 +1,15 @@
 <? 
 // Santi Onieva
 
-$isDashboard = str_contains($_SERVER['REQUEST_URI'], 'dashboard') 
+require_once '../model/Article/ArticleDAO.php';
+
+$isDashboard = str_contains($_SERVER['REQUEST_URI'], 'dashboard');
+
+$articleDAO = new ArticleDAO();
+$articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId() : null);
+
+// TODO: mostrar data de publicació, darrera modificació i alies de l'autor
+// TODO: mostrar botó per editar l'article
 ?>
 
 <div class="llistat-articles">

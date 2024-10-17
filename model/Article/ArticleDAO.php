@@ -40,32 +40,14 @@ class ArticleDAO {
     );
   }
 
-  public function getArticlesPerAutor($id_autor) {
-    $sentencia = $this->pdo->prepare("SELECT * FROM articles WHERE autor = :autor");
-    $sentencia->bindParam(':autor', $id_autor);
-    $sentencia->execute();
+  public function getArticles($id_autor = null) {
+    $sql = $id_autor ? "SELECT * FROM articles WHERE autor = :autor" : "SELECT * FROM articles";
+    $sentencia = $this->pdo->prepare($sql);
 
-    $resultats = $sentencia->fetchAll();
-
-    $articles = [];
-
-    foreach ($resultats as $resultat) {
-      $articles[] = new Article(
-        $resultat['titol'],
-        $resultat['cos'],  
-        $resultat['autor'], 
-        $resultat['ruta_imatge'], 
-        new DateTime($resultat['creat']), 
-        isset($resultat['modificat']) ? new DateTime($resultat['modificat']) : null, 
-        $resultat['id']
-      );
+    if ($id_autor) {
+        $sentencia->bindParam(':autor', $id_autor);
     }
 
-    return $articles;
-  }
-
-  public function getArticles() {
-    $sentencia = $this->pdo->prepare("SELECT * FROM articles");
     $sentencia->execute();
 
     $resultats = $sentencia->fetchAll();

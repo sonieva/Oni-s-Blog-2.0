@@ -6,9 +6,6 @@ Config::setTitol('Dashboard');
 
 require_once '../config/utils.php';
 
-require_once '../model/Article/Article.php';
-require_once '../model/Article/ArticleDAO.php';
-
 include 'components/header.php';
 
 $llistatBenvingudes = [
@@ -19,10 +16,6 @@ $llistatBenvingudes = [
   'Feliç ' . getDiaSetmana(), 
   'Hola de nou', 
 ];
-
-$articleDAO = new ArticleDAO();
-$articles = $articleDAO->getArticlesPerAutor($_SESSION['usuari']->getId());
-
 ?>
 
 <div class="dashboard">

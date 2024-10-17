@@ -57,6 +57,8 @@ function crearArticulo($titol, $cos, $imatge) {
     exit();
   }
 
+  unlink('../uploads/tmp/' . $_FILES['imatge']['name']);
+
   require_once '../model/Usuari/Usuari.php';
   require_once '../model/Article/Article.php';
   require_once '../model/Article/ArticleDAO.php';
@@ -89,9 +91,11 @@ function eliminarArticulo($id) {
   require_once '../model/Article/ArticleDAO.php';
 
   $articleDAO = new ArticleDAO();
+  $article = $articleDAO->getArticlePerId($id);
 
   if ($articleDAO->eliminar($id)) {
     $_SESSION['missatgeDelete'] = 'Article eliminat correctament';
+    unlink('..' . $article->getRutaImatge());
   } else {
     $_SESSION['errorDelete'] = 'No s\'ha pogut eliminar l\'article';
   }

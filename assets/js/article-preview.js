@@ -52,6 +52,8 @@ const articleBody = document.getElementById('article-body');
 
 const linkPosat = false;
 
-titolArticle.addEventListener('input', enviarFormulario);
-cosArticle.addEventListener('input', enviarFormulario);
-imatgeArticle.addEventListener('change', enviarFormulario);
+if (titolArticle && cosArticle && imatgeArticle) {
+  titolArticle.addEventListener('input', enviarFormulario);
+  cosArticle.addEventListener('input', enviarFormulario);
+  imatgeArticle.addEventListener('change', enviarFormulario);
+}
