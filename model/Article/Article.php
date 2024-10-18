@@ -1,16 +1,18 @@
 <?
 // Santi Onieva
 
+require_once '../model/Usuari/UsuariDAO.php';
+
 class Article {
-  private ?int $id;
+  private ?string $id;
   private string $titol;
   private string $cos;
   private ?DateTime $data_creacio;
   private ?DateTime $data_modificacio;
-  private int $id_autor;
+  private string $id_autor;
   private string $ruta_imatge;
 
-  public function __construct(string $titol, string $cos,  int $id_autor, string $ruta_imatge, ?DateTime $data_creacio = null, ?DateTime $data_modificacio = null, ?int $id = null) {
+  public function __construct(string $titol, string $cos, string $id_autor, string $ruta_imatge, ?DateTime $data_creacio = null, ?DateTime $data_modificacio = null, ?string $id = null) {
     $this->id = $id;
     $this->titol = $titol;
     $this->cos = $cos;
@@ -50,6 +52,11 @@ class Article {
 
   public function setDataModificacio($data_modificacio) {
     $this->data_modificacio = $data_modificacio;
+  }
+
+  public function getAutor() {
+    $usuariDAO = new UsuariDAO();
+    return $usuariDAO->getUsuariPerId($this->id_autor);
   }
 
   public function getIdAutor() {

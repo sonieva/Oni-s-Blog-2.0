@@ -2,13 +2,13 @@
 // Santi Onieva
 
 class Usuari {
-  private ?int $id;
+  private ?string $id;
   private string $alies;
   private string $email;
   private string $password;
   private ?string $nom_complet;
 
-  public function __construct(string $alies, string $email, string $password, ?string $nom_complet = null, ?int $id = null) {
+  public function __construct(string $alies, string $email, string $password, ?string $nom_complet = null, ?string $id = null) {
     $this->id = $id;
     $this->alies = $alies;
     $this->email = $email;

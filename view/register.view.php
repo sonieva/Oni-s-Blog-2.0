@@ -55,4 +55,6 @@ if (isset($_SESSION['dadesRegistre'])) {
 
     <button type="submit" class="signup">Registar-se</button>
   </form>
+
+  <p>Ja tens compte? <a href="view/login.view.php">Inicia sessió</a></p>
 </div>

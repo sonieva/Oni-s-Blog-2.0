@@ -9,7 +9,6 @@ $articleDAO = new ArticleDAO();
 $articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId() : null);
 
 // TODO: mostrar data de publicació, darrera modificació i alies de l'autor
-// TODO: mostrar botó per editar l'article
 ?>
 
 <div class="llistat-articles">
@@ -30,6 +29,11 @@ $articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId()
           </a>
         <? endif; ?>
       </figure>
+
+      <div class="article-info">
+        <small class="article-date">Publicat el <?= $article->getDataCreacio()->format('j/m/o') ?></small>
+        <small class="article-author">Per <strong><?= $article->getAutor()->getAlies() ?></strong></small>
+      </div>
       
       <div class="article-body">
         <h2><?= $article->getTitol() ?></h2>

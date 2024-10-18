@@ -6,6 +6,12 @@ Config::setTitol('Dashboard');
 
 require_once '../config/utils.php';
 
+session_start();
+
+if (!isset($_SESSION['usuari'])) {
+  header('Location: ..');
+}
+
 include 'components/header.php';
 
 $llistatBenvingudes = [
@@ -94,11 +100,15 @@ $editMode = ($_SESSION['editMode']) ?? false;
           <div class="article-body" id="article-body">
             <h2 id="titol-preview"><?= ($editMode && isset($_SESSION['articleUpdate'])) ? $_SESSION['articleUpdate']['titol'] : 'Títol de l\'article' ?></h2>
             <p id="cos-preview">
-              <?= ($editMode && isset($_SESSION['articleUpdate'])) 
-                  ? ((strlen($_SESSION['articleUpdate']['cos']) > 100) 
-                    ? substr($_SESSION['articleUpdate']['cos'], 0, 100) . '...' 
-                    : $_SESSION['articleUpdate']['cos']) 
-                  : 'Cos de l\'article' 
+              <?  if ($editMode && isset($_SESSION['articleUpdate'])) {
+                    if (strlen($_SESSION['articleUpdate']['cos']) > 100) {
+                        substr($_SESSION['articleUpdate']['cos'], 0, 100) . '...';
+                    } else {
+                      $_SESSION['articleUpdate']['cos'];
+                    }
+                  } else {
+                    'Cos de l\'article';
+                  }
               ?>
             </p>
             <? if ($editMode && isset($_SESSION['articleUpdate']) && strlen($_SESSION['articleUpdate']['cos']) > 100): ?>

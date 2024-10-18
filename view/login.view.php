@@ -40,7 +40,9 @@ if (isset($_SESSION['dadesLogin'])) {
       <i class="fa-solid fa-lock"></i>
     </div>
 
+    
     <button type="submit" class="login">Entrar</button>
   </form>
+  <p>No tens compte? <a href="view/register.view.php">Registra't</a></p>
 </div>
 

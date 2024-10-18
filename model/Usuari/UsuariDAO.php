@@ -30,7 +30,7 @@ class UsuariDAO {
 
     $resultat = $sentencia->fetch();
 
-    return new Usuari($resultat['id'], $resultat['alies'], $resultat['email'], $resultat['password'], $resultat['nom_complet']);
+    return new Usuari($resultat['alies'], $resultat['email'], $resultat['password'], $resultat['nom_complet'], $resultat['id']);
   }
 
   public function getUsuariPerEmail($email) {
