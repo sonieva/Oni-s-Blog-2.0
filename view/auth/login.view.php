@@ -1,16 +1,21 @@
 <?php
 // Santi Onieva
 
-require_once '../config/Config.php';
+require_once '../../config/Config.php';
 Config::setTitol('Login');
 
-include 'components/header.php';
+include '../components/header.php';
 
 if (isset($_SESSION['dadesLogin'])) {
   $email = $_SESSION['dadesLogin']['email'];
   unset($_SESSION['dadesLogin']);
 }
 ?>
+
+<? if (isset($_SESSION['missatgeInactivitat'])): ?>
+  <div id="toaster" class="toaster toaster-info"><?= $_SESSION['missatgeInactivitat'] ?></div>
+  <? unset($_SESSION['missatgeInactivitat']); ?>
+<? endif; ?>
 
 <div class="form-login">
   <h1>Iniciar sessió</h1>
@@ -43,6 +48,6 @@ if (isset($_SESSION['dadesLogin'])) {
     
     <button type="submit" class="login">Entrar</button>
   </form>
-  <p>No tens compte? <a href="view/register.view.php">Registra't</a></p>
+  <p>No tens compte? <a href="view/auth/register.view.php">Registra't</a></p>
 </div>
 

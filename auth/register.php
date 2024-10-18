@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       'email' => $email,
     ];
     
-    header('Location: ../view/register.view.php');
+    header('Location: ../view/auth/register.view.php');
     exit();
   }  
   else {
@@ -63,5 +63,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 }
 
-header('Location: ../view/register.view.php');
+header('Location: ../view/auth/register.view.php');
 exit();

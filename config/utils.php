@@ -1,4 +1,5 @@
-<?php
+<?
+// Santi Onieva
 
 function getHoraDelDia() {
   $hora = date('H');

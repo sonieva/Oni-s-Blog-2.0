@@ -240,9 +240,14 @@ article {
   .article-info {
     padding: 10px 24px;
     display: flex;
-    justify-content: space-between;
     color: white;
     background-color: #cd7930;
+    align-items: center;
+
+    > small {
+      flex: 1;
+      text-align: center;
+    }
   }
 
   .article-body {

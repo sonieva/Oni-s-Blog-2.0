@@ -1,3 +1,5 @@
+-- Santi Onieva
+
 CREATE DATABASE IF NOT EXISTS `Pt04_Santi_Onieva`;
 
 USE `Pt04_Santi_Onieva`;

@@ -3,10 +3,10 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . BASE_PATH . '/model/Usuari/Usuari.php';
 
-if (session_status() == PHP_SESSION_NONE) {
-  session_start();
-}
-// $_SESSION['user_id'] = 1;
+if (session_status() == PHP_SESSION_NONE) session_start();
+
+require_once $_SERVER['DOCUMENT_ROOT'] . BASE_PATH . '/auth/session-lifetime.php';
+
 $userLogged = isset($_SESSION['usuari']);
 ?>
 
@@ -64,10 +64,10 @@ $userLogged = isset($_SESSION['usuari']);
               <i class="fa-solid fa-right-from-bracket"></i> Sortir
             </a>
           <? else: ?>
-            <a class="dropdown-item" href="view/login.view.php">
+            <a class="dropdown-item" href="view/auth/login.view.php">
               <i class="fa-solid fa-right-to-bracket"></i> Iniciar sessio
             </a>
-            <a class="dropdown-item" href="view/register.view.php">
+            <a class="dropdown-item" href="view/auth/register.view.php">
               <i class="fa-solid fa-user-plus"></i> Crear compte
             </a>
           <? endif; ?>

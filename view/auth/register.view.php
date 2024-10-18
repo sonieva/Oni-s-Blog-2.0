@@ -1,10 +1,10 @@
 <?php
 // Santi Onieva
 
-include_once '../config/Config.php';
+include_once '../../config/Config.php';
 Config::setTitol('Registre');
 
-include 'components/header.php';
+include '../components/header.php';
 
 if (isset($_SESSION['dadesRegistre'])) {
   $alies = $_SESSION['dadesRegistre']['alies'];
@@ -56,5 +56,5 @@ if (isset($_SESSION['dadesRegistre'])) {
     <button type="submit" class="signup">Registar-se</button>
   </form>
 
-  <p>Ja tens compte? <a href="view/login.view.php">Inicia sessió</a></p>
+  <p>Ja tens compte? <a href="view/auth/login.view.php">Inicia sessió</a></p>
 </div>

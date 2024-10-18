@@ -5,6 +5,7 @@ require_once '../config/Config.php';
 Config::setTitol('Dashboard');
 
 require_once '../config/utils.php';
+require_once '../model/Usuari/Usuari.php';
 
 session_start();
 
@@ -26,15 +27,15 @@ $llistatBenvingudes = [
 $editMode = ($_SESSION['editMode']) ?? false;
 ?>
 
-  <? if (isset($_SESSION['missatgeDashboard'])): ?>
-    <div id="toaster" class="toaster toaster-success"><?= $_SESSION['missatgeDashboard'] ?></div>
-    <? unset($_SESSION['missatgeDashboard']); ?>
-  <? endif; ?>
+<? if (isset($_SESSION['missatgeDashboard'])): ?>
+  <div id="toaster" class="toaster toaster-success"><?= $_SESSION['missatgeDashboard'] ?></div>
+  <? unset($_SESSION['missatgeDashboard']); ?>
+<? endif; ?>
 
-  <? if (isset($_SESSION['errorDashboard'])): ?>
-    <div id="toaster" class="toaster toaster-error"><?= $_SESSION['errorDashboard'] ?></div>
-    <? unset($_SESSION['errorDashboard']); ?>
-  <? endif; ?>
+<? if (isset($_SESSION['errorDashboard'])): ?>
+  <div id="toaster" class="toaster toaster-error"><?= $_SESSION['errorDashboard'] ?></div>
+  <? unset($_SESSION['errorDashboard']); ?>
+<? endif; ?>
 
 <div class="dashboard">
   <h1 class="benvinguda"><?= $llistatBenvingudes[array_rand($llistatBenvingudes)] . ', ' . ($_SESSION['usuari']->getNomComplet() ?? $_SESSION['usuari']->getAlies()) ?></h1>

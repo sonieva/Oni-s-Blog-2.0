@@ -1,3 +1,5 @@
+// Santi Onieva
+
 window.onload = function() {
   var toaster = document.getElementById("toaster");
   if (toaster && toaster.innerHTML.trim() !== '') {
