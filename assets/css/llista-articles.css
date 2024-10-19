@@ -1,0 +1,115 @@
+.llistat-articles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+
+  .no-articles {
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #656565;
+    margin-top: 50px;
+  }
+
+  article {
+    width: 25%;
+  }
+}
+
+.pagination-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.pagination-select {
+  position: absolute;
+  right: 172px;
+  background: #ffffff;
+  border-radius: 0.6rem;
+
+  form {
+    padding: 1rem;
+    
+    label {
+      font-size: 20px;
+      color: #251b13;
+      padding-right: 10px;
+    }
+  
+    select {
+      padding: 0.5rem;
+      border: 1px solid #de7428;
+      border-radius: 0.4rem;
+      font-size: 20px;
+      cursor: pointer;
+      background: #ffffff;
+    }
+  }
+}
+
+.pagination-select.shadow {
+  box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+}
+
+.pagination-buttons {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  height: 5rem;
+  border-radius: 0.6rem;
+  background: #ffffff;
+  margin: 25px;
+
+  .flecha {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.8rem;
+    font-size: 1.4rem;
+    color: #de7428;
+    cursor: pointer;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 0.4rem;
+    text-decoration: none;
+  }
+
+  .flecha.disabled {
+    color: #f4caac;
+    pointer-events: none;
+  }
+
+  .numPagina {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.8rem;
+    font-size: 1.4rem;
+    color: black;
+    cursor: pointer;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 0.4rem;
+    text-decoration: none;
+    
+    &:hover {
+      color: #ee882a;
+    }
+
+    &.active {
+      color: #ffffff;
+      background: #de7428;
+      font-weight: 600;
+      border: 1px solid #f1883c;
+    }
+  }
+}
+
+.pagination-buttons.shadow {
+  box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+}

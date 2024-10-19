@@ -1,0 +1,148 @@
+.dashboard {
+  width: 1470px;
+  padding: 25px;
+  border-radius: 8px;
+  margin-bottom: 1.5%;
+
+  background-color: white;
+  box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+
+  .benvinguda {
+    margin-bottom: 25px;
+  }
+
+  hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, #d2691e, #ff7f50, #d2691e);
+    margin: 20px 0;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  .afegir-article {
+    display: none;
+  }
+
+  .apartats-titol {
+    display: flex;
+    width: 100%;
+    gap: 120px;
+
+  }
+
+  h3 {
+    width: 650px;
+    text-align: center;
+  }
+
+  .apartats {
+    display: flex;
+    gap: 120px;
+    justify-content: space-between;
+    align-items: center;
+
+    > div {
+      margin: 15px 0;
+    }
+    
+    .form-afegir {
+      width: 650px;
+
+      .missatge-error {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+  
+      form label:first-child {
+        margin-top: 0;
+      }
+  
+      input:not([type="file"]), textarea {
+        color: #1d1d1d;
+        font-size: 16px;
+        font-weight: 500;
+        width: 100%;
+        height: 46px;
+        letter-spacing: 0.03rem;
+        border: 1px solid #1d1d1d;
+        background: transparent;
+        outline: none;
+        border-radius: 8px;
+        text-indent: 20px;
+        margin-top: 6px;
+        transition: all 0.3s ease;
+      }
+      
+      input:focus, textarea:focus {
+        border-color: chocolate;
+      }
+  
+      textarea {
+        transition: unset;
+        height: unset;
+        resize: none;
+        padding: 10px 15px;
+        text-indent: unset;
+      }
+  
+      .imatge {
+        display: flex;
+        margin-top: 6px;
+        align-items: center;
+  
+        .btn-imatge {
+          margin-top: unset;
+          width: 20%;
+          font-size: 14px;
+          line-height: 35px;
+        }
+  
+        p {
+          margin-left: 10px;
+          width: 78%;
+        }
+      }
+      
+      input[type="file"] {
+        display: none;
+      }
+    }
+
+    .vista-previa {
+      width: 500px;
+    }
+  } 
+
+  h2 button {
+    position: absolute;
+    right: 58px;
+    padding: 10px 12px;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .btn-add {
+    background-color: var(--btn-success-bg);
+    border: 1px solid var(--btn-success-border-color);
+  }
+  
+  .btn-cancel {
+    background-color: var(--btn-danger-bg);
+    border: 1px solid var(--btn-danger-border-color);
+  }
+  
+  .btn-add:hover {
+    background-color: var(--btn-success-hover-bg);
+    border-color: var(--btn-success-hover-border-color)
+  }
+  
+  .btn-cancel:hover {
+    background-color: var(--btn-danger-hover-bg);
+    border-color: var(--btn-danger-hover-border-color)
+  }
+}

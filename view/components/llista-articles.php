@@ -5,10 +5,31 @@ require_once '../model/Article/ArticleDAO.php';
 
 $isDashboard = str_contains($_SERVER['REQUEST_URI'], 'dashboard');
 
+$articlesPerPagina = isset($_COOKIE['articlesPerPagina']) ? (int)$_COOKIE['articlesPerPagina'] : 6;
+$paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+$offset = ($paginaActual - 1) * $articlesPerPagina;
+
 $articleDAO = new ArticleDAO();
-$articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId() : null);
+$totalArticles = $articleDAO->countArticles($isDashboard ? $_SESSION['usuari']->getId() : null);
+$totalPagines = ceil($totalArticles / $articlesPerPagina);
+$articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId() : null, $offset, $articlesPerPagina);
 
 ?>
+
+<div class="pagination-control">
+  <? include 'pagination-buttons.php'; ?>
+
+  <div class="pagination-select <? if (!$isDashboard) echo 'shadow' ?>">
+    <form action="controller/pagination.controller.php" method="POST" class="pagination-form">
+      <label for="articlesPerPagina">Articles per pàgina:</label>
+      <select name="articlesPerPagina" onchange="this.form.submit()" class="form-select">
+        <?php foreach ([6, 12, 24, 48] as $cantitat): ?>
+          <option value="<?= $cantitat ?>" <?= ($cantitat == $articlesPerPagina) ? 'selected' : '' ?>><?= $cantitat ?></option>
+        <?php endforeach; ?>
+      </select>
+    </form>
+  </div>
+</div>
 
 <div class="llistat-articles">
   <? if ($isDashboard && empty($articles)): ?>
@@ -43,21 +64,15 @@ $articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId()
         <h2><?= $article->getTitol() ?></h2>
         
         <p>
-          <?php
-          $cos = $article->getCos();
-          
-          if (strlen($cos) > 100) {
-            echo substr($cos, 0, 100) . '...';
-          } else {
-            echo $cos;
-          }
-          ?>
+          <?= strlen($article->getCos()) > 100 ? substr($article->getCos(), 0, 100) . '...' : $article->getCos() ?>
         </p>
 
-        <? if (strlen($cos) > 100): ?> 
+        <? if (strlen($article->getCos()) > 100): ?> 
           <a class="read-more" id="continua-llegint">Continua llegint <i class="fa-solid fa-arrow-right"></i></a>
         <? endif; ?>
       </div>
     </article>
   <?php endforeach; ?>
 </div>
+
+<? include 'pagination-buttons.php'; ?>

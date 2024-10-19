@@ -7,7 +7,7 @@ Config::setTitol('Inici');
 include 'components/header.php';
 ?>
 
-<div class="articles">
+<div class="titol-inici">
   <h1>Articles publicats</h1>
 </div>
 
