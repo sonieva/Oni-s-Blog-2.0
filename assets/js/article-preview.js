@@ -16,9 +16,9 @@ function enviarFormulario() {
     if (article.cos && article.cos.length > 100) {
       previewCos.innerText = article.cos.slice(0, 100) + '...';
 
-      if (document.getElementsByClassName('read-more').length === 0) {
+      if (document.getElementsByClassName('read-more-preview').length === 0) {
         const readMore = document.createElement('a');
-        readMore.classList.add('read-more');
+        readMore.classList.add('read-more-preview');
         readMore.id = 'continua-llegint-preview';
         readMore.innerHTML = 'Continua llegint <i class="fa-solid fa-arrow-right"></i>';
         

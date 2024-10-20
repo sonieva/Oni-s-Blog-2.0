@@ -45,7 +45,7 @@ function crearArticulo($titol, $cos, $imatge) {
 
   unlink('../uploads/tmp/' . $_FILES['imatge']['name']);
 
-  $article = new Article(trim($titol), trim($cos), $_GET['autor'], '/uploads/' . $_FILES['imatge']['name']);
+  $article = new Article(htmlspecialchars(trim($titol)), htmlspecialchars(trim($cos)), $_GET['autor'], '/uploads/' . $_FILES['imatge']['name']);
   $articleDAO = new ArticleDAO();
 
   if ($articleDAO->inserir($article)) {
@@ -84,8 +84,8 @@ function modificarArticulo($id) {
 
   $_SESSION['errorAdd'] = [];
 
-  $titol = trim($_POST['titol'] ?? '');
-  $cos = trim($_POST['cos'] ?? '');
+  $titol = htmlspecialchars(trim($_POST['titol'])) ?? '';
+  $cos = htmlspecialchars(trim($_POST['cos'])) ?? '';
   $imatge = $_FILES['imatge'] ?? null;
 
   if (empty($titol) || empty($cos)) {

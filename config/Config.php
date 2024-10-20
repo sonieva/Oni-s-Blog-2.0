@@ -1,7 +1,7 @@
 <? 
 // Santi Onieva
 
-define('BASE_PATH', rtrim(str_replace(['/view', '/auth'], '', dirname($_SERVER['SCRIPT_NAME'])), '/'));
+define('BASE_PATH', rtrim(str_replace(['/view', '/auth', '/api'], '', dirname($_SERVER['SCRIPT_NAME'])), '/'));
 
 class Config {
   private static $titolPagina = '';

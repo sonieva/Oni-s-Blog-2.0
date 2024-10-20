@@ -4,8 +4,8 @@
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   session_start();
 
-  $titol = isset($_POST['titol']) && !empty($_POST['titol']) ? htmlspecialchars($_POST['titol']) : null;
-  $cos = isset($_POST['cos']) && !empty($_POST['cos']) ? htmlspecialchars($_POST['cos']) : null;
+  $titol = isset($_POST['titol']) && !empty($_POST['titol']) ? $_POST['titol'] : null;
+  $cos = isset($_POST['cos']) && !empty($_POST['cos']) ? $_POST['cos'] : null;
 
   $camps = [
     'titol' => $titol,

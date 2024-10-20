@@ -20,7 +20,7 @@ if (isset($_SESSION['dadesRegistre'])) {
     <div class="missatge-error">
       <ul>
         <?php foreach ($_SESSION['errorRegister'] as $error): ?>
-          <li><?php echo $error ?></li>
+          <li><?= $error ?></li>
         <?php endforeach; ?>
       </ul>
     </div>
@@ -44,13 +44,13 @@ if (isset($_SESSION['dadesRegistre'])) {
     <label for="password">Contrasenya</label>
     <div class="input">
       <input type="password" name="password" required>
-      <i class="fa-solid fa-lock"></i>
+      <i class="fa-solid fa-lock" id="toggle-password"></i>
     </div>
 
     <label for="password2">Repeteix contrasenya</label>
     <div class="input">
       <input type="password" name="password2" required>
-      <i class="fa-solid fa-lock"></i>
+      <i class="fa-solid fa-lock" id="toggle-password2"></i>
     </div>
 
     <button type="submit" class="signup">Registar-se</button>

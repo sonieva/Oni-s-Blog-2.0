@@ -1,3 +1,5 @@
+<!-- Santi Onieva -->
+
 <ul class="pagination-buttons <? if (!$isDashboard) echo 'shadow' ?>">
   <a class="flecha <?php if ($paginaActual == 1) echo 'disabled'; ?>" href="<?= $_SERVER['SCRIPT_NAME'] ?>?pagina=<?= $paginaActual - 1 ?>">
     <i class="fa-solid fa-chevron-left"></i>

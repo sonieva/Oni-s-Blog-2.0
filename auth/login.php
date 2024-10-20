@@ -31,6 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
       if (password_verify($password, $usuari->getPassword())) {
         $_SESSION['usuari'] = $usuari;
+        if (isset($_POST['recordar'])) {
+          setcookie('email', $email, time() + 60 * 60 * 24 * 30, '/');
+        } else {
+          setcookie('email', '', time() - 3600, '/');
+        }
         header('Location: ..');
         exit();
       } else {

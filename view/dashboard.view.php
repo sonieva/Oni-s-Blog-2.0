@@ -59,13 +59,13 @@ $editMode = ($_SESSION['editMode']) ?? false;
     </div>
   
     <div class="apartats">
-      <div class="form-afegir">
+      <div class="form-article">
   
         <?php if (isset($_SESSION['errorAdd']) && !empty($_SESSION['errorAdd'])): ?>
           <div class="missatge-error">
             <ul>
               <?php foreach ($_SESSION['errorAdd'] as $error): ?>
-                <li><?php echo $error ?></li>
+                <li><?= $error ?></li>
               <?php endforeach; ?>
             </ul>
           </div>
@@ -75,7 +75,9 @@ $editMode = ($_SESSION['editMode']) ?? false;
         <form action="controller/article.controller.php?action=<?= ($editMode) ? 'update&id='. $_SESSION['articleUpdate']['id'] : 'add&autor='. $_SESSION['usuari']->getId() ?>" method="POST" id="form-afegir" enctype="multipart/form-data">
     
           <label for="titol">Títol</label>
-          <input type="text" name="titol" id="titolArticle" required value="<? if (isset($_SESSION['articleUpdate'])) echo $_SESSION['articleUpdate']['titol'] ?>">
+          <div class="input">
+            <input type="text" name="titol" id="titolArticle" required value="<? if (isset($_SESSION['articleUpdate'])) echo $_SESSION['articleUpdate']['titol'] ?>">
+          </div>
     
           <label for="cos">Cos</label>
           <textarea name="cos" rows="10" id="cosArticle" required><? if (isset($_SESSION['articleUpdate'])) echo $_SESSION['articleUpdate']['cos'] ?></textarea>
@@ -103,17 +105,17 @@ $editMode = ($_SESSION['editMode']) ?? false;
             <p id="cos-preview">
               <?  if ($editMode && isset($_SESSION['articleUpdate'])) {
                     if (strlen($_SESSION['articleUpdate']['cos']) > 100) {
-                        substr($_SESSION['articleUpdate']['cos'], 0, 100) . '...';
+                      echo substr($_SESSION['articleUpdate']['cos'], 0, 100) . '...';
                     } else {
-                      $_SESSION['articleUpdate']['cos'];
+                      echo $_SESSION['articleUpdate']['cos'];
                     }
                   } else {
-                    'Cos de l\'article';
+                    echo 'Cos de l\'article';
                   }
               ?>
             </p>
             <? if ($editMode && isset($_SESSION['articleUpdate']) && strlen($_SESSION['articleUpdate']['cos']) > 100): ?>
-              <a class="read-more" id="continua-llegint-preview">
+              <a class="read-more-preview" id="continua-llegint-preview">
                 Continua llegint <i class="fa-solid fa-arrow-right"></i>
               </a>
             <? endif; ?>

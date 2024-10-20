@@ -48,7 +48,7 @@
       margin: 15px 0;
     }
     
-    .form-afegir {
+    .form-article {
       width: 650px;
 
       .missatge-error {
@@ -86,6 +86,7 @@
         resize: none;
         padding: 10px 15px;
         text-indent: unset;
+        font-family: inherit;
       }
   
       .imatge {
@@ -94,7 +95,7 @@
         align-items: center;
   
         .btn-imatge {
-          margin-top: unset;
+          margin: unset;
           width: 20%;
           font-size: 14px;
           line-height: 35px;
@@ -103,6 +104,7 @@
         p {
           margin-left: 10px;
           width: 78%;
+          text-align: start;
         }
       }
       

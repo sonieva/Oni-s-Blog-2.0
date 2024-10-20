@@ -6,12 +6,20 @@ require_once '../model/Article/ArticleDAO.php';
 $isDashboard = str_contains($_SERVER['REQUEST_URI'], 'dashboard');
 
 $articlesPerPagina = isset($_COOKIE['articlesPerPagina']) ? (int)$_COOKIE['articlesPerPagina'] : 6;
-$paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
-$offset = ($paginaActual - 1) * $articlesPerPagina;
 
 $articleDAO = new ArticleDAO();
 $totalArticles = $articleDAO->countArticles($isDashboard ? $_SESSION['usuari']->getId() : null);
+
 $totalPagines = ceil($totalArticles / $articlesPerPagina);
+
+if (!isset($_GET['pagina']) || $_GET['pagina'] < 1 || $_GET['pagina'] > $totalPagines) {
+  $paginaActual = 1;
+} else {
+  $paginaActual = $_GET['pagina'];
+}
+
+$offset = ($paginaActual - 1) * $articlesPerPagina;
+
 $articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId() : null, $offset, $articlesPerPagina);
 
 ?>
@@ -41,7 +49,7 @@ $articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId()
       <figure>
         <img src="<?= BASE_PATH . $article->getRutaImatge() ?>" alt="<?= $article->getTitol() ?>">
         <? if ($isDashboard): ?>
-          <a class="btn-delete" href="controller/article.controller.php?action=delete&id=<? echo $article->getId() ?>">
+          <a class="btn-delete" onclick="deleteArticle(<? echo $article->getId() ?>)">
             <i class="fa-solid fa-trash-alt"></i>
           </a>
           <a class="btn-edit" href="controller/article.controller.php?action=update&id=<? echo $article->getId() ?>">
@@ -64,11 +72,11 @@ $articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId()
         <h2><?= $article->getTitol() ?></h2>
         
         <p>
-          <?= strlen($article->getCos()) > 100 ? substr($article->getCos(), 0, 100) . '...' : $article->getCos() ?>
+          <?= strlen($article->getCos()) > 100 ? rtrim(substr($article->getCos(), 0, 100)) . '...' : $article->getCos() ?>
         </p>
 
         <? if (strlen($article->getCos()) > 100): ?> 
-          <a class="read-more" id="continua-llegint">Continua llegint <i class="fa-solid fa-arrow-right"></i></a>
+          <a class="read-more" id="continua-llegint" onclick="loadArticle(<?= $article->getId() ?>)">Continua llegint <i class="fa-solid fa-arrow-right"></i></a>
         <? endif; ?>
       </div>
     </article>
@@ -76,3 +84,12 @@ $articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId()
 </div>
 
 <? include 'pagination-buttons.php'; ?>
+
+<div id="articleModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <img class="modal-image" id="modal-image" src="" alt="">
+    <p id="modal-body"></p>
+  </div>
+</div>

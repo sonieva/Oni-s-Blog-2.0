@@ -34,6 +34,7 @@ article {
       color: white;
       border: 1px solid var(--btn-danger-border-color);
       border-radius: 0.375rem;
+      cursor: pointer;
     }
 
     .btn-delete:hover {
@@ -83,7 +84,6 @@ article {
       color: black;
       transition: color 0.3s ease-out;
       word-wrap: break-word;
-      word-break: break-all;
       white-space: normal;
     }
   
@@ -91,7 +91,6 @@ article {
       margin: 10px 0;
       font-size: small;
       word-wrap: break-word;
-      word-break: break-all;
       white-space: normal;
     }
   
