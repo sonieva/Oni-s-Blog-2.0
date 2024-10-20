@@ -51,13 +51,13 @@ class UsuariDAO {
   public function modificar(Usuari $usuari) {
     $sentenciaModificar = $this->pdo->prepare("UPDATE usuaris SET alies = :alies, email = :email, password = :password, nom_complet = :nom_complet WHERE id = :id");
 
-    $sentenciaModificar->bindParam(':id', $usuari->getId());
-    $sentenciaModificar->bindParam(':alies', $usuari->getAlies());
-    $sentenciaModificar->bindParam(':email', $usuari->getEmail());
-    $sentenciaModificar->bindParam(':password', $usuari->getPassword());
-    $sentenciaModificar->bindParam(':nom_complet', $usuari->getNomComplet());
-
-    return $sentenciaModificar->execute();
+    return $sentenciaModificar->execute([
+      'alies' => $usuari->getAlies(),
+      'email' => $usuari->getEmail(),
+      'password' => $usuari->getPassword(),
+      'nom_complet' => $usuari->getNomComplet(),
+      'id' => $usuari->getId(),
+    ]);
   }
 
   public function eliminar($id) {

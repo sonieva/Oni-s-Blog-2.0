@@ -1,0 +1,39 @@
+.perfil {
+  width: 60%;
+  padding: 25px;
+  border-radius: 8px;
+  margin-bottom: 1.5%;
+  background-color: white;
+  box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+
+  hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, #d2691e, #ff7f50, #d2691e);
+    margin: 20px 0;
+  }
+
+  
+}
+
+.info p {
+  margin: 10px 0;
+}
+
+.btn-edit-nom {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-edit-nom:hover {
+  color: #ff7f50;
+}
+
+.btn-edit-nom i {
+  font-size: 1.5em;
+}
+
+.nom-input {
+  display: none;
+}

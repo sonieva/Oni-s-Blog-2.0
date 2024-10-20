@@ -30,6 +30,7 @@ $userLogged = isset($_SESSION['usuari']);
   <link rel="stylesheet" href="assets/css/llista-articles.css">
   <link rel="stylesheet" href="assets/css/dashboard.css">
   <link rel="stylesheet" href="assets/css/modal.css">
+  <link rel="stylesheet" href="assets/css/perfil.css">
   <link rel="stylesheet" href="assets/css/styles.css">
 
   <script defer src="assets/js/toaster.js"></script>
@@ -40,6 +41,7 @@ $userLogged = isset($_SESSION['usuari']);
   <script defer src="assets/js/modal.js"></script>
   <script defer src="assets/js/delete-article.js"></script>
   <script defer src="assets/js/toggle-password.js"></script>
+  <script defer src="assets/js/edit-nom.js"></script>
 </head>
 <body>
   <nav class="navbar">
@@ -57,28 +59,33 @@ $userLogged = isset($_SESSION['usuari']);
 
     <div class="nav-items">
       <a class="nav-item" href="<?= BASE_PATH ?>">
-        <i class="fa-solid fa-house"></i> Inici
+        <i class="fa-solid fa-house"></i>Inici
       </a>
 
       <div class="nav-item">
         <button id="dropdown-toggle">
-            <i class="fa-solid fa-user"></i> <? echo $userLogged ? $_SESSION['usuari']->getNomComplet() ??  $_SESSION['usuari']->getAlies() : 'Identifica\'t'?> <i id="caret" class="fa-solid fa-caret-left"></i>
+          <i class="<?= $userLogged ? 'fa-solid' : 'fa-regular' ?> fa-user"></i>
+          <?= $userLogged ? $_SESSION['usuari']->getNomComplet() ??  $_SESSION['usuari']->getAlies() : 'Identifica\'t'?> 
+          <i id="caret" class="fa-solid fa-caret-left"></i>
         </button>
 
         <div id="dropdown" class="dropdown-content">
           <? if ($userLogged): ?>
-            <a class="dropdown-item" href="view/dashboard.view.php">
-              <i class="fa-solid fa-gauge-high"></i> Dashboard
+            <a href="view/perfil.view.php">
+              <i class="fa-solid fa-user-gear"></i>Perfil
             </a>
-            <a class="dropdown-item" href="auth/logout.php">
-              <i class="fa-solid fa-right-from-bracket"></i> Sortir
+            <a href="view/dashboard.view.php">
+              <i class="fa-solid fa-gauge-high"></i>Dashboard
+            </a>
+            <a href="auth/logout.php">
+              <i class="fa-solid fa-right-from-bracket"></i>Sortir
             </a>
           <? else: ?>
-            <a class="dropdown-item" href="view/auth/login.view.php">
-              <i class="fa-solid fa-right-to-bracket"></i> Iniciar sessio
+            <a href="view/auth/login.view.php">
+              <i class="fa-solid fa-right-to-bracket"></i>Iniciar sessio
             </a>
-            <a class="dropdown-item" href="view/auth/register.view.php">
-              <i class="fa-solid fa-user-plus"></i> Crear compte
+            <a href="view/auth/register.view.php">
+              <i class="fa-solid fa-user-plus"></i>Crear compte
             </a>
           <? endif; ?>
         </div>
