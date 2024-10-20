@@ -1,39 +1,37 @@
 .perfil {
-  width: 60%;
-  padding: 25px;
-  border-radius: 8px;
-  margin-bottom: 1.5%;
-  background-color: white;
-  box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+  width: 60%; /* La secció de perfil ocupa el 60% de l'amplada de la pantalla */
+  padding: 25px; /* Espai interior de 25px al voltant del contingut */
+  border-radius: 8px; /* Arrodoneix les cantonades de la secció */
+  margin-bottom: 1.5%; /* Espai inferior per separar de la resta d'elements */
+  background-color: white; /* Color de fons blanc */
+  box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px; /* Ombra subtil per donar efecte de profunditat */
 
   hr {
-    border: none;
-    height: 2px;
-    background: linear-gradient(to right, #d2691e, #ff7f50, #d2691e);
-    margin: 20px 0;
+    border: none; /* Elimina el borde per defecte de l'element hr */
+    height: 2px; /* Amplada de 2px per a la línia */
+    background: linear-gradient(to right, #d2691e, #ff7f50, #d2691e); /* Gradient lineal amb colors degradats */
+    margin: 20px 0; /* Espai vertical al voltant de la línia */
   }
-
-  
 }
 
 .info p {
-  margin: 10px 0;
+  margin: 10px 0; /* Espai vertical entre els paràgrafs de la informació de perfil */
 }
 
 .btn-edit-nom {
-  background: none;
-  border: none;
-  cursor: pointer;
+  background: none; /* Elimina el fons per defecte del botó */
+  border: none; /* Elimina el borde per defecte del botó */
+  cursor: pointer; /* Canvia el cursor a una mà quan es passa per sobre del botó */
 }
 
 .btn-edit-nom:hover {
-  color: #ff7f50;
+  color: #ff7f50; /* Canvia el color del botó a taronja clar quan s'hi passa el cursor per sobre */
 }
 
 .btn-edit-nom i {
-  font-size: 1.5em;
+  font-size: 1.5em; /* Augmenta la mida de l'icona per fer-la més visible */
 }
 
 .nom-input {
-  display: none;
+  display: none; /* Oculta l'input de text per defecte fins que es mostri amb JavaScript */
 }

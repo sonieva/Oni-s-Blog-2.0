@@ -1,115 +1,115 @@
 .llistat-articles {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+  display: flex; /* Mostra els articles en forma de flexbox */
+  flex-wrap: wrap; /* Permet que els articles saltin de línia quan calgui */
+  gap: 20px; /* Espai entre els articles */
+  justify-content: center; /* Centra els articles dins del contenidor */
 
   .no-articles {
-    width: 100%;
-    text-align: center;
-    font-size: 1.5rem;
-    color: #656565;
-    margin-top: 50px;
+    width: 100%; /* Amplada completa per centrar el text */
+    text-align: center; /* Centra el text */
+    font-size: 1.5rem; /* Mida de lletra gran per destacar el missatge */
+    color: #656565; /* Color gris per al text */
+    margin-top: 50px; /* Espai a dalt per separar-lo dels altres elements */
   }
 
   article {
-    width: 370px;
+    width: 370px; /* Amplada fixa per als articles */
   }
 }
 
 .pagination-control {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
+  display: flex; /* Utilitza flexbox per alinear els elements de la paginació */
+  align-items: center; /* Centra els elements verticalment */
+  justify-content: center; /* Centra els elements horitzontalment */
+  gap: 1rem; /* Espai entre els elements de la paginació */
 }
 
 .pagination-select {
-  position: absolute;
-  right: 172px;
-  background: #ffffff;
-  border-radius: 0.6rem;
+  position: absolute; /* Posiciona el select de manera relativa a la pàgina */
+  right: 172px; /* Desplaça el select cap a la dreta */
+  background: #ffffff; /* Fons blanc per al select */
+  border-radius: 0.6rem; /* Cantonades arrodonides per al select */
 
   form {
-    padding: 1rem;
+    padding: 1rem; /* Espai interior del formulari */
     
     label {
-      font-size: 20px;
-      color: #251b13;
-      padding-right: 10px;
+      font-size: 20px; /* Mida de la lletra per al label */
+      color: #251b13; /* Color del text del label */
+      padding-right: 10px; /* Espai a la dreta del label */
     }
   
     select {
-      padding: 0.5rem;
-      border: 1px solid #de7428;
-      border-radius: 0.4rem;
-      font-size: 20px;
-      cursor: pointer;
-      background: #ffffff;
+      padding: 0.5rem; /* Espai interior del select */
+      border: 1px solid #de7428; /* Contorn amb color taronja */
+      border-radius: 0.4rem; /* Cantonades arrodonides per al select */
+      font-size: 20px; /* Mida de la lletra del select */
+      cursor: pointer; /* Canvia el cursor quan es passa per sobre */
+      background: #ffffff; /* Fons blanc per al select */
     }
   }
 }
 
 .pagination-select.shadow {
-  box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+  box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px; /* Afegeix ombra per a donar profunditat */
 }
 
 .pagination-buttons {
-  list-style-type: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-  height: 5rem;
-  border-radius: 0.6rem;
-  background: #ffffff;
-  margin: 25px;
+  list-style-type: none; /* Elimina els punts de la llista */
+  display: flex; /* Utilitza flexbox per a l'alineació dels botons */
+  justify-content: center; /* Centra els botons horitzontalment */
+  align-items: center; /* Centra els botons verticalment */
+  flex-grow: 1; /* Fa que els botons ocupin tot l'espai disponible */
+  height: 5rem; /* Alçada dels botons */
+  border-radius: 0.6rem; /* Cantonades arrodonides */
+  background: #ffffff; /* Fons blanc per als botons */
+  margin: 25px; /* Espai al voltant de la llista de botons */
 
   .flecha {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0.8rem;
-    font-size: 1.4rem;
-    color: #de7428;
-    cursor: pointer;
-    width: 2.6rem;
-    height: 2.6rem;
-    border-radius: 0.4rem;
-    text-decoration: none;
+    display: flex; /* Flexbox per centrar el contingut */
+    justify-content: center; /* Centra el contingut horitzontalment */
+    align-items: center; /* Centra el contingut verticalment */
+    margin: 0.8rem; /* Espai al voltant de la fletxa */
+    font-size: 1.4rem; /* Mida de la lletra de la fletxa */
+    color: #de7428; /* Color taronja per a la fletxa */
+    cursor: pointer; /* Canvia el cursor quan es passa per sobre */
+    width: 2.6rem; /* Amplada de la fletxa */
+    height: 2.6rem; /* Alçada de la fletxa */
+    border-radius: 0.4rem; /* Cantonades arrodonides */
+    text-decoration: none; /* Elimina la subratllat del text */
   }
 
   .flecha.disabled {
-    color: #f4caac;
-    pointer-events: none;
+    color: #f4caac; /* Color més clar per indicar que està desactivada */
+    pointer-events: none; /* Desactiva els clics en la fletxa */
   }
 
   .numPagina {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0.8rem;
-    font-size: 1.4rem;
-    color: black;
-    cursor: pointer;
-    width: 2.6rem;
-    height: 2.6rem;
-    border-radius: 0.4rem;
-    text-decoration: none;
+    display: flex; /* Flexbox per centrar el contingut */
+    justify-content: center; /* Centra el contingut horitzontalment */
+    align-items: center; /* Centra el contingut verticalment */
+    margin: 0.8rem; /* Espai al voltant del número de pàgina */
+    font-size: 1.4rem; /* Mida de la lletra del número */
+    color: black; /* Color del text */
+    cursor: pointer; /* Canvia el cursor quan es passa per sobre */
+    width: 2.6rem; /* Amplada del número */
+    height: 2.6rem; /* Alçada del número */
+    border-radius: 0.4rem; /* Cantonades arrodonides */
+    text-decoration: none; /* Elimina la subratllat del text */
     
     &:hover {
-      color: #ee882a;
+      color: #ee882a; /* Canvia el color del text quan es passa per sobre */
     }
 
     &.active {
-      color: #ffffff;
-      background: #de7428;
-      font-weight: 600;
-      border: 1px solid #f1883c;
+      color: #ffffff; /* Text blanc per a la pàgina activa */
+      background: #de7428; /* Fons taronja per a la pàgina activa */
+      font-weight: 600; /* Text més gruixut per a la pàgina activa */
+      border: 1px solid #f1883c; /* Contorn més destacat per a la pàgina activa */
     }
   }
 }
 
 .pagination-buttons.shadow {
-  box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+  box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px; /* Afegeix ombra per a donar profunditat */
 }

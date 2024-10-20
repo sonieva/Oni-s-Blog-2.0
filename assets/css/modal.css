@@ -1,41 +1,41 @@
 .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10000;
+  position: fixed; /* Fa que la modal es mantingui fixa a la pantalla */
+  top: 0; /* Es posiciona a la part superior de la pantalla */
+  left: 0; /* Es posiciona a l'extrem esquerre de la pantalla */
+  width: 100%; /* Ocupa el 100% de l'amplada de la pantalla */
+  height: 100%; /* Ocupa el 100% de l'alçada de la pantalla */
+  background-color: rgba(0, 0, 0, 0.5); /* Fons negre translúcid per enfosquir el fons */
+  display: flex; /* Utilitza flexbox per centrar el contingut */
+  align-items: center; /* Centra verticalment el contingut */
+  justify-content: center; /* Centra horitzontalment el contingut */
+  z-index: 10000; /* Assegura que la modal estigui per sobre de tots els altres elements */
 }
 
 .modal-image {
-  width: 100%;
-  max-height: 300px;
-  object-fit: cover;
-  margin: 20px 0;
-  border-radius: 16px;
+  width: 100%; /* Fa que la imatge de la modal ocupi tota l'amplada disponible */
+  max-height: 300px; /* Limita l'alçada màxima de la imatge a 300px */
+  object-fit: cover; /* Assegura que la imatge mantingui la proporció i ompli l'espai */
+  margin: 20px 0; /* Espai vertical al voltant de la imatge */
+  border-radius: 16px; /* Arrodoneix les cantonades de la imatge */
 }
 
 .modal-title {
-  text-align: center;
+  text-align: center; /* Centra el text del títol dins de la modal */
 }
 
 .modal-content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  width: 80%;
-  max-width: 600px;
-  position: relative;
+  background-color: #fff; /* Fons blanc per al contingut de la modal */
+  padding: 20px; /* Espai interior al voltant del contingut */
+  border-radius: 8px; /* Arrodoneix les cantonades de la modal */
+  width: 80%; /* Fa que la modal ocupi el 80% de l'amplada de la pantalla */
+  max-width: 600px; /* Amplada màxima de la modal de 600px per evitar que sigui massa gran */
+  position: relative; /* Permet posicionar elements de manera relativa dins de la modal */
 }
 
 .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 20px;
-  cursor: pointer;
+  position: absolute; /* Posiciona el botó de tancament de manera absoluta dins de la modal */
+  top: 10px; /* Es desplaça 10px des de la part superior de la modal */
+  right: 20px; /* Es desplaça 20px des de la part dreta de la modal */
+  font-size: 20px; /* Mida del text del botó de tancament */
+  cursor: pointer; /* Canvia el cursor a una mà quan es passa per sobre */
 }

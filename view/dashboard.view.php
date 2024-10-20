@@ -1,7 +1,8 @@
-<?
+<?php
 // Santi Onieva
 
 require_once '../config/Config.php';
+// Estableix el títol de la pàgina a "Dashboard"
 Config::setTitol('Dashboard');
 
 require_once '../config/utils.php';
@@ -9,48 +10,45 @@ require_once '../model/Usuari/Usuari.php';
 
 session_start();
 
+// Comprova si l'usuari està identificat, si no, el redirigeix a la pàgina principal
 if (!isset($_SESSION['usuari'])) {
   header('Location: ..');
 }
 
+// Inclou el capçal de la pàgina
 include 'components/header.php';
 
-$llistatBenvingudes = [
-  'Hola', 
-  'Bon' . getHoraDelDia(), 
-  'Benvingut/da',
-  'Benvingut/da de nou',
-  'Feliç ' . getDiaSetmana(), 
-  'Hola de nou', 
-];
-
+// Comprova si està en mode d'edició per actualitzar un article
 $editMode = ($_SESSION['editMode']) ?? false;
+$missatge = getMessage('missatgeDashboard');
+$error = getMessage('errorDashboard');
+$errors = getMessages('errorAdd');
 ?>
 
-<? if (isset($_SESSION['missatgeDashboard'])): ?>
-  <div id="toaster" class="toaster toaster-success"><?= $_SESSION['missatgeDashboard'] ?></div>
-  <? unset($_SESSION['missatgeDashboard']); ?>
+<? if ($missatge): ?>
+  <div id="toaster" class="toaster toaster-success"><?= $missatge ?></div>
 <? endif; ?>
 
-<? if (isset($_SESSION['errorDashboard'])): ?>
-  <div id="toaster" class="toaster toaster-error"><?= $_SESSION['errorDashboard'] ?></div>
-  <? unset($_SESSION['errorDashboard']); ?>
+<? if ($error): ?>
+  <div id="toaster" class="toaster toaster-error"><?= $error ?></div>
 <? endif; ?>
 
 <div class="dashboard">
-  <h1 class="benvinguda"><?= $llistatBenvingudes[array_rand($llistatBenvingudes)] . ', ' . ($_SESSION['usuari']->getNomComplet() ?? $_SESSION['usuari']->getAlies()) ?></h1>
+  <h1 class="benvinguda"><?= missatgeBenvinguda() . ', ' . ($_SESSION['usuari']->getNomComplet() ?? $_SESSION['usuari']->getAlies()) ?></h1>
   
-  <div class="afegir-article <? if ($editMode) echo 'show' ?>" id="afegir-article">
+  <div class="afegir-article <?php if ($editMode || $errors) echo 'show' ?>" id="afegir-article">
     <hr>
 
     <h2>
-      <? echo ($editMode) ? 'Editar' : 'Afegir'; ?> article
-      <? if (!$editMode): ?>
+      <!-- Mostra "Editar" o "Afegir" depenent del mode d'edició -->
+      <?= ($editMode) ? 'Editar' : 'Afegir'; ?> article
+      <?php if (!$editMode): ?>
+        <!-- Botó per cancel·lar l'acció en mode "Afegir" -->
         <button class="btn-cancel" id="btn-cancel">
           <i class="fa-solid fa-times"></i>
           Cancel·lar
         </button>
-      <? endif; ?>
+      <?php endif; ?>
     </h2>
   
     <div class="apartats-titol">
@@ -61,33 +59,31 @@ $editMode = ($_SESSION['editMode']) ?? false;
     <div class="apartats">
       <div class="form-article">
   
-        <?php if (isset($_SESSION['errorAdd']) && !empty($_SESSION['errorAdd'])): ?>
-          <div class="missatge-error">
+        <?php if ($errors): ?>
+          <div class="missatge-error" id="errors-add">
             <ul>
-              <?php foreach ($_SESSION['errorAdd'] as $error): ?>
+              <?php foreach ($errors as $error): ?>
                 <li><?= $error ?></li>
               <?php endforeach; ?>
             </ul>
           </div>
-          <?php unset($_SESSION['errorAdd']); ?>
         <?php endif; ?>
   
         <form action="controller/article.controller.php?action=<?= ($editMode) ? 'update&id='. $_SESSION['articleUpdate']['id'] : 'add&autor='. $_SESSION['usuari']->getId() ?>" method="POST" id="form-afegir" enctype="multipart/form-data">
-    
           <label for="titol">Títol</label>
           <div class="input">
-            <input type="text" name="titol" id="titolArticle" required value="<? if (isset($_SESSION['articleUpdate'])) echo $_SESSION['articleUpdate']['titol'] ?>">
+            <input type="text" name="titol" id="titolArticle" required value="<?php if (isset($_SESSION['articleUpdate'])) echo $_SESSION['articleUpdate']['titol'] ?>">
           </div>
     
           <label for="cos">Cos</label>
-          <textarea name="cos" rows="10" id="cosArticle" required><? if (isset($_SESSION['articleUpdate'])) echo $_SESSION['articleUpdate']['cos'] ?></textarea>
+          <textarea name="cos" rows="10" id="cosArticle" required><?php if (isset($_SESSION['articleUpdate'])) echo $_SESSION['articleUpdate']['cos'] ?></textarea>
     
           <label for="imatge">Imatge</label>
           <div class="imatge">
             <button type="button" class="btn-imatge" id="btn-imatge">Examinar</button>
-            <p id="nom-imatge"><? if (isset($_SESSION['articleUpdate'])) echo substr($_SESSION['articleUpdate']['imatge'],9) ?></p>
+            <p id="nom-imatge"><?php if (isset($_SESSION['articleUpdate'])) echo substr($_SESSION['articleUpdate']['imatge'],9) ?></p>
           </div>
-          <input type="file" name="imatge" id="imatge-input" <? if (!$editMode) echo 'required' ?>>
+          <input type="file" name="imatge" id="imatge-input" <?php if (!$editMode) echo 'required' ?>>
     
           <button type="submit"><?= ($editMode) ? 'Modificar' : 'Afegir' ?></button>
         </form>
@@ -95,7 +91,6 @@ $editMode = ($_SESSION['editMode']) ?? false;
     
       <div class="vista-previa">
         <article>
-  
           <figure>
             <img src="<?= ($editMode && isset($_SESSION['articleUpdate'])) ? substr($_SESSION['articleUpdate']['imatge'],1) : BASE_PATH . '/assets/images/placeholder.png' ?>" alt="Imatge no disponible" id="imatge-preview"/>
           </figure>
@@ -103,7 +98,7 @@ $editMode = ($_SESSION['editMode']) ?? false;
           <div class="article-body" id="article-body">
             <h2 id="titol-preview"><?= ($editMode && isset($_SESSION['articleUpdate'])) ? $_SESSION['articleUpdate']['titol'] : 'Títol de l\'article' ?></h2>
             <p id="cos-preview">
-              <?  if ($editMode && isset($_SESSION['articleUpdate'])) {
+              <?php if ($editMode && isset($_SESSION['articleUpdate'])) {
                     if (strlen($_SESSION['articleUpdate']['cos']) > 100) {
                       echo substr($_SESSION['articleUpdate']['cos'], 0, 100) . '...';
                     } else {
@@ -114,16 +109,15 @@ $editMode = ($_SESSION['editMode']) ?? false;
                   }
               ?>
             </p>
-            <? if ($editMode && isset($_SESSION['articleUpdate']) && strlen($_SESSION['articleUpdate']['cos']) > 100): ?>
+            <?php if ($editMode && isset($_SESSION['articleUpdate']) && strlen($_SESSION['articleUpdate']['cos']) > 100): ?>
               <a class="read-more-preview" id="continua-llegint-preview">
                 Continua llegint <i class="fa-solid fa-arrow-right"></i>
               </a>
-            <? endif; ?>
+            <?php endif; ?>
           </div>
-  
         </article>
       </div>
-      <? unset($_SESSION['articleUpdate']); ?>
+      <?php unset($_SESSION['articleUpdate']); ?>
     </div>
   </div>
 
@@ -137,6 +131,5 @@ $editMode = ($_SESSION['editMode']) ?? false;
     </button>
   </h2>
 
-  <? include 'components/llista-articles.php' ?>
-
+  <?php include 'components/llista-articles.php' ?>
 </div>

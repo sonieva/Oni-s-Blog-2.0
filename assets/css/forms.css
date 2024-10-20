@@ -1,140 +1,158 @@
+/* Estil bàsic per als formularis de registre, login i article */
 .form-registre, .form-login, .form-article {
-  width: 440px;
-  padding: 25px 25px;
-  border-radius: 8px;
-  margin: 2.5% 0;
-  background-color: white;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  width: 440px; /* Amplada fixa dels formularis */
+  padding: 25px 25px; /* Espai interior (padding) */
+  border-radius: 8px; /* Corba les cantonades */
+  margin: 2.5% 0; /* Espai superior i inferior */
+  background-color: white; /* Fons blanc */
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; /* Ombra per donar profunditat */
 }
 
+/* Estil per al missatge d'error dels formularis */
 .form-registre .missatge-error,
 .form-login .missatge-error,
 .form-article .missatge-error {
-  border: #ff3a3a 1px solid;
-  border-radius: 8px;
-  background-color: #ed6060;
-  margin-top: 10px;
+  border: #ff3a3a 1px solid; /* Contorn de color vermell */
+  border-radius: 8px; /* Cantonades arrodonides */
+  background-color: #ed6060; /* Fons vermell clar */
+  margin-top: 10px; /* Espai superior */
 }
 
+/* Ajusta l'alineació de les llistes dins dels missatges d'error */
 .form-registre .missatge-error ul,
 .form-login .missatge-error ul,
 .form-article .missatge-error ul {
-  list-style-position: inside;
+  list-style-position: inside; /* Posa les marques de la llista dins de la caixa */
 }
 
+/* Estil per als elements de la llista dins del missatge d'error */
 .form-registre .missatge-error li,
 .form-login .missatge-error li,
 .form-article .missatge-error li {
-  color: white;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 2px 10px;
+  color: white; /* Color del text blanc */
+  font-size: 13px; /* Mida del text */
+  font-weight: 500; /* Gruix del text */
+  padding: 2px 10px; /* Espai interior */
 }
 
+/* Estil dels títols dels formularis de registre i login */
 .form-registre h1,
 .form-login h1 {
-  font-size: 1.6rem;
-  text-align: center;
+  font-size: 1.6rem; /* Mida del text */
+  text-align: center; /* Centra el text */
 }
 
+/* Estil per als labels dels formularis */
 .form-registre form label,
-.form-login form label ,
+.form-login form label,
 .form-article form label {
-  color: #1d1d1d;
-  font-size: 14px;
-  font-weight: bold;
-  letter-spacing: 0.03rem;
-  display: block;
-  margin-top: 12px;
+  color: #1d1d1d; /* Color del text */
+  font-size: 14px; /* Mida del text */
+  font-weight: bold; /* Text en negreta */
+  letter-spacing: 0.03rem; /* Espai entre lletres */
+  display: block; /* Mostra el label en una línia separada */
+  margin-top: 12px; /* Espai superior */
 }
 
+/* Elimina el marge superior per al label del checkbox "recordar" */
 .form-login form label[for="recordar"] {
   margin-top: 0;
 }
 
+/* Posiciona els contenidors dels inputs de manera relativa per poder afegir icones */
 .form-registre form .input,
 .form-login form .input,
 .form-article form .input {
   position: relative;
 }
 
+/* Estil dels inputs dins dels formularis */
 .form-registre form .input input,
 .form-login form .input input,
 .form-article form .input input {
-  color: #1d1d1d;
+  color: #1d1d1d; /* Color del text */
   font-size: 16px;
   font-weight: 500;
-  width: 100%;
-  height: 46px;
+  width: 100%; /* Amplada completa */
+  height: 46px; /* Alçada dels inputs */
   letter-spacing: 0.03rem;
-  border: 1px solid #1d1d1d;
-  background: transparent;
-  outline: none;
-  border-radius: 8px;
-  text-indent: 20px;
-  margin-top: 6px;
-  transition: all 0.3s ease;
+  border: 1px solid #1d1d1d; /* Contorn de color gris fosc */
+  background: transparent; /* Fons transparent */
+  outline: none; /* Elimina el contorn per defecte */
+  border-radius: 8px; /* Cantonades arrodonides */
+  text-indent: 20px; /* Espai per al text dins de l'input */
+  margin-top: 6px; /* Espai superior */
+  transition: all 0.3s ease; /* Transició suau per canvis d'estil */
 }
 
+/* Canvia el color del contorn quan l'input està enfocat */
 .form-registre form .input input:focus,
 .form-login form .input input:focus,
 .form-article form .input input:focus {
-  border-color: chocolate;
+  border-color: chocolate; /* Color del contorn en enfocar */
 }
 
+/* Canvia el color de l'icona quan l'input està enfocat */
 .form-registre form .input input:focus + i,
 .form-login form .input input:focus + i {
-  color: chocolate;
+  color: chocolate; /* Canvia a color xocolata */
 }
 
+/* Posiciona les icones dins dels inputs */
 .form-registre form .input i,
 .form-login form .input i {
   position: absolute;
-  font-size: 25px;
-  right: 10px;
-  top: 16px;
-  transition: all 0.3s ease;
+  font-size: 25px; /* Mida de l'icona */
+  right: 10px; /* Posició a la dreta */
+  top: 16px; /* Posició a dalt */
+  transition: all 0.3s ease; /* Transició suau */
 }
 
+/* Afegim un cursor pointer a les icones que estan al costat dels inputs de contrasenya */
 input[type="password"] + i {
-  cursor: pointer;
+  cursor: pointer; /* Canvia el cursor quan es fa hover */
 }
 
+/* Estil dels botons dins dels formularis */
 .form-registre button,
 .form-login button,
 .form-article button {
-  width: 100%;
+  width: 100%; /* Amplada completa */
   margin: 15px 0;
-  background: chocolate;
-  color: #fff;
-  border: none;
-  line-height: 50px;
-  font-size: 18px;
-  letter-spacing: 0.025em;
-  cursor: pointer;
-  font-weight: 800;
-  border-radius: 8px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  background: chocolate; /* Color de fons */
+  color: #fff; /* Text blanc */
+  border: none; /* Elimina el contorn */
+  line-height: 50px; /* Alçada de línia */
+  font-size: 18px; /* Mida del text */
+  letter-spacing: 0.025em; /* Espai entre lletres */
+  cursor: pointer; /* Canvia el cursor en fer hover */
+  font-weight: 800; /* Text en negreta */
+  border-radius: 8px; /* Cantonades arrodonides */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); /* Ombra suau */
   transition: all 0.3s ease;
 }
 
+/* Canvia el color de fons dels botons quan es fa hover */
 .form-registre button:hover,
 .form-login button:hover,
 .form-article button:hover {
-  background-color: #df813e;
+  background-color: #df813e; /* Color xocolata més clar */
 }
 
+/* Centra el text dins de la classe .form-article */
 .form-article p {
   text-align: center;
 }
 
+/* Estil per a la secció de "Recorda'm" en el formulari de login */
 .form-login .recordar {
-  display: flex;
+  display: flex; /* Alinea els elements en una fila */
   align-items: center;
   margin-top: 10px;
-  gap: 10px;
+  gap: 10px; /* Espai entre el label i el checkbox */
 }
 
+/* Augmenta la mida del checkbox per a "Recorda'm" */
 .form-login .recordar input {
   transform: scale(1.1);
 }

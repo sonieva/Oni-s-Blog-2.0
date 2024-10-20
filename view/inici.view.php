@@ -1,9 +1,11 @@
-<? 
+<?php
 // Santi Onieva
 
+// Inclou la configuració i estableix el títol de la pàgina
 include_once '../config/Config.php';
 Config::setTitol('Inici');
 
+// Inclou el capçal de la pàgina
 include 'components/header.php';
 ?>
 
@@ -11,4 +13,5 @@ include 'components/header.php';
   <h1>Articles publicats</h1>
 </div>
 
-<? include 'components/llista-articles.php' ?>
+<!-- Inclou el component que llista els articles publicats -->
+<?php include 'components/llista-articles.php'; ?>
