@@ -30,11 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['errorRegister'][] = 'El correu no és vàlid';
   }
 
-  // Es comprova si ja existeix un usuari amb aquest correu.
-  if ($usuariDAO->getUsuariPerEmail($email)) {
-    $_SESSION['errorRegister'][] = 'Aquest correu ja està registrat';
-  }
-
   // Es comprova si les contrasenyes introduïdes coincideixen.
   if ($password !== $password2) {
     $_SESSION['errorRegister'][] = 'Les contrasenyes no coincideixen';
@@ -43,6 +38,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Es valida la seguretat de la contrasenya.
   if (!validarContrasenya($password)) {
     $_SESSION['errorRegister'][] = 'La contrasenya ha de tenir com a mínim 8 caràcters, una majúscula, una minúscula, un número i un caràcter especial';
+  }
+
+  $usuariDAO = new UsuariDAO();
+
+  // Es comprova si ja existeix un usuari amb aquest correu.
+  if ($usuariDAO->getUsuariPerEmail($email)) {
+    $_SESSION['errorRegister'][] = 'Aquest correu ja està registrat';
   }
   
   // Si hi ha errors de registre, es guarden les dades introduïdes a la sessió i es redirigeix al formulari de registre.
@@ -64,7 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Es crea un nou objecte Usuari amb les dades introduïdes.
     $usuari = new Usuari($alies, $email, $passwordHash);
-    $usuariDAO = new UsuariDAO();
     
     // S'intenta inserir el nou usuari a la base de dades.
     if ($usuariDAO->inserir($usuari)) {

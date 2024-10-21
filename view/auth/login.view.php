@@ -57,10 +57,15 @@ if (isset($_SESSION['dadesLogin'])) {
       <label for="recordar">Recorda'm</label>
       <input type="checkbox" name="recordar">
     </div>
+
+    <!-- Enllaç per recuperar la contrasenya. -->
+    <p>Has olvidat la contrasenya?</p>
     
     <!-- Botó per enviar el formulari de login. -->
     <button type="submit" class="login">Entrar</button>
   </form>
+
+  
   
   <!-- Enllaç per a aquells usuaris que no tenen un compte i volen registrar-se. -->
   <p>No tens compte? <a href="view/auth/register.view.php">Registra't</a></p>

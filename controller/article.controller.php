@@ -143,7 +143,7 @@ function modificarArticle($id): void {
   // S'intenta modificar l'article i es mostra un missatge en funció del resultat.
   if ($articleDAO->modificar($articleNew)) {
     unset($_SESSION['editMode']);
-    addMessage('missatgeDashboard', 'Article modificat correctament');
+    setMessage('missatgeDashboard', 'Article modificat correctament');
   } else {
     addMessage('errorDashboard', 'No s\'ha pogut modificar l\'article');
   }
