@@ -8,7 +8,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . BASE_PATH . '/model/Usuari/Usuari.php';
 if (session_status() == PHP_SESSION_NONE) session_start();
 
 // Es requereix el fitxer per controlar la durada de la sessió.
-require_once $_SERVER['DOCUMENT_ROOT'] . BASE_PATH . '/auth/session-lifetime.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . BASE_PATH . '/config/session-lifetime.php';
 
 // Es defineix si l'usuari està identificat a partir de la sessió.
 $userLogged = isset($_SESSION['usuari']);
