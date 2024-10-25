@@ -78,3 +78,14 @@ onis-blog/
 - **MySQL** 8
 - **Servidor web** (Apache, Nginx, etc.)
 - **Docker** (Opcional, per a un desplegament fàcil amb Docker i Docker Compose)
+
+## Valors a cambiar
+
+Per un funcionament correcte, cal cambiar els següents valors:
+- Connexio.php
+```php
+private $host = 'db'; // Cal posar la IP del servidor
+private $dbName = 'Pt04_Santi_Onieva';
+private $user = 'root'; // Si cal, s'ha de canviar l'usuari
+private $password = 'p@ssw0rd'; // Cal cambiar la contrasenya
+```
