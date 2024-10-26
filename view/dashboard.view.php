@@ -25,13 +25,13 @@ $error = getMessage('errorDashboard');
 $errors = getMessages('errorAdd');
 ?>
 
-<? if ($missatge): ?>
+<?php if ($missatge): ?>
   <div id="toaster" class="toaster toaster-success"><?= $missatge ?></div>
-<? endif; ?>
+<?php endif; ?>
 
-<? if ($error): ?>
+<?php if ($error): ?>
   <div id="toaster" class="toaster toaster-error"><?= $error ?></div>
-<? endif; ?>
+<?php endif; ?>
 
 <div class="dashboard">
   <h1 class="benvinguda"><?= missatgeBenvinguda() . ', ' . ($_SESSION['usuari']->getNomComplet() ?? $_SESSION['usuari']->getAlies()) ?></h1>

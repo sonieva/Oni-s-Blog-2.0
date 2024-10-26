@@ -23,9 +23,11 @@ function handlePasswordToggle(event) {
 }
 
 // Obté els elements de les icones per canviar el tipus de les contrasenyes
+const toggleOldPassword = document.getElementById('toggle-old-password');
 const togglePassword = document.getElementById('toggle-password');
 const togglePassword2 = document.getElementById('toggle-password2');
 
 // Si l'icona per mostrar/amagar la contrasenya existeix, afegeix un listener al clic
+if (toggleOldPassword) toggleOldPassword.addEventListener('click', handlePasswordToggle);
 if (togglePassword) togglePassword.addEventListener('click', handlePasswordToggle);
 if (togglePassword2) togglePassword2.addEventListener('click', handlePasswordToggle);

@@ -3,7 +3,7 @@
 // Selecciona els elements HTML necessaris per editar el nom complet
 const nomText = document.getElementById('nom-text'); // Element que mostra el nom complet
 const nomInput = document.getElementById('nom-input'); // Input per editar el nom complet
-const btnEditNom = document.getElementById('btn-edit-nom'); // Botó per editar el nom
+const btnEditNom = document.getElementById('btn-edit-perfil'); // Botó per editar el nom
 
 // Afegim un event listener per quan es fa clic al botó d'editar
 if (btnEditNom) {

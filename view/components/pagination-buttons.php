@@ -1,6 +1,6 @@
 <!-- Santi Onieva -->
 
-<ul class="pagination-buttons <? if (!$isDashboard) echo 'shadow' ?>">
+<ul class="pagination-buttons <?php if (!$isDashboard) echo 'shadow' ?>">
   <!-- Enllaç per a la fletxa d'anterior pàgina. Està deshabilitada si l'usuari es troba a la primera pàgina. -->
   <a class="flecha <?php if ($paginaActual == 1) echo 'disabled'; ?>" href="<?= $_SERVER['SCRIPT_NAME'] ?>?pagina=<?= $paginaActual - 1 ?>">
     <i class="fa-solid fa-chevron-left"></i>

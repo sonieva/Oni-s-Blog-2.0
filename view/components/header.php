@@ -90,7 +90,7 @@ $userLogged = isset($_SESSION['usuari']);
 
         <!-- Contingut del menú desplegable amb opcions segons si l'usuari està identificat o no. -->
         <div id="dropdown" class="dropdown-content">
-          <? if ($userLogged): ?>
+          <?php if ($userLogged): ?>
             <!-- Si l'usuari està identificat, es mostren enllaços al perfil, al dashboard i per sortir de la sessió. -->
             <a href="view/perfil.view.php">
               <i class="fa-solid fa-user-gear"></i>Perfil
@@ -101,7 +101,7 @@ $userLogged = isset($_SESSION['usuari']);
             <a href="auth/logout.php">
               <i class="fa-solid fa-right-from-bracket"></i>Sortir
             </a>
-          <? else: ?>
+          <?php else: ?>
             <!-- Si l'usuari no està identificat, es mostren opcions per iniciar sessió o crear un compte. -->
             <a href="view/auth/login.view.php">
               <i class="fa-solid fa-right-to-bracket"></i>Iniciar sessio
@@ -109,7 +109,7 @@ $userLogged = isset($_SESSION['usuari']);
             <a href="view/auth/register.view.php">
               <i class="fa-solid fa-user-plus"></i>Crear compte
             </a>
-          <? endif; ?>
+          <?php endif; ?>
         </div>
       </div>
     </div>

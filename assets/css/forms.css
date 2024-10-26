@@ -1,5 +1,5 @@
 /* Estil bàsic per als formularis de registre, login i article */
-.form-registre, .form-login, .form-article {
+.form-registre, .form-login, .form-article, .form-change-password {
   width: 440px; /* Amplada fixa dels formularis */
   padding: 25px 25px; /* Espai interior (padding) */
   border-radius: 8px; /* Corba les cantonades */
@@ -11,7 +11,8 @@
 /* Estil per al missatge d'error dels formularis */
 .form-registre .missatge-error,
 .form-login .missatge-error,
-.form-article .missatge-error {
+.form-article .missatge-error,
+.form-change-password .missatge-error {
   border: #ff3a3a 1px solid; /* Contorn de color vermell */
   border-radius: 8px; /* Cantonades arrodonides */
   background-color: #ed6060; /* Fons vermell clar */
@@ -21,14 +22,16 @@
 /* Ajusta l'alineació de les llistes dins dels missatges d'error */
 .form-registre .missatge-error ul,
 .form-login .missatge-error ul,
-.form-article .missatge-error ul {
+.form-article .missatge-error ul,
+.form-change-password .missatge-error ul {
   list-style-position: inside; /* Posa les marques de la llista dins de la caixa */
 }
 
 /* Estil per als elements de la llista dins del missatge d'error */
 .form-registre .missatge-error li,
 .form-login .missatge-error li,
-.form-article .missatge-error li {
+.form-article .missatge-error li,
+.form-change-password .missatge-error li {
   color: white; /* Color del text blanc */
   font-size: 13px; /* Mida del text */
   font-weight: 500; /* Gruix del text */
@@ -37,7 +40,8 @@
 
 /* Estil dels títols dels formularis de registre i login */
 .form-registre h1,
-.form-login h1 {
+.form-login h1,
+.form-change-password h1 {
   font-size: 1.6rem; /* Mida del text */
   text-align: center; /* Centra el text */
 }
@@ -45,7 +49,8 @@
 /* Estil per als labels dels formularis */
 .form-registre form label,
 .form-login form label,
-.form-article form label {
+.form-article form label,
+.form-change-password form label {
   color: #1d1d1d; /* Color del text */
   font-size: 14px; /* Mida del text */
   font-weight: bold; /* Text en negreta */
@@ -62,14 +67,16 @@
 /* Posiciona els contenidors dels inputs de manera relativa per poder afegir icones */
 .form-registre form .input,
 .form-login form .input,
-.form-article form .input {
+.form-article form .input,
+.form-change-password form .input {
   position: relative;
 }
 
 /* Estil dels inputs dins dels formularis */
 .form-registre form .input input,
 .form-login form .input input,
-.form-article form .input input {
+.form-article form .input input,
+.form-change-password form .input input {
   color: #1d1d1d; /* Color del text */
   font-size: 16px;
   font-weight: 500;
@@ -88,19 +95,22 @@
 /* Canvia el color del contorn quan l'input està enfocat */
 .form-registre form .input input:focus,
 .form-login form .input input:focus,
-.form-article form .input input:focus {
+.form-article form .input input:focus,
+.form-change-password form .input input:focus {
   border-color: chocolate; /* Color del contorn en enfocar */
 }
 
 /* Canvia el color de l'icona quan l'input està enfocat */
 .form-registre form .input input:focus + i,
-.form-login form .input input:focus + i {
+.form-login form .input input:focus + i,
+.form-change-password form .input input:focus + i {
   color: chocolate; /* Canvia a color xocolata */
 }
 
 /* Posiciona les icones dins dels inputs */
 .form-registre form .input i,
-.form-login form .input i {
+.form-login form .input i,
+.form-change-password form .input i {
   position: absolute;
   font-size: 25px; /* Mida de l'icona */
   right: 10px; /* Posició a la dreta */
@@ -116,7 +126,8 @@ input[type="password"] + i {
 /* Estil dels botons dins dels formularis */
 .form-registre button,
 .form-login button,
-.form-article button {
+.form-article button,
+.form-change-password button {
   width: 100%; /* Amplada completa */
   margin: 15px 0;
   background: chocolate; /* Color de fons */
@@ -135,7 +146,8 @@ input[type="password"] + i {
 /* Canvia el color de fons dels botons quan es fa hover */
 .form-registre button:hover,
 .form-login button:hover,
-.form-article button:hover {
+.form-article button:hover,
+.form-change-password button:hover {
   background-color: #df813e; /* Color xocolata més clar */
 }
 

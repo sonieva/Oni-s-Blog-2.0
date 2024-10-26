@@ -19,7 +19,13 @@ if (!isset($_SESSION['usuari'])) {
 
 // Inclou el capçal de la pàgina
 include 'components/header.php';
+
+$missatge = getMessage('successChangePassword');
 ?>
+
+<?php if ($missatge): ?>
+  <div id="toaster" class="toaster toaster-success"><?= $missatge ?></div>
+<?php endif; ?>
 
 <div class="perfil">
   <!-- Mostra el nom d'usuari com a títol -->
@@ -33,7 +39,7 @@ include 'components/header.php';
       <strong>Nom complet: </strong>
       <span id="nom-text"><?= $_SESSION['usuari']->getNomComplet() ?? 'No configurat' ?></span>
       <input type="text" class="nom-input" id="nom-input">
-      <button class="btn-edit-nom" id="btn-edit-nom">
+      <button class="btn-edit-perfil" id="btn-edit-perfil">
         <i class="fas fa-pencil"></i>
       </button>
     </p>
@@ -41,6 +47,11 @@ include 'components/header.php';
     <!-- Mostra altres dades de l'usuari, com l'alies i el correu electrònic -->
     <p><strong>Alies: </strong><?= $_SESSION['usuari']->getAlies() ?></p>
     <p><strong>Correu: </strong><?= $_SESSION['usuari']->getEmail() ?></p>
-    <p><strong>Contrasenya: </strong><?= str_repeat('•', 10) ?></p>
+    <p>
+      <strong>Contrasenya: </strong><?= str_repeat('•', 10) ?>
+      <a href="view/auth/change-password.view.php" class="btn-edit-perfil">
+        <i class="fas fa-pencil"></i>
+      </a>
+    </p>
   </div>
 </div>

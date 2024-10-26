@@ -5,6 +5,9 @@
 require_once '../../config/Config.php';
 Config::setTitol('Login');
 
+// S'inclou el fitxer de funcions utils.php.
+require_once '../../config/utils.php';
+
 // S'inclou el component del header.
 include '../components/header.php';
 
@@ -20,21 +23,22 @@ if (isset($_SESSION['dadesLogin'])) {
   // Si no hi ha ni dades de sessió ni cookie, es deixa l'email buit.
   $email = '';
 }
+
+// Es comprova si hi ha errors de login emmagatzemats en la sessió.
+$errors = getMessages('errorsLogin');
 ?>
 
 <div class="form-login">
   <h1>Iniciar sessió</h1>
 
-  <?php if (isset($_SESSION['errorsLogin']) && !empty($_SESSION['errorsLogin'])): ?>
-    <!-- Si hi ha errors de login, es mostren en una llista dins d'un missatge d'error. -->
+  <?php if ($errors): ?>
     <div class="missatge-error">
       <ul>
-        <?php foreach ($_SESSION['errorsLogin'] as $error): ?>
+        <?php foreach ($errors as $error): ?>
           <li><?= $error ?></li>
         <?php endforeach; ?>
       </ul>
     </div>
-    <?php unset($_SESSION['errorsLogin']); ?>
   <?php endif; ?>
     
   <form action="auth/login.php" method="POST">
@@ -62,7 +66,7 @@ if (isset($_SESSION['dadesLogin'])) {
     <p>Has olvidat la contrasenya?</p>
     
     <!-- Botó per enviar el formulari de login. -->
-    <button type="submit" class="login">Entrar</button>
+    <button type="submit">Entrar</button>
   </form>
 
   
@@ -72,7 +76,7 @@ if (isset($_SESSION['dadesLogin'])) {
 </div>
 
 <!-- Si hi ha un missatge de sessió caducada per inactivitat, es mostra un toaster amb aquest missatge. -->
-<? if (isset($_SESSION['missatgeInactivitat'])): ?>
+<?php if (isset($_SESSION['missatgeInactivitat'])): ?>
   <div id="toaster" class="toaster toaster-info"><?= $_SESSION['missatgeInactivitat'] ?></div>
-  <? unset($_SESSION['missatgeInactivitat']); ?>
-<? endif; ?>
+  <?php unset($_SESSION['missatgeInactivitat']); ?>
+<?php endif; ?>

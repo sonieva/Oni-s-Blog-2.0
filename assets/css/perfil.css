@@ -18,18 +18,20 @@
   margin: 10px 0; /* Espai vertical entre els paràgrafs de la informació de perfil */
 }
 
-.btn-edit-nom {
+.btn-edit-perfil {
   background: none; /* Elimina el fons per defecte del botó */
   border: none; /* Elimina el borde per defecte del botó */
   cursor: pointer; /* Canvia el cursor a una mà quan es passa per sobre del botó */
+  text-decoration: none; /* Elimina el subratllat del text */
+  color: #b3642c; /* Color del text del botó */
 }
 
-.btn-edit-nom:hover {
+.btn-edit-perfil:hover {
   color: #ff7f50; /* Canvia el color del botó a taronja clar quan s'hi passa el cursor per sobre */
 }
 
-.btn-edit-nom i {
-  font-size: 1.5em; /* Augmenta la mida de l'icona per fer-la més visible */
+.btn-edit-perfil i {
+  font-size: 1.35rem; /* Augmenta la mida de l'icona per fer-la més visible */
 }
 
 .nom-input {

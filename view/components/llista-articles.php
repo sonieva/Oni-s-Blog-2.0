@@ -34,7 +34,7 @@ $articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId()
 
 <!-- Control de la paginació amb un formulari per a seleccionar la quantitat d'articles per pàgina. -->
 <div class="pagination-control">
-  <? include 'pagination-buttons.php'; ?>
+  <?php include 'pagination-buttons.php'; ?>
 
   <div class="pagination-select <? if (!$isDashboard) echo 'shadow' ?>">
     <form action="controller/pagination.controller.php" method="POST" class="pagination-form">
@@ -50,10 +50,10 @@ $articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId()
 
 <!-- Llista dels articles. -->
 <div class="llistat-articles">
-  <? if ($isDashboard && empty($articles)): ?>
+  <?php if ($isDashboard && empty($articles)): ?>
     <!-- Si l'usuari està al dashboard i no té articles, es mostra un missatge. -->
     <h2 class="no-articles">Encara no has publicat cap article</h2>
-  <? endif; ?>
+  <?php endif; ?>
 
   <?php foreach ($articles as $article): ?>
     <article>
@@ -62,27 +62,27 @@ $articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId()
         <img src="<?= BASE_PATH . $article->getRutaImatge() ?>" alt="<?= $article->getTitol() ?>">
         
         <!-- Si l'usuari està al dashboard, es mostren botons per eliminar i editar l'article. -->
-        <? if ($isDashboard): ?>
+        <?php if ($isDashboard): ?>
           <a class="btn-delete" onclick="deleteArticle(<? echo $article->getId() ?>)">
             <i class="fa-solid fa-trash-alt"></i>
           </a>
           <a class="btn-edit" href="controller/article.controller.php?action=update&id=<? echo $article->getId() ?>">
             <i class="fa-solid fa-edit"></i>
           </a>
-        <? endif; ?>
+        <?php endif; ?>
       </figure>
 
       <div class="article-info">
         <!-- Es mostren les dates de publicació i modificació de l'article. -->
         <small class="article-date">Publicat <?= $article->getDataCreacio()->format('j/m/o') ?></small>
-        <? if ($article->getDataModificacio()): ?>
+        <?php if ($article->getDataModificacio()): ?>
           <small class="article-date">Modificat <?= $article->getDataModificacio()->format('j/m/o') ?></small>
-        <? endif; ?>
+        <?php endif; ?>
         
         <!-- Si l'usuari no està al dashboard, es mostra l'autor de l'article. -->
-        <? if (!$isDashboard): ?>
+        <?php if (!$isDashboard): ?>
           <small class="article-author">Per <strong><?= $article->getAutor()->getAlies() ?></strong></small>
-        <? endif; ?>
+        <?php endif; ?>
       </div>
       
       <div class="article-body">
@@ -94,16 +94,16 @@ $articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId()
         </p>
 
         <!-- Si el cos és més llarg de 100 caràcters, es mostra un enllaç per a llegir l'article complet. -->
-        <? if (strlen($article->getCos()) > 100): ?> 
+        <?php if (strlen($article->getCos()) > 100): ?> 
           <a class="read-more" id="continua-llegint" onclick="loadArticle(<?= $article->getId() ?>)">Continua llegint <i class="fa-solid fa-arrow-right"></i></a>
-        <? endif; ?>
+        <?php endif; ?>
       </div>
     </article>
   <?php endforeach; ?>
 </div>
 
 <!-- Es tornen a incloure els botons de paginació per tenir-los també a la part inferior de la pàgina. -->
-<? include 'pagination-buttons.php'; ?>
+<?php include 'pagination-buttons.php'; ?>
 
 <!-- Modal per a mostrar el contingut complet de l'article. S'inicialitza ocult. -->
 <div id="articleModal" class="modal" style="display: none;">
