@@ -5,7 +5,6 @@ require_once '../config/Config.php';
 // Estableix el títol de la pàgina a "Dashboard"
 Config::setTitol('Dashboard');
 
-require_once '../config/utils.php';
 require_once '../model/Usuari/Usuari.php';
 
 session_start();
@@ -57,7 +56,7 @@ $errors = getMessages('errorAdd');
     </div>
   
     <div class="apartats">
-      <div class="form-article">
+      <div class="custom-form form-article">
   
         <?php if ($errors): ?>
           <div class="missatge-error" id="errors-add">

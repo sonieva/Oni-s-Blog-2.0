@@ -1,6 +1,8 @@
 <?php
 // Santi Onieva
 
+if (session_status() == PHP_SESSION_NONE) session_start();
+
 // Funció per obtenir la part del dia en funció de l'hora actual.
 function getHoraDelDia(): string {
   // S'obté l'hora actual en format de 24 hores.
@@ -102,7 +104,7 @@ function addMessage($key, $message): void {
 function getMessage($key): ?string {
   if (isset($_SESSION[$key])) {
       $message = $_SESSION[$key];
-      unset($_SESSION[$key]); // Eliminamos el mensaje después de leerlo
+      unset($_SESSION[$key]); 
       return $message;
   }
   return null;
@@ -111,9 +113,13 @@ function getMessage($key): ?string {
 function getMessages($key): ?array {
   if (isset($_SESSION[$key])) {
       $messages = $_SESSION[$key];
-      unset($_SESSION[$key]); // Eliminamos el mensaje después de leerlo
+      unset($_SESSION[$key]);
       return $messages;
   }
   return null;
+}
+
+function generarTokenRecuperacio(): string {
+  return bin2hex(random_bytes(32));
 }
 ?>

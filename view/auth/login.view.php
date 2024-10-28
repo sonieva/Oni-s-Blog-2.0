@@ -5,9 +5,6 @@
 require_once '../../config/Config.php';
 Config::setTitol('Login');
 
-// S'inclou el fitxer de funcions utils.php.
-require_once '../../config/utils.php';
-
 // S'inclou el component del header.
 include '../components/header.php';
 
@@ -26,9 +23,14 @@ if (isset($_SESSION['dadesLogin'])) {
 
 // Es comprova si hi ha errors de login emmagatzemats en la sessió.
 $errors = getMessages('errorsLogin');
+$error = getMessages('errorLogin');
 ?>
 
-<div class="form-login">
+<?php if ($error): ?>
+  <div id="toaster" class="toaster toaster-error"><?= $error ?></div>
+<?php endif; ?>
+
+<div class="custom-form form-login">
   <h1>Iniciar sessió</h1>
 
   <?php if ($errors): ?>
@@ -63,7 +65,7 @@ $errors = getMessages('errorsLogin');
     </div>
 
     <!-- Enllaç per recuperar la contrasenya. -->
-    <p>Has olvidat la contrasenya?</p>
+    <p>Has olvidat la contrasenya? <a href="view/auth/correu-recuperacio.view.php">Recupera-la</a></p>
     
     <!-- Botó per enviar el formulari de login. -->
     <button type="submit">Entrar</button>

@@ -7,6 +7,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . BASE_PATH . '/model/Usuari/Usuari.php';
 // Si la sessió no està iniciada, s'inicia.
 if (session_status() == PHP_SESSION_NONE) session_start();
 
+// S'inclou el fitxer de funcions utils.php.
+require_once $_SERVER['DOCUMENT_ROOT'] . BASE_PATH . '/utils/utils.php';
+
 // Es requereix el fitxer per controlar la durada de la sessió.
 require_once $_SERVER['DOCUMENT_ROOT'] . BASE_PATH . '/config/session-lifetime.php';
 
@@ -84,7 +87,7 @@ $userLogged = isset($_SESSION['usuari']);
       <div class="nav-item">
         <button id="dropdown-toggle">
           <i class="<?= $userLogged ? 'fa-solid' : 'fa-regular' ?> fa-user"></i>
-          <?= $userLogged ? $_SESSION['usuari']->getAlies() : 'Identifica\'t'?> 
+          <span id="header-nom"><?= $userLogged ? ($_SESSION['usuari']->getNomComplet() ?: $_SESSION['usuari']->getAlies()) : 'Identifica\'t' ?></span>
           <i id="caret" class="fa-solid fa-caret-left"></i>
         </button>
 

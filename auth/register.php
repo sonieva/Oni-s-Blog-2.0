@@ -4,7 +4,7 @@
 // S'inclouen les classes necessàries per gestionar els usuaris i les utilitats.
 require_once '../model/Usuari/Usuari.php';
 require_once '../model/Usuari/UsuariDAO.php';
-require_once '../config/utils.php';
+require_once '../utils/utils.php';
 
 // S'inicialitza un array per emmagatzemar els errors de registre.
 $_SESSION['errorRegister'] = [];

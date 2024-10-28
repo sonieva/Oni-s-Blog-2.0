@@ -4,6 +4,7 @@
 const nomText = document.getElementById('nom-text'); // Element que mostra el nom complet
 const nomInput = document.getElementById('nom-input'); // Input per editar el nom complet
 const btnEditNom = document.getElementById('btn-edit-perfil'); // Botó per editar el nom
+const headerNom = document.getElementById('header-nom'); // Element que mostra el nom complet al header
 
 // Afegim un event listener per quan es fa clic al botó d'editar
 if (btnEditNom) {
@@ -19,12 +20,15 @@ if (btnEditNom) {
 if (nomInput) {
   nomInput.addEventListener('blur', () => {
     // Obté el valor de l'input i si està buit, assigna "No configurat"
-    const nouNom = nomInput.value.trim() || 'No configurat';
+    let nouNom = nomInput.value.trim() || 'No configurat';
 
     // Actualitza el text amb el nou nom i torna a mostrar el text, amagant l'input
     nomText.textContent = nouNom;
     nomText.style.display = 'inline-block';
     nomInput.style.display = 'none';
+
+    nouNom = (nouNom == 'No configurat') ? null : nouNom; // Si el nou nom és "No configurat", assigna null
+    if (nouNom) headerNom.innerHTML = nouNom; // Si el nou nom no és null, actualitza el nom al header
 
     // Fa una petició `fetch` a l'API per actualitzar el nom complet a la base de dades
     fetch('api/update-profile.php', {

@@ -87,5 +87,5 @@ Per un funcionament correcte, cal cambiar els següents valors:
 private $host = 'db'; // Cal posar la IP del servidor
 private $dbName = 'Pt04_Santi_Onieva';
 private $user = 'root'; // Si cal, s'ha de canviar l'usuari
-private $password = 'p@ssw0rd'; // Cal cambiar la contrasenya
+private $password = 'p@ssw0rd'; // i la contrasenya
 ```

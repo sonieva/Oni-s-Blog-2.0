@@ -2,6 +2,7 @@
 // Santi Onieva
 
 // S'inclou la classe UsuariDAO per a gestionar les operacions amb usuaris
+require_once '../model/Usuari/Usuari.php';
 require_once '../model/Usuari/UsuariDAO.php';
 
 // Inicialitzar l'array d'errors per al login

@@ -37,7 +37,15 @@ class UsuariDAO {
     $resultat = $sentencia->fetch();
 
     // Retorna un objecte Usuari amb les dades recuperades.
-    return new Usuari($resultat['alies'], $resultat['email'], $resultat['password'], $resultat['nom_complet'], $resultat['id']);
+    return new Usuari(
+      $resultat['alies'], 
+      $resultat['email'], 
+      $resultat['password'], 
+      $resultat['nom_complet'], 
+      $resultat['id'], 
+      $resultat['token_recuperacio'], 
+      isset($resultat['expiracio_token']) ? new DateTime($resultat['expiracio_token']) : null
+    );
   }
 
   // Obté un usuari de la base de dades pel seu correu electrònic.
@@ -53,13 +61,34 @@ class UsuariDAO {
     } else {
       // Obté el resultat i retorna un objecte Usuari.
       $resultat = $sentencia->fetch();
-      return new Usuari($resultat['alies'], $resultat['email'], $resultat['password'], $resultat['nom_complet'], $resultat['id']);
+      return new Usuari(
+        $resultat['alies'], 
+        $resultat['email'], 
+        $resultat['password'], 
+        $resultat['nom_complet'], 
+        $resultat['id'],
+        $resultat['token_recuperacio'],
+        isset($resultat['expiracio_token']) ? new DateTime($resultat['expiracio_token']) : null
+      );
     }
+  }
+
+  public function getCorreus() {
+    $sentencia = $this->pdo->prepare("SELECT email FROM usuaris");
+
+    // Executa la consulta.
+    $sentencia->execute();
+
+    // Obté el resultat de la consulta.
+    $resultat = $sentencia->fetchColumn();
+
+    // Retorna un array amb els correus electrònics.
+    return $resultat;
   }
 
   // Modifica les dades d'un usuari existent a la base de dades.
   public function modificar(Usuari $usuari) {
-    $sentenciaModificar = $this->pdo->prepare("UPDATE usuaris SET alies = :alies, email = :email, password = :password, nom_complet = :nom_complet WHERE id = :id");
+    $sentenciaModificar = $this->pdo->prepare("UPDATE usuaris SET alies = :alies, email = :email, password = :password, nom_complet = :nom_complet, token_recuperacio = :token_recuperacio, expiracio_token = :expiracio_token WHERE id = :id");
 
     // Executa la sentència d'actualització amb les dades de l'usuari i retorna el resultat.
     return $sentenciaModificar->execute([
@@ -68,6 +97,8 @@ class UsuariDAO {
       'password' => $usuari->getPassword(),
       'nom_complet' => $usuari->getNomComplet(),
       'id' => $usuari->getId(),
+      'token_recuperacio' => $usuari->getTokenRecuperacio(),
+      'expiracio_token' => $usuari->getExpiracioToken()->format('Y-m-d H:i:s'),
     ]);
   }
 

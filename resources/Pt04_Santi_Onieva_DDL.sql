@@ -13,6 +13,11 @@ CREATE TABLE `usuaris` (
   PRIMARY KEY (`id`)
 );
 
+-- Modifiquem la taula d'usuaris per afegir la part del token de recuperació de contrasenya
+ALTER TABLE `usuaris`
+ADD COLUMN `token_recuperacio` VARCHAR(255) NULL DEFAULT NULL,
+ADD COLUMN `expiracio_token` TIMESTAMP NULL DEFAULT NULL;
+
 CREATE TABLE `articles` (
   `id` int NOT NULL AUTO_INCREMENT,
   `titol` varchar(255) NOT NULL,

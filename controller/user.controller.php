@@ -3,9 +3,8 @@
 
 require_once '../model/Usuari/Usuari.php';
 require_once '../model/Usuari/UsuariDAO.php';
-require_once '../config/utils.php';
-
-session_start();
+require_once '../utils/utils.php';
+require_once '../config/Config.php';
 
 if (isset($_GET['action'])) {
   // S'utilitza un switch per determinar l'acció a executar.
@@ -13,11 +12,8 @@ if (isset($_GET['action'])) {
       case 'change_password':
         canviarPassword($_POST['antigaPassword'], $_POST['novaPassword'], $_POST['novaPassword2']);
         break;
-      case 'update':
-        
-        break;
-      case 'delete':
-        
+      case 'reset_password_mail':
+        enviarCorreuRecuperacio($_POST['correuRecuperacio']);
         break;
   }
 } else {
@@ -26,12 +22,14 @@ if (isset($_GET['action'])) {
 }
 
 function canviarPassword($oldPassword, $newPassword, $confirmPassword): void {
-  // Es crea un array per emmagatzemar els possibles errors.
-  $_SESSION['errorChangePassword'] = [];
-
   // Es comprova que l'usuari està identificat.
   if (!isset($_SESSION['usuari'])) {
-    setMessage('errorInici', 'No estàs identificat');
+    setMessage('errorLogin', 'No estàs identificat');
+    header('Location: ../view/auth/login.view.php');
+  }
+
+  if (empty($oldPassword) || empty($newPassword) || empty($confirmPassword)) {
+    addMessage('errorChangePassword', 'Has d\'omplir tots els camps');
   }
 
   // Es comprova que la contrasenya antiga sigui correcta.
@@ -76,6 +74,54 @@ function canviarPassword($oldPassword, $newPassword, $confirmPassword): void {
   }
 
   header('Location: ../view/perfil.view.php');
+  exit();
+}
+
+function enviarCorreuRecuperacio($correuRecuperacio): void {
+  
+  if (isset($_SESSION['usuari'])) {
+    setMessage('errorInici', 'Has d\'estar deslogat per poder restablir la contrasenya');
+    header('Location: ../view/inici.view.php');
+  }
+
+  if (empty($correuRecuperacio)) {
+    addMessage('errorsResetPassword', 'Has d\'omplir el camp correu electrònic');
+  }
+
+  if (!filter_var($correuRecuperacio, FILTER_VALIDATE_EMAIL)) {
+    addMessage('errorsResetPassword', 'El correu electrònic no és vàlid');
+  }
+
+  $usuariDAO = new UsuariDAO();
+  $usuari = $usuariDAO->getUsuariPerEmail($correuRecuperacio);
+
+  if (!$usuari) {
+    addMessage('errorsResetPassword', 'No existeix cap usuari amb aquest correu electrònic');
+  }
+
+  if (!empty($_SESSION['errorsResetPassword'])) {
+    header('Location: ../view/auth/correu-recuperacio.view.php');
+    exit();
+  }
+
+  $token = generarTokenRecuperacio();
+  $expiry = (new DateTime('now'))->add(new DateInterval('PT15M'));
+
+  $usuari->setTokenRecuperacio($token);
+  $usuari->setExpiracioToken($expiry);
+  $usuariDAO->modificar($usuari);
+
+  $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? "https" : "http";
+  $host = $_SERVER['HTTP_HOST'];
+  $resetLink = "$protocol://$host" . BASE_PATH . "/auth/reset-password.view.php?token=$token";
+
+  require_once '../utils/MailUtils.php';
+
+  MailUtils::enviarCorreuRecuperacio($correuRecuperacio, $resetLink);
+
+  if (empty($_SESSION['errorCorreu'])) setMessage('missatgeCorreu', 'Correu de recuperació enviat correctament');
+
+  header('Location: ../view/auth/correu-recuperacio.view.php');
   exit();
 }
 

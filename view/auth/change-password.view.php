@@ -1,17 +1,15 @@
 <?php
-
 // Santi Onieva
 
 require_once '../../config/Config.php';
 Config::setTitol('Canviar contrasenya');
 
-require_once '../../config/utils.php';
 require_once '../../model/Usuari/Usuari.php';
 
 session_start();
 
 if (!isset($_SESSION['usuari'])) {
-  header('Location: ..');
+  header('Location: ../..');
 }
 
 include '../components/header.php';
@@ -19,7 +17,7 @@ include '../components/header.php';
 $errors = getMessages('errorChangePassword');
 ?>
 
-<div class="form-change-password">
+<div class="custom-form form-change-password">
   <h1>Modificar contrasenya</h1>
 
   <?php if ($errors): ?>
@@ -32,8 +30,7 @@ $errors = getMessages('errorChangePassword');
     </div>
   <?php endif; ?>
 
-  <form action="controller/user.controller.php?action=change_password" method="POST">
-    
+  <form action="controller/user.controller.php?action=change_password" method="POST">    
     <label for="old-password">Contrasenya antiga</label>
     <div class="input">
       <input type="password" name="antigaPassword" required>

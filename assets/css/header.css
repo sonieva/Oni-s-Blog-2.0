@@ -72,6 +72,7 @@
       /* Estil per a icones que no són fa-caret-left o fa-caret-down */
       i:not(.fa-caret-left, .fa-caret-down) {
         margin-right: 0.5rem; /* Espai a la dreta de l'icona */
+        pointer-events: all; /* Activa els events de ratolí */
       }
   
       i.fa-caret-left, i.fa-caret-down {

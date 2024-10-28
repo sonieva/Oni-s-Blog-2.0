@@ -5,6 +5,12 @@
 include_once '../../config/Config.php';
 Config::setTitol('Registre');
 
+session_start();
+
+if (isset($_SESSION['usuari'])) {
+  header('Location: ../..');
+}
+
 // S'inclou el component del header.
 include '../components/header.php';
 
@@ -17,7 +23,7 @@ if (isset($_SESSION['dadesRegistre'])) {
 }
 ?>
 
-<div class="form-registre">
+<div class="custom-form form-registre">
   <h1>Crear compte</h1>
 
   <?php if (isset($_SESSION['errorRegister']) && !empty($_SESSION['errorRegister'])): ?>

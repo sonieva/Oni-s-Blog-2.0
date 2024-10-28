@@ -8,14 +8,18 @@ class Usuari {
   private string $email;
   private string $password;
   private ?string $nom_complet;
+  private ?string $token_recuperacio;
+  private ?DateTime $expiracio_token;
 
   // Constructor que inicialitza un objecte Usuari amb els valors proporcionats.
-  public function __construct(string $alies, string $email, string $password, ?string $nom_complet = null, ?string $id = null) {
+  public function __construct(string $alies, string $email, string $password, ?string $nom_complet = null, ?string $id = null, ?string $token_recuperacio = null, ?DateTime $expiracio_token = null) {
     $this->id = $id;
     $this->alies = $alies;
     $this->email = $email;
     $this->password = $password;
     $this->nom_complet = $nom_complet;
+    $this->token_recuperacio = $token_recuperacio;
+    $this->expiracio_token = $expiracio_token;
   }
 
   // Retorna l'ID de l'usuari.
@@ -61,6 +65,26 @@ class Usuari {
   // Estableix un nou nom complet per a l'usuari.
   public function setNomComplet($nom_complet) {
     $this->nom_complet = $nom_complet;
+  }
+
+  // Retorna el token de recuperació de l'usuari.
+  public function getTokenRecuperacio() {
+    return $this->token_recuperacio;
+  }
+
+  // Estableix un nou token de recuperació per a l'usuari.
+  public function setTokenRecuperacio($token_recuperacio) {
+    $this->token_recuperacio = $token_recuperacio;
+  }
+
+  // Retorna la data d'expiració del token de recuperació de l'usuari.
+  public function getExpiracioToken() {
+    return $this->expiracio_token;
+  }
+
+  // Estableix una nova data d'expiració per al token de recuperació de l'usuari.
+  public function setExpiracioToken($expiracio_token) {
+    $this->expiracio_token = $expiracio_token;
   }
 
 }

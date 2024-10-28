@@ -5,7 +5,7 @@
 session_start();
 
 require_once '../model/Article/ArticleDAO.php';
-require_once '../config/utils.php';
+require_once '../utils/utils.php';
 
 // Es comprova si s'ha rebut una acció a través de la URL.
 if (isset($_GET['action'])) {

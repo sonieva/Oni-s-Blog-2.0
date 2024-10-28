@@ -3,7 +3,7 @@
 
 // Es defineix la constant BASE_PATH per obtenir la ruta base del projecte,
 // eliminant les parts '/view', '/auth' i '/api' de la ruta del directori actual.
-define('BASE_PATH', rtrim(str_replace(['/view', '/auth', '/api'], '', dirname($_SERVER['SCRIPT_NAME'])), '/'));
+define('BASE_PATH', rtrim(str_replace(['/view', '/auth', '/api', '/controller'], '', dirname($_SERVER['SCRIPT_NAME'])), '/'));
 
 // Es crea la classe Config per gestionar la configuració de la pàgina.
 class Config {

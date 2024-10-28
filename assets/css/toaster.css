@@ -4,7 +4,6 @@
 .toaster {
   visibility: hidden; /* El toaster és invisible per defecte */
   min-width: 250px; /* Amplada mínima per assegurar que el contingut tingui espai */
-  margin-left: -125px; /* Centra el toaster horitzontalment (compensa la meitat de la seva amplada) */
   background-color: #333; /* Color de fons gris fosc */
   color: #fff; /* Color del text blanc */
   text-align: center; /* Text centrat */
@@ -12,7 +11,6 @@
   padding: 16px; /* Espai intern de 16px al voltant del contingut */
   position: fixed; /* Posició fixa per a que es mantingui visible mentre es desplaça la pàgina */
   z-index: 1; /* Prioritat alta perquè es mostri sobre altres elements */
-  left: 50%; /* Centra l'element horitzontalment a la pàgina */
   bottom: 30px; /* Desplaça el toaster cap amunt des de la part inferior de la pàgina */
   font-size: 17px; /* Mida de la lletra */
 }

@@ -5,9 +5,6 @@
 include_once '../config/Config.php';
 Config::setTitol('Inici');
 
-// Inclou les funcions utils.php
-include_once '../config/utils.php';
-
 // Inclou el capçal de la pàgina
 include 'components/header.php';
 

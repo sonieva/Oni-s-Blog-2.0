@@ -5,8 +5,7 @@
 require_once '../config/Config.php';
 Config::setTitol('Perfil');
 
-// Inclou utilitats i el model de l'usuari
-require_once '../config/utils.php';
+// Inclou el model de l'usuari
 require_once '../model/Usuari/Usuari.php';
 
 // Inicia la sessió
