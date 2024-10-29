@@ -24,24 +24,14 @@ if (isset($_SESSION['dadesLogin'])) {
 // Es comprova si hi ha errors de login emmagatzemats en la sessió.
 $errors = getMessages('errorsLogin');
 $error = getMessages('errorLogin');
-?>
 
-<?php if ($error): ?>
-  <div id="toaster" class="toaster toaster-error"><?= $error ?></div>
-<?php endif; ?>
+include_once '../components/toasters.php'
+?>
 
 <div class="custom-form form-login">
   <h1>Iniciar sessió</h1>
 
-  <?php if ($errors): ?>
-    <div class="missatge-error">
-      <ul>
-        <?php foreach ($errors as $error): ?>
-          <li><?= $error ?></li>
-        <?php endforeach; ?>
-      </ul>
-    </div>
-  <?php endif; ?>
+  <?php include '../components/form-errors.php'; ?>
     
   <form action="auth/login.php" method="POST">
     <!-- Camp per introduir el correu electrònic, s'omple automàticament si hi ha dades disponibles. -->
@@ -70,15 +60,7 @@ $error = getMessages('errorLogin');
     <!-- Botó per enviar el formulari de login. -->
     <button type="submit">Entrar</button>
   </form>
-
-  
   
   <!-- Enllaç per a aquells usuaris que no tenen un compte i volen registrar-se. -->
   <p>No tens compte? <a href="view/auth/register.view.php">Registra't</a></p>
 </div>
-
-<!-- Si hi ha un missatge de sessió caducada per inactivitat, es mostra un toaster amb aquest missatge. -->
-<?php if (isset($_SESSION['missatgeInactivitat'])): ?>
-  <div id="toaster" class="toaster toaster-info"><?= $_SESSION['missatgeInactivitat'] ?></div>
-  <?php unset($_SESSION['missatgeInactivitat']); ?>
-<?php endif; ?>

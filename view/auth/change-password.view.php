@@ -20,15 +20,7 @@ $errors = getMessages('errorChangePassword');
 <div class="custom-form form-change-password">
   <h1>Modificar contrasenya</h1>
 
-  <?php if ($errors): ?>
-    <div class="missatge-error">
-      <ul>
-        <?php foreach ($errors as $error): ?>
-          <li><?= $error ?></li>
-        <?php endforeach; ?>
-      </ul>
-    </div>
-  <?php endif; ?>
+  <?php include '../components/form-errors.php'; ?>
 
   <form action="controller/user.controller.php?action=change_password" method="POST">    
     <label for="old-password">Contrasenya antiga</label>

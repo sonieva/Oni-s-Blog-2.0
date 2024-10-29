@@ -32,21 +32,7 @@ $offset = ($paginaActual - 1) * $articlesPerPagina;
 $articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId() : null, $offset, $articlesPerPagina);
 ?>
 
-<!-- Control de la paginació amb un formulari per a seleccionar la quantitat d'articles per pàgina. -->
-<div class="pagination-control">
-  <?php include 'pagination-buttons.php'; ?>
-
-  <div class="pagination-select <? if (!$isDashboard) echo 'shadow' ?>">
-    <form action="controller/pagination.controller.php" method="POST" class="pagination-form">
-      <label for="articlesPerPagina">Articles per pàgina:</label>
-      <select name="articlesPerPagina" onchange="this.form.submit()" class="form-select">
-        <?php foreach ([6, 12, 24, 48] as $cantitat): ?>
-          <option value="<?= $cantitat ?>" <?= ($cantitat == $articlesPerPagina) ? 'selected' : '' ?>><?= $cantitat ?></option>
-        <?php endforeach; ?>
-      </select>
-    </form>
-  </div>
-</div>
+<?php include 'pagination-control.php'; ?>
 
 <!-- Llista dels articles. -->
 <div class="llistat-articles">

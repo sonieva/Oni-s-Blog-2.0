@@ -5,9 +5,6 @@
 require_once '../model/Usuari/Usuari.php';
 require_once '../model/Usuari/UsuariDAO.php';
 
-// Inicialitzar l'array d'errors per al login
-$_SESSION['errorsLogin'] = [];
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   session_start();
   
@@ -17,12 +14,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
   // Es comprova si l'email està buit i s'afegeix un error si cal
   if (empty($email)) {
-    $_SESSION['errorsLogin'][] = 'El correu electrònic és obligatori';
+    addMessage('errorsLogin', 'El correu electrònic és obligatori');
   }
   
   // Es comprova si la contrasenya està buida i s'afegeix un error si cal
   if (empty($password)) {
-    $_SESSION['errorsLogin'][] = 'La contrasenya és obligatòria';
+    addMessage('errorsLogin', 'La contrasenya és obligatòria');
   }
   
   // Si tant l'email com la contrasenya no estan buits, es continua amb la validació
@@ -32,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Si no es troba cap usuari amb aquest email, es mostra un missatge d'error
     if ($usuari === null) {
-      $_SESSION['errorsLogin'][] = 'El correu electrònic o la contrasenya són incorrectes';
+      addMessage('errorsLogin', 'El correu electrònic o la contrasenya són incorrectes');
     } else {
       // Es verifica la contrasenya introduïda amb la contrasenya emmagatzemada
       if (password_verify($password, $usuari->getPassword())) {
@@ -49,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
       } else {
         // Si la contrasenya és incorrecta, es mostra un missatge d'error
-        $_SESSION['errorsLogin'][] = 'El correu electrònic o la contrasenya són incorrectes';
+        addMessage('errorsLogin', 'El correu electrònic o la contrasenya són incorrectes');
       }
     }
   }

@@ -21,22 +21,14 @@ if (isset($_SESSION['dadesRegistre'])) {
   $email = $_SESSION['dadesRegistre']['email'];
   unset($_SESSION['dadesRegistre']);
 }
+
+$errors = getMessages('errorsRegister');
 ?>
 
 <div class="custom-form form-registre">
   <h1>Crear compte</h1>
 
-  <?php if (isset($_SESSION['errorRegister']) && !empty($_SESSION['errorRegister'])): ?>
-    <!-- Si hi ha errors en el registre, es mostren en una llista dins d'un missatge d'error. -->
-    <div class="missatge-error">
-      <ul>
-        <?php foreach ($_SESSION['errorRegister'] as $error): ?>
-          <li><?= $error ?></li>
-        <?php endforeach; ?>
-      </ul>
-    </div>
-    <?php unset($_SESSION['errorRegister']); ?>
-  <?php endif; ?>
+  <?php include '../components/form-errors.php'; ?>
     
   <form action="auth/register.php" method="POST">
       
@@ -57,7 +49,7 @@ if (isset($_SESSION['dadesRegistre'])) {
     <!-- Camp per introduir la contrasenya. -->
     <label for="password">Contrasenya</label>
     <div class="input">
-      <input type="password" name="password" required>
+      <input type="password" name="password" minlength="8" required>
       <i class="fa-solid fa-lock" id="toggle-password"></i>
     </div>
 

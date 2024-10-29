@@ -9,6 +9,7 @@ Config::setTitol('Inici');
 include 'components/header.php';
 
 $error = getMessage('errorInici');
+$missatge = getMessage('missatgeInici');
 ?>
 
 <div class="titol-inici">

@@ -98,7 +98,7 @@ class UsuariDAO {
       'nom_complet' => $usuari->getNomComplet(),
       'id' => $usuari->getId(),
       'token_recuperacio' => $usuari->getTokenRecuperacio(),
-      'expiracio_token' => $usuari->getExpiracioToken()->format('Y-m-d H:i:s'),
+      'expiracio_token' => ($usuari->getExpiracioToken()) ? $usuari->getExpiracioToken()->format('Y-m-d H:i:s') : null,
     ]);
   }
 

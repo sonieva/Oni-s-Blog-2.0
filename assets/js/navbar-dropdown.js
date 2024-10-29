@@ -19,6 +19,23 @@ if (toggler && dropdown && caretIcon) {
       caretIcon.classList.replace('fa-caret-down', 'fa-caret-left');
     }
   });
+
+  const fills = toggler.children;
+  
+  for (let i = 0; i < fills.length; i++) {
+    fills[i].addEventListener('click', (event) => {
+      event.stopPropagation();
+      // Alterna la classe 'show' per mostrar o amagar el contingut del desplegable
+      dropdown.classList.toggle('show');
+
+      // Canvia la icona del caret segons l'estat del desplegable
+      if (dropdown.classList.contains('show')) {
+        caretIcon.classList.replace('fa-caret-left', 'fa-caret-down');
+      } else {
+        caretIcon.classList.replace('fa-caret-down', 'fa-caret-left');
+      }
+    });
+  }
 }
 
 // Funció per tancar el desplegable si es fa clic fora d'ell

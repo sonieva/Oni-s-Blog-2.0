@@ -22,15 +22,9 @@ $editMode = ($_SESSION['editMode']) ?? false;
 $missatge = getMessage('missatgeDashboard');
 $error = getMessage('errorDashboard');
 $errors = getMessages('errorAdd');
+
+include_once 'components/toasters.php'
 ?>
-
-<?php if ($missatge): ?>
-  <div id="toaster" class="toaster toaster-success"><?= $missatge ?></div>
-<?php endif; ?>
-
-<?php if ($error): ?>
-  <div id="toaster" class="toaster toaster-error"><?= $error ?></div>
-<?php endif; ?>
 
 <div class="dashboard">
   <h1 class="benvinguda"><?= missatgeBenvinguda() . ', ' . ($_SESSION['usuari']->getNomComplet() ?? $_SESSION['usuari']->getAlies()) ?></h1>
@@ -58,15 +52,7 @@ $errors = getMessages('errorAdd');
     <div class="apartats">
       <div class="custom-form form-article">
   
-        <?php if ($errors): ?>
-          <div class="missatge-error" id="errors-add">
-            <ul>
-              <?php foreach ($errors as $error): ?>
-                <li><?= $error ?></li>
-              <?php endforeach; ?>
-            </ul>
-          </div>
-        <?php endif; ?>
+        <?php include '../components/form-errors.php'; ?>
   
         <form action="controller/article.controller.php?action=<?= ($editMode) ? 'update&id='. $_SESSION['articleUpdate']['id'] : 'add&autor='. $_SESSION['usuari']->getId() ?>" method="POST" id="form-afegir" enctype="multipart/form-data">
           <label for="titol">Títol</label>

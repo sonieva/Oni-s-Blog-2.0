@@ -20,11 +20,9 @@ if (!isset($_SESSION['usuari'])) {
 include 'components/header.php';
 
 $missatge = getMessage('successChangePassword');
-?>
 
-<?php if ($missatge): ?>
-  <div id="toaster" class="toaster toaster-success"><?= $missatge ?></div>
-<?php endif; ?>
+include_once 'components/toasters.php'
+?>
 
 <div class="perfil">
   <!-- Mostra el nom d'usuari com a títol -->

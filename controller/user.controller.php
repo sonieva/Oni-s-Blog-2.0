@@ -85,21 +85,21 @@ function enviarCorreuRecuperacio($correuRecuperacio): void {
   }
 
   if (empty($correuRecuperacio)) {
-    addMessage('errorsResetPassword', 'Has d\'omplir el camp correu electrònic');
+    addMessage('errorsCorreuRecuperacio', 'Has d\'omplir el camp correu electrònic');
   }
 
   if (!filter_var($correuRecuperacio, FILTER_VALIDATE_EMAIL)) {
-    addMessage('errorsResetPassword', 'El correu electrònic no és vàlid');
+    addMessage('errorsCorreuRecuperacio', 'El correu electrònic no és vàlid');
   }
 
   $usuariDAO = new UsuariDAO();
   $usuari = $usuariDAO->getUsuariPerEmail($correuRecuperacio);
 
   if (!$usuari) {
-    addMessage('errorsResetPassword', 'No existeix cap usuari amb aquest correu electrònic');
+    addMessage('errorsCorreuRecuperacio', 'No existeix cap usuari amb aquest correu electrònic');
   }
 
-  if (!empty($_SESSION['errorsResetPassword'])) {
+  if (!empty($_SESSION['errorsCorreuRecuperacio'])) {
     header('Location: ../view/auth/correu-recuperacio.view.php');
     exit();
   }
