@@ -14,7 +14,54 @@
   }
 }
 
-.info p {
+.info-header {
+  display: flex; /* Utilitza un model de caixes flexibles per al contenidor */
+  justify-content: space-between; /* Espai equitatiu entre els elements del contenidor */
+  align-items: center; /* Centra verticalment els elements del contenidor */
+
+  .container-foto-perfil {
+    position: relative; /* Defineix el contenedor de la imatge com a referència per a l'element absolut */
+    width: 100px;       /* Ajusta l'amplada del contenedor */
+    height: 100px;      /* Ajusta l'alçada del contenedor */
+
+    img {
+      width: 100%;        /* La imatge ocupa tot el contenedor */
+      height: 100%;       /* La imatge ocupa tot el contenedor */
+      border-radius: 50%; /* Arrodoneix les cantonades de la imatge */
+      object-fit: cover;  /* Ajusta la imatge per cobrir el contenidor */
+    }
+
+    .input-foto-perfil {
+      display: none; /* Oculta l'input de tipus file per defecte fins que es mostri amb JavaScript */
+    }
+
+    .edit-icon {
+      position: absolute;  /* El botó es posiciona respecte al contenedor relatiu */
+      bottom: -5px;         /* Ajusta la posició del botó a la part inferior */
+      right: 5px;          /* Ajusta la posició del botó a la dreta */
+      background-color: #f15b2a;  /* Color anaranjado de fondo */
+      color: white;
+      border-radius: 50%;  /* Hace que el botón sea redondo */
+      padding: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;          /* Elimina el borde del botón */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para resaltar el ícono */
+    }
+
+    .edit-icon:hover {
+      background-color: #ff7f50; /* Canvia el color de fons a taronja clar quan es passa el cursor per sobre */
+    }
+    
+    .edit-icon i {
+      font-size: 14px; /* Tamaño del ícono del lápiz */
+    }
+  }
+}
+
+.info-body p {
   margin: 10px 0; /* Espai vertical entre els paràgrafs de la informació de perfil */
 }
 
@@ -23,7 +70,7 @@
   border: none; /* Elimina el borde per defecte del botó */
   cursor: pointer; /* Canvia el cursor a una mà quan es passa per sobre del botó */
   text-decoration: none; /* Elimina el subratllat del text */
-  color: #b3642c; /* Color del text del botó */
+  color: #f15b2a; /* Color del text del botó */
 }
 
 .btn-edit-perfil:hover {

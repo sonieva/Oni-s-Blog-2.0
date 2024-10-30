@@ -47,10 +47,12 @@ class ArticleDAO {
   }
 
   // Obté una llista d'articles, amb la possibilitat de filtrar per autor i aplicar paginació.
-  public function getArticles($idAutor = null, $offet = 0, $articlesPerPagina = 6) {
+  public function getArticles($idAutor = null, $offet = 0, $articlesPerPagina = 6, $ordenaPer = 'creat-desc') {
+    $ordenaPer = explode('-', $ordenaPer);
+
     $sql = $idAutor ? 
-      "SELECT * FROM articles WHERE autor = :autor LIMIT :offset, :articlesPerPagina" : 
-      "SELECT * FROM articles LIMIT :offset, :articlesPerPagina";
+      "SELECT * FROM articles WHERE autor = :autor ORDER BY $ordenaPer[0] $ordenaPer[1] LIMIT :offset, :articlesPerPagina"  : 
+      "SELECT * FROM articles ORDER BY $ordenaPer[0] $ordenaPer[1] LIMIT :offset, :articlesPerPagina";
 
     $sentencia = $this->pdo->prepare($sql);
 

@@ -10,6 +10,8 @@ $isDashboard = str_contains($_SERVER['REQUEST_URI'], 'dashboard');
 // Es determina la quantitat d'articles per pàgina a partir de la cookie, si existeix; si no, es fixa per defecte en 6.
 $articlesPerPagina = isset($_COOKIE['articlesPerPagina']) ? (int)$_COOKIE['articlesPerPagina'] : 6;
 
+$ordenaPer = isset($_COOKIE['ordenaPer']) ? $_COOKIE['ordenaPer'] : 'creat-desc';
+
 // Es crea una instància de l'ArticleDAO per gestionar la interacció amb la base de dades.
 $articleDAO = new ArticleDAO();
 // Es calcula el total d'articles, filtrant per l'usuari si es tracta del dashboard.
@@ -29,7 +31,7 @@ if (!isset($_GET['pagina']) || $_GET['pagina'] < 1 || $_GET['pagina'] > $totalPa
 $offset = ($paginaActual - 1) * $articlesPerPagina;
 
 // Es recuperen els articles corresponents a la pàgina actual, filtrats per l'usuari si es tracta del dashboard.
-$articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId() : null, $offset, $articlesPerPagina);
+$articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId() : null, $offset, $articlesPerPagina, $ordenaPer);
 ?>
 
 <?php include 'pagination-control.php'; ?>
@@ -89,7 +91,7 @@ $articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId()
 </div>
 
 <!-- Es tornen a incloure els botons de paginació per tenir-los també a la part inferior de la pàgina. -->
-<?php include 'pagination-buttons.php'; ?>
+<?php include 'pagination-control.php'; ?>
 
 <!-- Modal per a mostrar el contingut complet de l'article. S'inicialitza ocult. -->
 <div id="articleModal" class="modal" style="display: none;">

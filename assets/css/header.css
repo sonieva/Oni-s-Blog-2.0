@@ -76,7 +76,8 @@
       }
   
       i.fa-caret-left, i.fa-caret-down {
-        margin-left: 0.2rem; /* Espai a l'esquerra de les icones de caret */
+        margin-top: 6.2px; /* Ajusta la posició vertical de les icones de caret */
+        width: 8.75px;
       }
     }
   }
@@ -88,6 +89,18 @@
     border: none; /* Sense contorn */
     font-family: inherit; /* Hereta la font del seu element pare */
     font-size: inherit; /* Hereta la mida de lletra */
+    display: flex; /* Flexbox per alinear els elements del botó */
+    align-items: center; /* Centra els elements verticalment */
+    gap: 0.5rem; /* Espai entre els elements del botó */
+
+    .foto-perfil-header {
+      width: 36px;           /* Ajusta el tamaño de la imagen según tus necesidades */
+      height: 36px;          /* Debe ser igual al ancho para mantener el aspecto redondo */
+      border-radius: 50%;    /* Hace la imagen circular */
+      border: 2px solid #fff; /* Añade un borde alrededor de la imagen (puedes cambiar el color) */
+      object-fit: cover;     /* Asegura que la imagen se ajuste bien dentro del círculo */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Opcional: Añade una sombra para que destaque más */
+    }
   }
   
   .dropdown-content {
@@ -96,8 +109,7 @@
     background-color: rgba(166, 92, 33, 0.8); /* Fons semitransparent per al menú desplegable */
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.3); /* Ombra per al menú desplegable */
     z-index: 1; /* Eleva el menú sobre altres elements */
-    top: 3.2rem; /* Es desplaça cap avall des de la part superior */
-    right: .5rem; /* Es desplaça cap a l'esquerra des de la vora dreta */
+    top: 4rem; /* Es desplaça cap avall des de la part superior */
   }
   
   .dropdown-content a {

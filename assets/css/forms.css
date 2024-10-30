@@ -45,11 +45,6 @@
   margin-top: 12px; /* Espai superior */
 }
 
-/* Elimina el marge superior per al label del checkbox "recordar" */
-.form-login form label[for="recordar"] {
-  margin-top: 0;
-}
-
 /* Posiciona els contenidors dels inputs de manera relativa per poder afegir icones */
 .custom-form form .input {
   position: relative;
@@ -91,11 +86,6 @@
   transition: all 0.3s ease; /* Transició suau */
 }
 
-/* Afegim un cursor pointer a les icones que estan al costat dels inputs de contrasenya */
-input[type="password"] + i {
-  cursor: pointer; /* Canvia el cursor quan es fa hover */
-}
-
 /* Estil dels botons dins dels formularis */
 .custom-form button {
   width: 100%; /* Amplada completa */
@@ -118,9 +108,23 @@ input[type="password"] + i {
   background-color: #df813e; /* Color xocolata més clar */
 }
 
+/* Afegim un cursor pointer a les icones que estan al costat dels inputs de contrasenya */
+input[type="password"] + i {
+  cursor: pointer; /* Canvia el cursor quan es fa hover */
+}
+
 /* Centra el text dins de la classe .form-article */
 .form-article p {
   text-align: center;
+}
+
+.form-login .autocompleted {
+  background-color: #fffeb4 !important;
+}
+
+/* Elimina el marge superior per al label del checkbox "recordar" */
+.form-login form label[for="recordar"] {
+  margin-top: 0;
 }
 
 /* Estil per a la secció de "Recorda'm" en el formulari de login */

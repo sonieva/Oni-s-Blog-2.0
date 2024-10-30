@@ -77,7 +77,7 @@ include_once 'components/toasters.php'
       <div class="vista-previa">
         <article>
           <figure>
-            <img src="<?= ($editMode && isset($_SESSION['articleUpdate'])) ? substr($_SESSION['articleUpdate']['imatge'],1) : BASE_PATH . '/assets/images/placeholder.png' ?>" alt="Imatge no disponible" id="imatge-preview"/>
+            <img src="<?= ($editMode && isset($_SESSION['articleUpdate'])) ? substr($_SESSION['articleUpdate']['imatge'],1) : BASE_PATH . '/assets/images/placeholder-article.png' ?>" alt="Imatge no disponible" id="imatge-preview"/>
           </figure>
   
           <div class="article-body" id="article-body">

@@ -73,12 +73,12 @@ function validarImatge($imatge): void {
   $fileExtension = strtolower(pathinfo($imatge['name'], PATHINFO_EXTENSION));
   
   // Es comprova si no s'ha pujat cap arxiu.
-  if (!isset($_FILES['imatge'])) {
+  if (!isset($imatge)) {
     addMessage('errorAdd', 'No s\'ha pujat cap imatge');
   }
 
   // Es comprova si hi ha hagut algun error durant la pujada de l'arxiu.
-  if ($_FILES['imatge']['error'] !== UPLOAD_ERR_OK) {
+  if ($imatge['error'] !== UPLOAD_ERR_OK) {
     addMessage('errorAdd', 'No s\'ha pogut pujar la imatge');
   }
   

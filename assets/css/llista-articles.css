@@ -22,13 +22,6 @@
   align-items: center; /* Centra els elements verticalment */
   justify-content: center; /* Centra els elements horitzontalment */
   gap: 1rem; /* Espai entre els elements de la paginació */
-}
-
-.pagination-select {
-  position: absolute; /* Posiciona el select de manera relativa a la pàgina */
-  right: 172px; /* Desplaça el select cap a la dreta */
-  background: #ffffff; /* Fons blanc per al select */
-  border-radius: 0.6rem; /* Cantonades arrodonides per al select */
 
   form {
     padding: 1rem; /* Espai interior del formulari */
@@ -50,7 +43,22 @@
   }
 }
 
-.pagination-select.shadow {
+.pagination-select, .pagination-order {
+  position: absolute; /* Posiciona el select de manera relativa a la pàgina */
+  background: #ffffff; /* Fons blanc per al select */
+  border-radius: 0.6rem; /* Cantonades arrodonides per al select */
+}
+
+.pagination-order {
+  left: 172px; /* Desplaça el select cap a la dreta */
+}
+
+.pagination-select {
+  right: 172px; /* Desplaça el select cap a la dreta */
+}
+
+.pagination-select.shadow,
+.pagination-order.shadow {
   box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px; /* Afegeix ombra per a donar profunditat */
 }
 

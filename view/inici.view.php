@@ -1,6 +1,7 @@
 <?php
 // Santi Onieva
 
+
 // Inclou la configuració i estableix el títol de la pàgina
 include_once '../config/Config.php';
 Config::setTitol('Inici');

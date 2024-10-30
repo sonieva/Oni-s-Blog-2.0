@@ -3,16 +3,17 @@
 
 class Usuari {
   // Atributs de la classe Usuari amb visibilitat privada.
-  private ?string $id;
+  private ?int $id;
   private string $alies;
   private string $email;
   private string $password;
   private ?string $nom_complet;
   private ?string $token_recuperacio;
   private ?DateTime $expiracio_token;
+  private ?string $ruta_imatge;
 
   // Constructor que inicialitza un objecte Usuari amb els valors proporcionats.
-  public function __construct(string $alies, string $email, string $password, ?string $nom_complet = null, ?string $id = null, ?string $token_recuperacio = null, ?DateTime $expiracio_token = null) {
+  public function __construct(string $alies, string $email, string $password, ?string $nom_complet = null, ?int $id = null, ?string $token_recuperacio = null, ?DateTime $expiracio_token = null, ?string $ruta_imatge = null) {
     $this->id = $id;
     $this->alies = $alies;
     $this->email = $email;
@@ -20,6 +21,7 @@ class Usuari {
     $this->nom_complet = $nom_complet;
     $this->token_recuperacio = $token_recuperacio;
     $this->expiracio_token = $expiracio_token;
+    $this->ruta_imatge = $ruta_imatge;
   }
 
   // Retorna l'ID de l'usuari.
@@ -85,6 +87,16 @@ class Usuari {
   // Estableix una nova data d'expiració per al token de recuperació de l'usuari.
   public function setExpiracioToken($expiracio_token) {
     $this->expiracio_token = $expiracio_token;
+  }
+
+  // Retorna la ruta de la imatge de perfil de l'usuari.
+  public function getRutaImatge() {
+    return $this->ruta_imatge;
+  }
+
+  // Estableix una nova ruta per a la imatge de perfil de l'usuari.
+  public function setRutaImatge($ruta_imatge) {
+    $this->ruta_imatge = $ruta_imatge;
   }
 
 }

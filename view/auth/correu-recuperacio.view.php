@@ -4,6 +4,12 @@
 require_once '../../config/Config.php';
 Config::setTitol('Restablir contrasenya');
 
+session_start();
+
+if (isset($_SESSION['usuari'])) {
+  header('Location: ../..');
+}
+
 include '../components/header.php';
 
 $errors = getMessages('errorsCorreuRecuperacio');

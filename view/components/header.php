@@ -58,6 +58,7 @@ $userLogged = isset($_SESSION['usuari']);
   <script defer src="assets/js/delete-article.js"></script>
   <script defer src="assets/js/toggle-password.js"></script>
   <script defer src="assets/js/edit-nom.js"></script>
+  <script defer src="assets/js/edit-foto-perfil.js"></script>
 </head>
 <body>
   <!-- Navbar amb els elements de navegació de la pàgina. -->
@@ -86,7 +87,11 @@ $userLogged = isset($_SESSION['usuari']);
       <!-- Botó del menú desplegable per a accions de l'usuari. -->
       <div class="nav-item">
         <button id="dropdown-toggle">
-          <i class="<?= $userLogged ? 'fa-solid' : 'fa-regular' ?> fa-user"></i>
+          <?php if ($userLogged): ?>
+            <img src="<?= $_SESSION['usuari']->getRutaImatge() ?: 'assets/images/placeholder-usuari.png' ?>" alt="Imatge de perfil" class="foto-perfil-header" id="foto-perfil-header">
+          <?php else: ?>
+            <i class="fa-regular fa-user"></i>
+          <?php endif; ?>
           <span id="header-nom"><?= $userLogged ? ($_SESSION['usuari']->getNomComplet() ?: $_SESSION['usuari']->getAlies()) : 'Identifica\'t' ?></span>
           <i id="caret" class="fa-solid fa-caret-left"></i>
         </button>

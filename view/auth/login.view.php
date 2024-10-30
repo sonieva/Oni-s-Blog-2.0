@@ -13,17 +13,20 @@ if (isset($_SESSION['dadesLogin'])) {
   // Si existeixen, es recupera l'email de les dades de login i es neteja la sessió.
   $email = $_SESSION['dadesLogin']['email'];
   unset($_SESSION['dadesLogin']);
-} else if (isset($_COOKIE['email'])) {
+} else if (isset($_COOKIE['email']) && isset($_COOKIE['password'])) {
   // Si no hi ha dades de login a la sessió, es comprova si hi ha una cookie amb l'email.
   $email = $_COOKIE['email'];
+  $password = $_COOKIE['password'];
 } else {
   // Si no hi ha ni dades de sessió ni cookie, es deixa l'email buit.
   $email = '';
+  $password = '';
 }
 
 // Es comprova si hi ha errors de login emmagatzemats en la sessió.
 $errors = getMessages('errorsLogin');
 $error = getMessages('errorLogin');
+$missatge = getMessage('missatgeLogin');
 
 include_once '../components/toasters.php'
 ?>
@@ -37,14 +40,14 @@ include_once '../components/toasters.php'
     <!-- Camp per introduir el correu electrònic, s'omple automàticament si hi ha dades disponibles. -->
     <label for="email">Correu electrònic</label>
     <div class="input">
-      <input type="email" name="email" required autocomplete="off" value="<?= $email ?>">
+      <input <?php if(!empty($email)) echo 'class="autocompleted"' ?> type="email" name="email" required autocomplete="off" value="<?= $email ?>">
       <i class="fa-solid fa-at"></i>
     </div>
 
     <!-- Camp per introduir la contrasenya. -->
     <label for="password">Contrasenya</label>
     <div class="input">
-      <input type="password" name="password" required>
+      <input <?php if(!empty($password)) echo 'class="autocompleted"' ?> type="password" name="password" required value="<?= $password ?>">
       <i class="fa-solid fa-lock" id="toggle-password"></i>
     </div>
 

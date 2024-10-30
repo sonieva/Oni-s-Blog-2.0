@@ -10,14 +10,14 @@ class Article {
   private string $cos;
   private ?DateTime $data_creacio;
   private ?DateTime $data_modificacio;
-  private string $id_autor;
+  private int $id_autor;
   private string $ruta_imatge;
 
   // Constructor de la classe Article que inicialitza els seus atributs.
   public function __construct(
     string $titol,
     string $cos,
-    string $id_autor,
+    int $id_autor,
     string $ruta_imatge,
     ?DateTime $data_creacio = null,
     ?DateTime $data_modificacio = null,

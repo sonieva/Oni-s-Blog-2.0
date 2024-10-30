@@ -19,18 +19,29 @@ if (!isset($_SESSION['usuari'])) {
 // Inclou el capçal de la pàgina
 include 'components/header.php';
 
-$missatge = getMessage('successChangePassword');
+$missatge = getMessage('missatgePerfil');
+$error = getMessage('errorPerfil');
 
 include_once 'components/toasters.php'
 ?>
 
 <div class="perfil">
-  <!-- Mostra el nom d'usuari com a títol -->
-  <h1><?= $_SESSION['usuari']->getAlies() ?></h1>
+  <div class="info-header">
+    <!-- Mostra el nom d'usuari com a títol -->
+    <h1><?= $_SESSION['usuari']->getAlies() ?></h1>
+
+    <div class="container-foto-perfil">
+      <img src="<?= ($_SESSION['usuari']->getRutaImatge()) ?? 'assets/images/placeholder-usuari.png' ?>" alt="Foto de perfil" class="foto-perfil" id="foto-perfil">
+      <input type="file" id="input-foto-perfil" class="input-foto-perfil" accept="image/*">
+      <button class="edit-icon" id="edit-icon">
+        <i class="fas fa-pencil-alt"></i>
+      </button>
+    </div>
+  </div>
   
   <hr>
 
-  <div class="info">
+  <div class="info-body">
     <!-- Mostra el nom complet de l'usuari amb la possibilitat d'editar-lo -->
     <p>
       <strong>Nom complet: </strong>

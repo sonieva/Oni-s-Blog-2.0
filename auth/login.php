@@ -4,6 +4,7 @@
 // S'inclou la classe UsuariDAO per a gestionar les operacions amb usuaris
 require_once '../model/Usuari/Usuari.php';
 require_once '../model/Usuari/UsuariDAO.php';
+require_once '../utils/utils.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   session_start();
@@ -39,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Si s'ha seleccionat "recordar", es guarda una cookie amb l'email durant 30 dies
         if (isset($_POST['recordar'])) {
           setcookie('email', $email, time() + 60 * 60 * 24 * 30, '/');
+          setcookie('password', $password, time() + 60 * 60 * 24 * 30, '/');
         }
         
         // Es redirigeix a la pàgina principal
