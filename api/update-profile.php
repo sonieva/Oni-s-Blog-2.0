@@ -4,15 +4,15 @@
 // Es requereixen els arxius necessaris per treballar amb la classe Usuari i UsuariDAO.
 require_once '../model/Usuari/UsuariDAO.php';
 require_once '../model/Usuari/Usuari.php';
-require_once '../utils/utils.php';
+session_start();
 
 // Es comprova si la petició és de tipus POST.
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['usuari'])) {
   // S'obté el contingut JSON de la petició.
   $data = json_decode(file_get_contents('php://input'), true);
   
   // Es comprova que existeixin les dades necessàries i que hi hagi un usuari en sessió.
-  if (isset($data['nom_complet']) && isset($_SESSION['usuari'])) {
+  if (isset($data['editant']) && $data['editant'] === 'nom_complet') {
     // Es neteja l'espai en blanc del nom complet.
     $nomComplet = trim($data['nom_complet']);
 
@@ -22,14 +22,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userOld = $usuariDAO->getUsuariPerId($_SESSION['usuari']->getId());
 
     // S'actualitza el nom complet de l'usuari.
-    $userOld->setNomComplet($nomComplet);
+    if (!$nomComplet) {
+      $userOld->setNomComplet(null);
+    } else {
+      $userOld->setNomComplet($nomComplet);
+    }
     // Es guarda la modificació a la base de dades.
     $usuariDAO->modificar($userOld);
     // Es guarda l'usuari actualitzat a la sessió.
     $_SESSION['usuari'] = $userOld;
   }
 
-  if (isset($_FILES['imatge']) && $_FILES['imatge']['error'] === UPLOAD_ERR_OK && isset($_SESSION['usuari'])) {
+  if (isset($_FILES['imatge']) && $_FILES['imatge']['error'] === UPLOAD_ERR_OK) {
     $imatge = $_FILES['imatge'];
     
     // Es defineixen les extensions permeses per les imatges.
@@ -60,6 +64,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuariDAO = new UsuariDAO();
     $usuariDAO->modificar($userOld);
     
+    $_SESSION['usuari'] = $userOld;
+  }
+
+  if (isset($data['alies'])) {
+    // Es neteja l'espai en blanc del nom complet.
+    $alies = trim($data['alies']);
+
+    // Es crea una instància de UsuariDAO per accedir a la base de dades.
+    $usuariDAO = new UsuariDAO();
+    // S'obté l'usuari actual mitjançant el seu ID.
+    $userOld = $usuariDAO->getUsuariPerId($_SESSION['usuari']->getId());
+
+    // S'actualitza el nom complet de l'usuari.
+    $userOld->setAlies($alies);
+    // Es guarda la modificació a la base de dades.
+    $usuariDAO->modificar($userOld);
+    // Es guarda l'usuari actualitzat a la sessió.
     $_SESSION['usuari'] = $userOld;
   }
 }

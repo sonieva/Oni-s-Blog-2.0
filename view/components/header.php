@@ -41,11 +41,11 @@ $userLogged = isset($_SESSION['usuari']);
   <link rel="stylesheet" href="assets/css/toaster.css">
   <link rel="stylesheet" href="assets/css/header.css">
   <link rel="stylesheet" href="assets/css/article.css">
-  <link rel="stylesheet" href="assets/css/forms.css">
   <link rel="stylesheet" href="assets/css/llista-articles.css">
   <link rel="stylesheet" href="assets/css/dashboard.css">
   <link rel="stylesheet" href="assets/css/modal.css">
   <link rel="stylesheet" href="assets/css/perfil.css">
+  <link rel="stylesheet" href="assets/css/forms.css">
   <link rel="stylesheet" href="assets/css/styles.css">
 
   <!-- Enllaços als scripts JavaScript propis amb la propietat "defer" per carregar-los després del contingut HTML. -->
@@ -59,6 +59,8 @@ $userLogged = isset($_SESSION['usuari']);
   <script defer src="assets/js/toggle-password.js"></script>
   <script defer src="assets/js/edit-nom.js"></script>
   <script defer src="assets/js/edit-foto-perfil.js"></script>
+  <script defer src="assets/js/edit-alies.js"></script>
+  <script defer src="assets/js/register-alies.js"></script>
 </head>
 <body>
   <!-- Navbar amb els elements de navegació de la pàgina. -->
@@ -106,7 +108,7 @@ $userLogged = isset($_SESSION['usuari']);
             <a href="view/dashboard.view.php">
               <i class="fa-solid fa-gauge-high"></i>Dashboard
             </a>
-            <a href="auth/logout.php">
+            <a href="controller/user.controller.php?action=logout">
               <i class="fa-solid fa-right-from-bracket"></i>Sortir
             </a>
           <?php else: ?>

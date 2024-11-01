@@ -12,6 +12,7 @@ include '../components/header.php';
 if (isset($_SESSION['dadesLogin'])) {
   // Si existeixen, es recupera l'email de les dades de login i es neteja la sessió.
   $email = $_SESSION['dadesLogin']['email'];
+  $password = '';
   unset($_SESSION['dadesLogin']);
 } else if (isset($_COOKIE['email']) && isset($_COOKIE['password'])) {
   // Si no hi ha dades de login a la sessió, es comprova si hi ha una cookie amb l'email.
@@ -36,7 +37,7 @@ include_once '../components/toasters.php'
 
   <?php include '../components/form-errors.php'; ?>
     
-  <form action="auth/login.php" method="POST">
+  <form action="controller/user.controller.php?action=login" method="POST">
     <!-- Camp per introduir el correu electrònic, s'omple automàticament si hi ha dades disponibles. -->
     <label for="email">Correu electrònic</label>
     <div class="input">

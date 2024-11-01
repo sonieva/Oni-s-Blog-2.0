@@ -110,7 +110,7 @@ class UsuariDAO {
       'alies' => $usuari->getAlies(),
       'email' => $usuari->getEmail(),
       'password' => $usuari->getPassword(),
-      'nom_complet' => $usuari->getNomComplet(),
+      'nom_complet' => ($usuari->getNomComplet()) ?? null,
       'id' => $usuari->getId(),
       'token_recuperacio' => $usuari->getTokenRecuperacio(),
       'expiracio_token' => ($usuari->getExpiracioToken()) ? $usuari->getExpiracioToken()->format('Y-m-d H:i:s') : null,

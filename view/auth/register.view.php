@@ -30,13 +30,15 @@ $errors = getMessages('errorsRegister');
 
   <?php include '../components/form-errors.php'; ?>
     
-  <form action="auth/register.php" method="POST">
+  <form action="controller/user.controller.php?action=register" method="POST">
       
     <!-- Camp per introduir el nom d'usuari, es preomple automàticament si hi ha dades disponibles. -->
     <label for="alies">Nom d'usuari</label>
     <div class="input">
-      <input type="text" name="alies" required value="<?php if (isset($alies)) echo $alies ?>">
+      <input type="text" name="alies" id="alies-register-input" required autocomplete="off" value="<?php if (isset($alies)) echo $alies ?>">
       <i class="fa-solid fa-user"></i>
+      <span id="alies-register-status" class="alies-register-status-icon"></span> <!-- Contenedor del icono -->
+      <span id="alias-register-status-msg" class="alias-status-msg"></span> <!-- Mensaje de estado -->
     </div>
 
     <!-- Camp per introduir el correu electrònic, es preomple automàticament si hi ha dades disponibles. -->
