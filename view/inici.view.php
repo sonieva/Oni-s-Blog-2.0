@@ -13,15 +13,13 @@ include 'components/header.php';
 
 $error = getMessage('errorInici');
 $missatge = getMessage('missatgeInici');
+
+include_once 'components/toasters.php' 
 ?>
 
 <div class="titol-inici">
   <h1>Articles publicats</h1>
 </div>
-
-<?php if ($error): ?>
-  <div id="toaster" class="toaster toaster-error"><?= $error ?></div>
-<?php endif; ?>
 
 <!-- Inclou el component que llista els articles publicats -->
 <?php include 'components/llista-articles.php'; ?>

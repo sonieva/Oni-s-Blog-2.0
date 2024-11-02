@@ -109,7 +109,8 @@
 }
 
 /* Afegim un cursor pointer a les icones que estan al costat dels inputs de contrasenya */
-input[type="password"] + i {
+input[type="password"] + i,
+i.fa-unlock {
   cursor: pointer; /* Canvia el cursor quan es fa hover */
 }
 

@@ -5,7 +5,7 @@
 require_once '../../config/Config.php';
 Config::setTitol('Login');
 Config::setArchiusCSS(['forms']);
-Config::setArchiusJS(['toggle-password']);
+Config::setArchiusJS(['toggle-password','remove-autocomplete']);
 
 // S'inclou el component del header.
 include '../components/header.php';

@@ -83,7 +83,7 @@
     display: flex; /* Flexbox per centrar el contingut */
     justify-content: center; /* Centra el contingut horitzontalment */
     align-items: center; /* Centra el contingut verticalment */
-    margin: 0.8rem; /* Espai al voltant de la fletxa */
+    margin: 0.7rem; /* Espai al voltant de la fletxa */
     font-size: 1.4rem; /* Mida de la lletra de la fletxa */
     color: #de7428; /* Color taronja per a la fletxa */
     cursor: pointer; /* Canvia el cursor quan es passa per sobre */
@@ -102,7 +102,7 @@
     display: flex; /* Flexbox per centrar el contingut */
     justify-content: center; /* Centra el contingut horitzontalment */
     align-items: center; /* Centra el contingut verticalment */
-    margin: 0.8rem; /* Espai al voltant del número de pàgina */
+    margin: 0.6rem; /* Espai al voltant del número de pàgina */
     font-size: 1.4rem; /* Mida de la lletra del número */
     color: black; /* Color del text */
     cursor: pointer; /* Canvia el cursor quan es passa per sobre */

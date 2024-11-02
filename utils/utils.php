@@ -44,7 +44,7 @@ function missatgeBenvinguda(): string {
   // Es defineix un array amb diferents missatges de benvinguda.
   $llistatBenvingudes = [
     'Hola', 
-    'Bon ' . getHoraDelDia(), 
+    'Bon' . getHoraDelDia(), 
     'Benvingut/da',
     'Benvingut/da de nou',
     'Feliç ' . getDiaSetmana(), 

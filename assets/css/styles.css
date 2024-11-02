@@ -27,7 +27,8 @@
 
 body {
   line-height: 1.5; /* Espaiat vertical entre línies de text */
-  background-image: url(../images/fons.png); /* Imatge de fons per a la pàgina */
+  background-image: url(../images/fons.svg); /* Imatge de fons per a la pàgina */
+  background-size: cover; /* Ajusta la imatge de fons per cobrir tota la pàgina */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Tipografia del text */
   font-size: 1rem; /* Mida del text */
   display: flex; /* Aplica un contenidor flex per al cos de la pàgina */
