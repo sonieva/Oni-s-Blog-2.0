@@ -70,7 +70,7 @@
       }
   
       /* Estil per a icones que no són fa-caret-left o fa-caret-down */
-      i:not(.fa-caret-left, .fa-caret-down) {
+      i:not(.fa-caret-left, .fa-caret-down, .fa-user) {
         margin-right: 0.5rem; /* Espai a la dreta de l'icona */
         pointer-events: all; /* Activa els events de ratolí */
       }
@@ -110,6 +110,7 @@
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.3); /* Ombra per al menú desplegable */
     z-index: 1; /* Eleva el menú sobre altres elements */
     top: 4rem; /* Es desplaça cap avall des de la part superior */
+    right: .6rem;
   }
   
   .dropdown-content a {

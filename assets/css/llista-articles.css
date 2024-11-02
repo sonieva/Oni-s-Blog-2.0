@@ -9,7 +9,6 @@
     text-align: center; /* Centra el text */
     font-size: 1.5rem; /* Mida de lletra gran per destacar el missatge */
     color: #656565; /* Color gris per al text */
-    margin-top: 50px; /* Espai a dalt per separar-lo dels altres elements */
   }
 
   article {
@@ -29,7 +28,14 @@
     label {
       font-size: 20px; /* Mida de la lletra per al label */
       color: #251b13; /* Color del text del label */
+    }
+    
+    label[for='ordenar'] {
       padding-right: 10px; /* Espai a la dreta del label */
+    }
+
+    label[for='articlesPerPagina'] {
+      padding-left: 10px; /* Espai a la dreta del label */
     }
   
     select {

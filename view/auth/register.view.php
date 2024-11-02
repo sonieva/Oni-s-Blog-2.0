@@ -4,6 +4,8 @@
 // S'inclou el fitxer de configuració i s'estableix el títol de la pàgina a "Registre".
 include_once '../../config/Config.php';
 Config::setTitol('Registre');
+Config::setArchiusCSS(['forms']);
+Config::setArchiusJS(['register-alies','toggle-password']);
 
 session_start();
 

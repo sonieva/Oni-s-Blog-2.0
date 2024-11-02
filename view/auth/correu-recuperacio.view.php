@@ -3,6 +3,7 @@
 
 require_once '../../config/Config.php';
 Config::setTitol('Restablir contrasenya');
+Config::setArchiusCSS(['forms']);
 
 session_start();
 

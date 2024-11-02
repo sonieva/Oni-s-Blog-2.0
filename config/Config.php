@@ -9,6 +9,8 @@ define('BASE_PATH', rtrim(str_replace(['/view', '/auth', '/api', '/controller'],
 class Config {
   // Es defineix una propietat estàtica per emmagatzemar el títol de la pàgina.
   private static $titolPagina = '';
+  private static $archiusCSS = [];
+  private static $archiusJS = [];
 
   // Mètode estàtic per establir el títol de la pàgina.
   public static function setTitol(string $titol): void {
@@ -18,6 +20,22 @@ class Config {
   // Mètode estàtic per obtenir el títol de la pàgina.
   public static function getTitol(): string {
     return self::$titolPagina;
+  }
+
+  public static function setArchiusCSS(array $nomArchius) {
+    self::$archiusCSS = $nomArchius;
+  }
+
+  public static function getArchiusCSS() {
+    return self::$archiusCSS;
+  }
+
+  public static function setArchiusJS(array $nomArchius) {
+    self::$archiusJS = $nomArchius;
+  }
+
+  public static function getArchiusJS() {
+    return self::$archiusJS;
   }
 }
 ?>

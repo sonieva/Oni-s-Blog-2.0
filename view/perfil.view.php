@@ -4,6 +4,8 @@
 // Inclou la configuració i estableix el títol de la pàgina
 require_once '../config/Config.php';
 Config::setTitol('Perfil');
+Config::setArchiusCSS(['perfil']);
+Config::setArchiusJS(['edit-alies', 'edit-nom', 'edit-foto-perfil']);
 
 // Inclou el model de l'usuari
 require_once '../model/Usuari/Usuari.php';

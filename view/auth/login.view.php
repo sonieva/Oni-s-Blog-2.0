@@ -4,9 +4,15 @@
 // S'inclou el fitxer de configuració i s'estableix el títol de la pàgina a "Login".
 require_once '../../config/Config.php';
 Config::setTitol('Login');
+Config::setArchiusCSS(['forms']);
+Config::setArchiusJS(['toggle-password']);
 
 // S'inclou el component del header.
 include '../components/header.php';
+
+if (!isset($_SESSION['intentsLogin'])) {
+  $_SESSION['intentsLogin'] = 0;
+}
 
 // Es comprova si hi ha dades de login emmagatzemades en la sessió.
 if (isset($_SESSION['dadesLogin'])) {
@@ -60,7 +66,15 @@ include_once '../components/toasters.php'
 
     <!-- Enllaç per recuperar la contrasenya. -->
     <p>Has olvidat la contrasenya? <a href="view/auth/correu-recuperacio.view.php">Recupera-la</a></p>
-    
+
+    <!-- Mostrar reCAPTCHA només si els intents de login superen el límit -->
+    <?php if ($_SESSION['intentsLogin'] >= 3): ?>
+      <!-- reCAPTCHA -->
+      <div class="recaptcha">
+        <div class="g-recaptcha" data-sitekey="6Lcw6HIqAAAAAGq0Okq5wzhOsDfiAmGs5b_O09rI"></div>
+      </div>
+    <?php endif; ?>
+
     <!-- Botó per enviar el formulari de login. -->
     <button type="submit">Entrar</button>
   </form>

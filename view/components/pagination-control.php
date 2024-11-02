@@ -4,7 +4,7 @@
 <div class="pagination-control">
   <div class="pagination-order <?php if (!$isDashboard) echo 'shadow' ?>">
     <form action="controller/pagination.controller.php" method="POST">
-      <label for="ordenar">Ordenar per:</label>
+      <label for="ordenar">Ordenar per</label>
       <select name="ordenaPer" onchange="this.form.submit()">
         <option value="creat-desc" <?= ($ordenaPer == 'creat-desc') ? 'selected' : '' ?>>Més recents</option>
         <option value="creat-asc" <?= ($ordenaPer == 'creat-asc') ? 'selected' : '' ?>>Més antics</option>
@@ -38,12 +38,12 @@
 
   <div class="pagination-select <?php if (!$isDashboard) echo 'shadow' ?>">
     <form action="controller/pagination.controller.php" method="POST">
-      <label for="articlesPerPagina">Articles per pàgina:</label>
       <select name="articlesPerPagina" onchange="this.form.submit()">
         <?php foreach ([6, 12, 24, 48] as $cantitat): ?>
           <option value="<?= $cantitat ?>" <?= ($cantitat == $articlesPerPagina) ? 'selected' : '' ?>><?= $cantitat ?></option>
-        <?php endforeach; ?>
+          <?php endforeach; ?>
       </select>
+      <label for="articlesPerPagina">Articles per pàgina</label>
     </form>
   </div>
 </div>

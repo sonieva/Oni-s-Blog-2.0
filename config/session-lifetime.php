@@ -13,7 +13,7 @@ if (isset($_SESSION['ultimaActivitat']) && isset($_SESSION['usuari']) && (!isset
     // Si el temps d'inactivitat supera el límit establert, es destrueix la sessió de l'usuari.
     if ($tempsInactivitat > $maxTempsInactivitat) {
         // S'emmagatzema un missatge per indicar que la sessió ha caducat per inactivitat.
-        $_SESSION['missatgeInactivitat'] = 'Sessió caducada per inactivitat';
+        setMessage('missatgeInactivitat','Sessió caducada per inactivitat');
         
         // S'elimina l'usuari de la sessió.
         unset($_SESSION['usuari']);

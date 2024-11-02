@@ -10,7 +10,7 @@ if (isset($_GET['action']) && ($_SERVER['REQUEST_METHOD'] === 'POST' || $_GET['a
   // S'utilitza un switch per determinar l'acció a executar.
   switch ($_GET['action']) {
     case 'login':
-      login($_POST['email'], $_POST['password'], isset($_POST['recordar']));
+      login($_POST['email'], $_POST['password'], isset($_POST['recordar']), isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : null);
       break;
     case 'logout':
       logout();
@@ -34,7 +34,7 @@ if (isset($_GET['action']) && ($_SERVER['REQUEST_METHOD'] === 'POST' || $_GET['a
   exit();
 }
 
-function login($email, $password, $recordar) {
+function login($email, $password, $recordar, $recaptchaResponse) {
   // Es comprova si l'email està buit i s'afegeix un error si cal
   if (empty($email)) {
     addMessage('errorsLogin', 'El correu electrònic és obligatori');
@@ -44,34 +44,43 @@ function login($email, $password, $recordar) {
   if (empty($password)) {
     addMessage('errorsLogin', 'La contrasenya és obligatòria');
   }
+
+  if ($_SESSION['intentsLogin'] >= 3) {
+    $recaptchaSecret = '6Lcw6HIqAAAAACeQJvXacNE7hruTlKAt2YLmVcwC';
+    
+    // Realiza la petición a la API de reCAPTCHA
+    $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$recaptchaSecret&response=$recaptchaResponse");
+    $responseKeys = json_decode($response, true);
+
+    if (!$responseKeys["success"]) {
+      addMessage('errorsLogin', "La verificació de reCAPTCHA ha fallat. Si us plau, intenta-ho de nou");
+    }
+  }
   
   // Si tant l'email com la contrasenya no estan buits, es continua amb la validació
-  if (!empty($email) && !empty($password)) {
+  if (empty($_SESSION['errorsLogin'])) {
     $usuariDAO = new UsuariDAO();
     $usuari = $usuariDAO->getUsuariPerEmail($email);
 
     // Si no es troba cap usuari amb aquest email, es mostra un missatge d'error
-    if ($usuari === null) {
-      addMessage('errorsLogin', 'El correu electrònic o la contrasenya són incorrectes');
-    } else {
-      // Es verifica la contrasenya introduïda amb la contrasenya emmagatzemada
-      if (password_verify($password, $usuari->getPassword())) {
-        // Si la contrasenya és correcta, es guarda l'usuari a la sessió
-        $_SESSION['usuari'] = $usuari;
+    if ($usuari && password_verify($password, $usuari->getPassword())) {
+      // Si la contrasenya és correcta, es guarda l'usuari a la sessió
+      $_SESSION['usuari'] = $usuari;
 
-        // Si s'ha seleccionat "recordar", es guarda una cookie amb l'email durant 30 dies
-        if ($recordar) {
-          setcookie('email', $email, time() + 60 * 60 * 24 * 30, '/');
-          setcookie('password', $password, time() + 60 * 60 * 24 * 30, '/');
-        }
-        
-        // Es redirigeix a la pàgina principal
-        header('Location: ..');
-        exit();
-      } else {
-        // Si la contrasenya és incorrecta, es mostra un missatge d'error
-        addMessage('errorsLogin', 'El correu electrònic o la contrasenya són incorrectes');
+      // Si s'ha seleccionat "recordar", es guarda una cookie amb l'email durant 30 dies
+      if ($recordar) {
+        setcookie('email', $email, time() + 60 * 60 * 24 * 30, '/');
+        setcookie('password', $password, time() + 60 * 60 * 24 * 30, '/');
       }
+
+      unset($_SESSION['intentsLogin']);
+      
+      // Es redirigeix a la pàgina principal
+      header('Location: ..');
+      exit();
+    } else {
+      // Si la contrasenya és incorrecta, es mostra un missatge d'error
+      addMessage('errorsLogin', 'El correu electrònic o la contrasenya són incorrectes');
     }
   }
 
@@ -80,6 +89,7 @@ function login($email, $password, $recordar) {
     $_SESSION['dadesLogin'] = [
       'email' => $email,
     ];
+    $_SESSION['intentsLogin'] += 1;
   }
 
   header('Location: ../view/auth/login.view.php');

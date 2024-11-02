@@ -3,6 +3,8 @@
 
 require_once '../../config/Config.php';
 Config::setTitol('Canviar contrasenya');
+Config::setArchiusCSS(['forms']);
+Config::setArchiusJS(['toggle-password']);
 
 require_once '../../model/Usuari/Usuari.php';
 

@@ -5,6 +5,8 @@
 // Inclou la configuració i estableix el títol de la pàgina
 include_once '../config/Config.php';
 Config::setTitol('Inici');
+Config::setArchiusCSS(['llista-articles', 'article', 'modal']);
+Config::setArchiusJS(['modal']);
 
 // Inclou el capçal de la pàgina
 include 'components/header.php';

@@ -8,6 +8,8 @@ if (isset($_GET['token'])) {
 
 require_once '../../config/Config.php';
 Config::setTitol('Restablir contrasenya');
+Config::setArchiusCSS(['forms']);
+Config::setArchiusJS(['toggle-password']);
 
 include '../components/header.php';
 

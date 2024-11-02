@@ -4,6 +4,8 @@
 require_once '../config/Config.php';
 // Estableix el títol de la pàgina a "Dashboard"
 Config::setTitol('Dashboard');
+Config::setArchiusCSS(['dashboard', 'forms', 'llista-articles', 'modal', 'article']);
+Config::setArchiusJS(['article-preview', 'btn-imatge', 'delete-article', 'modal', 'show-add-article']);
 
 require_once '../model/Usuari/Usuari.php';
 
@@ -52,7 +54,7 @@ include_once 'components/toasters.php'
     <div class="apartats">
       <div class="custom-form form-article">
   
-        <?php include '../components/form-errors.php'; ?>
+        <?php include 'components/form-errors.php'; ?>
   
         <form action="controller/article.controller.php?action=<?= ($editMode) ? 'update&id='. $_SESSION['articleUpdate']['id'] : 'add&autor='. $_SESSION['usuari']->getId() ?>" method="POST" id="form-afegir" enctype="multipart/form-data">
           <label for="titol">Títol</label>

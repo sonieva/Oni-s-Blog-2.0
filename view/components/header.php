@@ -37,30 +37,22 @@ $userLogged = isset($_SESSION['usuari']);
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   
-  <!-- Enllaços als arxius CSS propis. -->
+  <?php foreach (Config::getArchiusCSS() as $arxiu): ?>
+    <link rel="stylesheet" href="assets/css/<?= $arxiu ?>.css">
+  <?php endforeach; ?>
+
   <link rel="stylesheet" href="assets/css/toaster.css">
   <link rel="stylesheet" href="assets/css/header.css">
-  <link rel="stylesheet" href="assets/css/article.css">
-  <link rel="stylesheet" href="assets/css/llista-articles.css">
-  <link rel="stylesheet" href="assets/css/dashboard.css">
-  <link rel="stylesheet" href="assets/css/modal.css">
-  <link rel="stylesheet" href="assets/css/perfil.css">
-  <link rel="stylesheet" href="assets/css/forms.css">
   <link rel="stylesheet" href="assets/css/styles.css">
+    
+  <?php foreach (Config::getArchiusJS() as $arxiu): ?>
+    <script defer src="assets/js/<?= $arxiu ?>.js"></script>
+  <?php endforeach; ?>
 
-  <!-- Enllaços als scripts JavaScript propis amb la propietat "defer" per carregar-los després del contingut HTML. -->
   <script defer src="assets/js/toaster.js"></script>
   <script defer src="assets/js/navbar-dropdown.js"></script>
-  <script defer src="assets/js/btn-imatge.js"></script>
-  <script defer src="assets/js/article-preview.js"></script>
-  <script defer src="assets/js/show-add-article.js"></script>
-  <script defer src="assets/js/modal.js"></script>
-  <script defer src="assets/js/delete-article.js"></script>
-  <script defer src="assets/js/toggle-password.js"></script>
-  <script defer src="assets/js/edit-nom.js"></script>
-  <script defer src="assets/js/edit-foto-perfil.js"></script>
-  <script defer src="assets/js/edit-alies.js"></script>
-  <script defer src="assets/js/register-alies.js"></script>
+  
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
   <!-- Navbar amb els elements de navegació de la pàgina. -->

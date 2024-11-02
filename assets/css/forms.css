@@ -118,6 +118,10 @@ input[type="password"] + i {
   text-align: center;
 }
 
+.form-login button {
+  margin-bottom: 10px;
+}
+
 .form-login .autocompleted {
   background-color: #fffeb4 !important;
 }
@@ -131,7 +135,7 @@ input[type="password"] + i {
 .form-login .recordar {
   display: flex; /* Alinea els elements en una fila */
   align-items: center;
-  margin-top: 10px;
+  margin: 10px 0;
   gap: 10px; /* Espai entre el label i el checkbox */
 }
 
@@ -178,4 +182,10 @@ input[type="password"] + i {
 #alias-status-msg {
   margin-top: 5px;
   font-size: 14px;
+}
+
+.recaptcha {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
