@@ -5,7 +5,7 @@
 include_once '../../config/Config.php';
 Config::setTitol('Registre');
 Config::setArchiusCSS(['forms']);
-Config::setArchiusJS(['register-alies','toggle-password']);
+Config::setArchiusJS(['register-alies', 'toggle-password']);
 
 session_start();
 
@@ -31,9 +31,9 @@ $errors = getMessages('errorsRegister');
   <h1>Crear compte</h1>
 
   <?php include '../components/form-errors.php'; ?>
-    
+
   <form action="controller/user.controller.php?action=register" method="POST">
-      
+
     <!-- Camp per introduir el nom d'usuari, es preomple automàticament si hi ha dades disponibles. -->
     <label for="alies">Nom d'usuari</label>
     <div class="input">

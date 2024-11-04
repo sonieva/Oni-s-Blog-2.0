@@ -111,6 +111,11 @@
     z-index: 1; /* Eleva el menú sobre altres elements */
     top: 4rem; /* Es desplaça cap avall des de la part superior */
     right: .6rem;
+    max-width: 145px;
+  }
+
+  .dropdown-content:has(> :nth-child(3)) {
+    max-width: 120px;
   }
   
   .dropdown-content a {
@@ -118,6 +123,11 @@
     padding: 8px 10px; /* Espai interior als enllaços */
     text-decoration: none; /* Elimina el subratllat dels enllaços */
     display: block; /* Els enllaços ocupen tota l'amplada del contenidor */
+  }
+
+  .dropdown-content .admin-link {
+    display: flex; /* Flexbox per alinear els elements dels enllaços */
+    align-items: center; /* Centra els elements verticalment */
   }
   
   .dropdown-content a:hover {

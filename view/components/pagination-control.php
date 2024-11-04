@@ -41,7 +41,7 @@
       <select name="articlesPerPagina" onchange="this.form.submit()">
         <?php foreach ([6, 12, 24, 48] as $cantitat): ?>
           <option value="<?= $cantitat ?>" <?= ($cantitat == $articlesPerPagina) ? 'selected' : '' ?>><?= $cantitat ?></option>
-          <?php endforeach; ?>
+        <?php endforeach; ?>
       </select>
       <label for="articlesPerPagina">Articles per pàgina</label>
     </form>

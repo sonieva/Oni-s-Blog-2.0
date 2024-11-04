@@ -24,7 +24,7 @@ $errors = getMessages('errorChangePassword');
 
   <?php include '../components/form-errors.php'; ?>
 
-  <form action="controller/user.controller.php?action=change_password" method="POST">    
+  <form action="controller/user.controller.php?action=change_password" method="POST">
     <label for="old-password">Contrasenya antiga</label>
     <div class="input">
       <input type="password" name="antigaPassword" required>

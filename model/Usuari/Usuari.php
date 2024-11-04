@@ -11,9 +11,10 @@ class Usuari {
   private ?string $token_recuperacio;
   private ?DateTime $expiracio_token;
   private ?string $ruta_imatge;
+  private bool $esAdmin;
 
   // Constructor que inicialitza un objecte Usuari amb els valors proporcionats.
-  public function __construct(string $alies, string $email, string $password, ?string $nom_complet = null, ?int $id = null, ?string $token_recuperacio = null, ?DateTime $expiracio_token = null, ?string $ruta_imatge = null) {
+  public function __construct(string $alies, string $email, string $password, ?string $nom_complet = null, ?int $id = null, ?string $token_recuperacio = null, ?DateTime $expiracio_token = null, ?string $ruta_imatge = null, bool $esAdmin = false) {
     $this->id = $id;
     $this->alies = $alies;
     $this->email = $email;
@@ -22,6 +23,7 @@ class Usuari {
     $this->token_recuperacio = $token_recuperacio;
     $this->expiracio_token = $expiracio_token;
     $this->ruta_imatge = $ruta_imatge;
+    $this->esAdmin = $esAdmin;
   }
 
   // Retorna l'ID de l'usuari.
@@ -97,6 +99,11 @@ class Usuari {
   // Estableix una nova ruta per a la imatge de perfil de l'usuari.
   public function setRutaImatge($ruta_imatge) {
     $this->ruta_imatge = $ruta_imatge;
+  }
+
+  // Retorna si l'usuari és administrador o no.
+  public function esAdmin() {
+    return $this->esAdmin;
   }
 
 }

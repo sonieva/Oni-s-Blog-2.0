@@ -14,7 +14,7 @@ class ArticleDAO {
   }
 
   // Insereix un nou article a la base de dades.
-  public function inserir(Article $article) {
+  public function inserir(Article $article): bool {
     $sentenciaAfegir = $this->pdo->prepare("INSERT INTO articles (titol, cos, autor, ruta_imatge) VALUES (:titol, :cos, :autor, :ruta_imatge)");
 
     // S'executa la sentència amb els valors obtinguts de l'objecte Article.
@@ -27,7 +27,7 @@ class ArticleDAO {
   }
 
   // Obté un article a partir del seu ID.
-  public function getArticlePerId($id) {
+  public function getArticlePerId($id): Article {
     $sentencia = $this->pdo->prepare("SELECT * FROM articles WHERE id = :id");
     $sentencia->bindParam(':id', $id);
     $sentencia->execute();
@@ -46,8 +46,41 @@ class ArticleDAO {
     );
   }
 
+  public function getAllArticles($idAutor = null): array {
+    $sql = $idAutor ? 
+      "SELECT * FROM articles WHERE autor = :autor" : 
+      "SELECT * FROM articles";
+      
+    $sentencia = $this->pdo->prepare($sql);
+
+    // S'afegeix el paràmetre d'autor si es proporciona.
+    if ($idAutor) {
+        $sentencia->bindParam(':autor', $idAutor, PDO::PARAM_INT);
+    }
+
+    // S'executa la consulta.
+    $sentencia->execute();
+
+    $articles = [];
+
+    // Es crea una llista d'objectes Article amb els resultats obtinguts.
+    while ($article = $sentencia->fetch(PDO::FETCH_ASSOC)) {
+      $articles[] = new Article(
+        $article['titol'], 
+        $article['cos'],  
+        $article['autor'], 
+        $article['ruta_imatge'], 
+        new DateTime($article['creat']), 
+        isset($article['modificat']) ? new DateTime($article['modificat']) : null, 
+        $article['id']
+      );
+    }
+
+    return $articles;
+  }
+
   // Obté una llista d'articles, amb la possibilitat de filtrar per autor i aplicar paginació.
-  public function getArticles($idAutor = null, $offet = 0, $articlesPerPagina = 6, $ordenaPer = 'creat-desc') {
+  public function getArticles($idAutor = null, $offet = 0, $articlesPerPagina = 6, $ordenaPer = 'creat-desc'): array {
     $ordenaPer = explode('-', $ordenaPer);
 
     $sql = $idAutor ? 
@@ -87,7 +120,7 @@ class ArticleDAO {
   }
 
   // Obté el nombre total d'articles, amb la possibilitat de filtrar per autor.
-  public function countArticles($idAutor = null) {
+  public function countArticles($idAutor = null): int {
     $sql = $idAutor ? 
       "SELECT COUNT(*) FROM articles WHERE autor = :autor" : 
       "SELECT COUNT(*) FROM articles";
@@ -104,7 +137,7 @@ class ArticleDAO {
   }
 
   // Modifica un article existent a la base de dades.
-  public function modificar(Article $article) {
+  public function modificar(Article $article): bool {
     $sentenciaModificar = $this->pdo->prepare("UPDATE articles SET titol = :titol, cos = :cos, autor = :autor, ruta_imatge = :ruta_imatge, modificat = NOW() WHERE id = :id");
 
     // S'executa la sentència amb els valors actualitzats de l'objecte Article.
@@ -118,7 +151,7 @@ class ArticleDAO {
   }
 
   // Elimina un article de la base de dades a partir del seu ID.
-  public function eliminar($id) {
+  public function eliminar($id): bool {
     $sentenciaEliminar = $this->pdo->prepare("DELETE FROM articles WHERE id = :id");
     $sentenciaEliminar->bindParam(':id', $id, PDO::PARAM_INT);
     

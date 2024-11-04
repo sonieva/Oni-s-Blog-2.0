@@ -6,7 +6,7 @@ require_once '../model/Usuari/UsuariDAO.php';
 require_once '../utils/utils.php';
 require_once '../config/Config.php';
 
-if (isset($_GET['action']) && ($_SERVER['REQUEST_METHOD'] === 'POST' || $_GET['action'] === 'logout')) {
+if (isset($_GET['action']) && ($_SERVER['REQUEST_METHOD'] === 'POST' || in_array($_GET['action'], ['logout','delete']))) {
   // S'utilitza un switch per determinar l'acció a executar.
   switch ($_GET['action']) {
     case 'login':
@@ -26,6 +26,9 @@ if (isset($_GET['action']) && ($_SERVER['REQUEST_METHOD'] === 'POST' || $_GET['a
       break;
     case 'reset_password':
       resetPassword($_POST['token'], $_POST['novaPassword'], $_POST['novaPassword2']);
+      break;
+    case 'delete':
+      eliminarUsuari($_GET['id']);
       break;
   }
 } else {
@@ -337,6 +340,38 @@ function resetPassword($token, $newPassword, $confirmPassword): void {
   }
 
   header('Location: ../view/auth/login.view.php');
+  exit();
+}
+
+function eliminarUsuari($id) {
+  if (!isset($_SESSION['usuari'])) {
+    setMessage('errorLogin', 'No estàs identificat');
+    header('Location: ../view/auth/login.view.php');
+    exit();
+  }
+
+  if (!$_SESSION['usuari']->esAdmin()) {
+    setMessage('errorInici', 'No tens permisos per eliminar usuaris');
+    header('Location: ..');
+    exit();
+  }
+
+  $usuariDAO = new UsuariDAO();
+  $usuari = $usuariDAO->getUsuariPerId($id);
+
+  if (!$usuari) {
+    setMessage('errorAdmin', 'No s\'ha trobat cap usuari amb aquest ID');
+    header('Location: ../view/admin.view.php');
+    exit();
+  }
+
+  if ($usuariDAO->eliminar($usuari->getId())) {
+    setMessage('missatgeAdmin', 'Usuari eliminat correctament');
+  } else {
+    setMessage('errorAdmin', 'Error al eliminar l\'usuari');
+  }
+
+  header('Location: ../view/admin.view.php');
   exit();
 }
 

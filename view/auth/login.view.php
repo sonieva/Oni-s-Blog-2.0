@@ -5,7 +5,7 @@
 require_once '../../config/Config.php';
 Config::setTitol('Login');
 Config::setArchiusCSS(['forms']);
-Config::setArchiusJS(['toggle-password','remove-autocomplete']);
+Config::setArchiusJS(['toggle-password', 'remove-autocomplete']);
 
 // S'inclou el component del header.
 include '../components/header.php';
@@ -42,19 +42,19 @@ include_once '../components/toasters.php'
   <h1>Iniciar sessió</h1>
 
   <?php include '../components/form-errors.php'; ?>
-    
+
   <form action="controller/user.controller.php?action=login" method="POST">
     <!-- Camp per introduir el correu electrònic, s'omple automàticament si hi ha dades disponibles. -->
     <label for="email">Correu electrònic</label>
     <div class="input">
-      <input <?php if(!empty($email)) echo 'class="autocompleted"' ?> type="email" name="email" required autocomplete="off" value="<?= $email ?>">
+      <input <?php if (!empty($email)) echo 'class="autocompleted"' ?> type="email" name="email" required autocomplete="off" value="<?= $email ?>">
       <i class="fa-solid fa-at"></i>
     </div>
 
     <!-- Camp per introduir la contrasenya. -->
     <label for="password">Contrasenya</label>
     <div class="input">
-      <input <?php if(!empty($password)) echo 'class="autocompleted"' ?> type="password" name="password" required value="<?= $password ?>">
+      <input <?php if (!empty($password)) echo 'class="autocompleted"' ?> type="password" name="password" required value="<?= $password ?>">
       <i class="fa-solid fa-lock" id="toggle-password"></i>
     </div>
 
@@ -78,7 +78,7 @@ include_once '../components/toasters.php'
     <!-- Botó per enviar el formulari de login. -->
     <button type="submit">Entrar</button>
   </form>
-  
+
   <!-- Enllaç per a aquells usuaris que no tenen un compte i volen registrar-se. -->
   <p>No tens compte? <a href="view/auth/register.view.php">Registra't</a></p>
 </div>

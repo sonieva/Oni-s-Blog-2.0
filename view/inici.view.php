@@ -14,7 +14,7 @@ include 'components/header.php';
 $error = getMessage('errorInici');
 $missatge = getMessage('missatgeInici');
 
-include_once 'components/toasters.php' 
+include_once 'components/toasters.php'
 ?>
 
 <div class="titol-inici">

@@ -48,7 +48,7 @@ $articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId()
       <figure>
         <!-- Es mostra la imatge de l'article. -->
         <img src="<?= BASE_PATH . $article->getRutaImatge() ?>" alt="<?= $article->getTitol() ?>">
-        
+
         <!-- Si l'usuari està al dashboard, es mostren botons per eliminar i editar l'article. -->
         <?php if ($isDashboard): ?>
           <a class="btn-delete" onclick="deleteArticle(<? echo $article->getId() ?>)">
@@ -66,23 +66,23 @@ $articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId()
         <?php if ($article->getDataModificacio()): ?>
           <small class="article-date">Modificat <?= $article->getDataModificacio()->format('j/m/o') ?></small>
         <?php endif; ?>
-        
+
         <!-- Si l'usuari no està al dashboard, es mostra l'autor de l'article. -->
         <?php if (!$isDashboard): ?>
           <small class="article-author">Per <strong><?= $article->getAutor()->getAlies() ?></strong></small>
         <?php endif; ?>
       </div>
-      
+
       <div class="article-body">
         <!-- Es mostra el títol i un fragment del cos de l'article (màxim 100 caràcters). -->
         <h2><?= $article->getTitol() ?></h2>
-        
+
         <p>
           <?= strlen($article->getCos()) > 100 ? rtrim(substr($article->getCos(), 0, 100)) . '...' : $article->getCos() ?>
         </p>
 
         <!-- Si el cos és més llarg de 100 caràcters, es mostra un enllaç per a llegir l'article complet. -->
-        <?php if (strlen($article->getCos()) > 100): ?> 
+        <?php if (strlen($article->getCos()) > 100): ?>
           <a class="read-more" id="continua-llegint" onclick="loadArticle(<?= $article->getId() ?>)">Continua llegint <i class="fa-solid fa-arrow-right"></i></a>
         <?php endif; ?>
       </div>

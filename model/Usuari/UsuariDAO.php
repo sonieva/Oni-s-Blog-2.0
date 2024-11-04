@@ -25,6 +25,30 @@ class UsuariDAO {
     ]);
   }
 
+  // Obté tots els usuaris de la base de dades.
+  public function getUsuaris(): array {
+    $sentencia = $this->pdo->query("SELECT * FROM usuaris");
+
+    $usuaris = [];
+
+    // Recorre tots els resultats de la consulta i els emmagatzema en un array d'usuaris.
+    foreach ($sentencia->fetchAll() as $resultat) {
+      $usuaris[] = new Usuari(
+        $resultat['alies'], 
+        $resultat['email'], 
+        $resultat['password'], 
+        $resultat['nom_complet'], 
+        $resultat['id'], 
+        $resultat['token_recuperacio'], 
+        isset($resultat['expiracio_token']) ? new DateTime($resultat['expiracio_token']) : null,
+        $resultat['ruta_imatge'],
+        $resultat['es_admin']
+      );
+    }
+
+    return $usuaris;
+  }
+
   // Obté un usuari de la base de dades pel seu ID.
   public function getUsuariPerId(int $id): Usuari {
     $sentencia = $this->pdo->prepare("SELECT * FROM usuaris WHERE id = :id");
@@ -44,7 +68,8 @@ class UsuariDAO {
       $resultat['id'], 
       $resultat['token_recuperacio'], 
       isset($resultat['expiracio_token']) ? new DateTime($resultat['expiracio_token']) : null,
-      $resultat['ruta_imatge']
+      $resultat['ruta_imatge'],
+      $resultat['es_admin']
     );
   }
 
@@ -70,7 +95,8 @@ class UsuariDAO {
       $resultat['id'],
       $resultat['token_recuperacio'],
       isset($resultat['expiracio_token']) ? new DateTime($resultat['expiracio_token']) : null,
-      $resultat['ruta_imatge']
+      $resultat['ruta_imatge'],
+      $resultat['es_admin']
     );
   }
 
@@ -103,7 +129,7 @@ class UsuariDAO {
 
   // Modifica les dades d'un usuari existent a la base de dades.
   public function modificar(Usuari $usuari) {
-    $sentenciaModificar = $this->pdo->prepare("UPDATE usuaris SET alies = :alies, email = :email, password = :password, nom_complet = :nom_complet, token_recuperacio = :token_recuperacio, expiracio_token = :expiracio_token, ruta_imatge = :ruta_imatge WHERE id = :id");
+    $sentenciaModificar = $this->pdo->prepare("UPDATE usuaris SET alies = :alies, email = :email, password = :password, nom_complet = :nom_complet, token_recuperacio = :token_recuperacio, expiracio_token = :expiracio_token, ruta_imatge = :ruta_imatge, es_admin = :es_admin WHERE id = :id");
 
     // Executa la sentència d'actualització amb les dades de l'usuari i retorna el resultat.
     return $sentenciaModificar->execute([
@@ -114,7 +140,8 @@ class UsuariDAO {
       'id' => $usuari->getId(),
       'token_recuperacio' => $usuari->getTokenRecuperacio(),
       'expiracio_token' => ($usuari->getExpiracioToken()) ? $usuari->getExpiracioToken()->format('Y-m-d H:i:s') : null,
-      'ruta_imatge' => $usuari->getRutaImatge()
+      'ruta_imatge' => $usuari->getRutaImatge(),
+      'es_admin' => $usuari->esAdmin()
     ]);
   }
 

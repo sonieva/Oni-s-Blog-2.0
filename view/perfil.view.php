@@ -41,7 +41,7 @@ include_once 'components/toasters.php'
       </button>
     </div>
   </div>
-  
+
   <hr>
 
   <div class="info-body">
