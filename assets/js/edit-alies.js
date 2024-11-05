@@ -35,7 +35,7 @@ if (aliesInput) {
       return;
     }
 
-    if (disponible) {
+    if (disponible || nouAlies === aliesText.textContent) {
       // Alias disponible: mostrar tick verde
       aliesStatus.className = 'alies-status-icon fas fa-check-circle';
       aliesStatus.style.color = 'green';
@@ -72,7 +72,7 @@ function canviarAlies() {
 
   verificarDisponibilitatAlies(nouAlies)
     .then(disponible => {
-      if (!disponible) {
+      if (!disponible && nouAlies !== oldAlies) {
         alert('Aquest alies ja està en ús. Si us plau, tria un altre.');
         aliesInput.focus();
         return;
