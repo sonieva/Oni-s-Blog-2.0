@@ -53,6 +53,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['usuari'])) {
       setMessage('errorPerfil', 'No s\'ha pogut pujar la imatge al servidor');
     }
 
+    if (!empty($_SESSION['errorPerfil'])) {
+      header('Location: ../view/perfil.view.php');
+      exit();
+    }
+
     $userOld = $_SESSION['usuari'];
 
     if ($userOld->getRutaImatge()) {
