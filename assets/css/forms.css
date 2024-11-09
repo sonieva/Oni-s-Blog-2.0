@@ -190,3 +190,42 @@ i.fa-unlock {
   justify-content: center;
   margin-top: 10px;
 }
+
+.social-auth {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.social-auth-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+
+  a {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    font-size: 25px;
+    transition: all 0.3s ease;
+  }
+
+  a.google-auth {
+    background-color: #ee4d3f;
+    &:hover {
+      background-color: #c1351d;
+    }
+  }
+
+  a.github-auth {
+    background-color: #464646;
+    &:hover {
+      background-color: #242424;
+    }
+  }
+}

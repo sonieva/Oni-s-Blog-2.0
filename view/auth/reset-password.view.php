@@ -21,7 +21,7 @@ $errors = getMessages('errorsResetPassword');
 
   <?php include '../components/form-errors.php'; ?>
 
-  <form action="controller/user.controller.php?action=reset_password" method="post">
+  <form action="auth/reset-password.php" method="post">
     <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
 
     <label for="new-password">Nova contrasenya</label>

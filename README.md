@@ -41,7 +41,7 @@ onis-blog/
 ├── view/
 │   ├── auth/
 │   │   ├── login.view.php
-│   │   └── register.view.php
+│   │   └── signup.view.php
 │   ├── components/
 │   │   ├── header.php
 │   │   ├── llista-articles.php

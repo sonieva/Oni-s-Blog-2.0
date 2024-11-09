@@ -15,13 +15,15 @@ class UsuariDAO {
 
   // Insereix un nou usuari a la base de dades.
   public function inserir(Usuari $usuari) {
-    $sentenciaAfegir = $this->pdo->prepare("INSERT INTO usuaris (alies, email, password) VALUES (:alies, :email, :password)");
+    $sentenciaAfegir = $this->pdo->prepare("INSERT INTO usuaris (alies, email, password, nom_complet, ruta_imatge) VALUES (:alies, :email, :password, :nom_complet, :ruta_imatge)");
 
     // Executa la sentència d'inserció i retorna el resultat.
     return $sentenciaAfegir->execute([
       'alies' => $usuari->getAlies(),
       'email' => $usuari->getEmail(),
       'password' => $usuari->getPassword(),
+      'nom_complet' => $usuari->getNomComplet(),
+      'ruta_imatge' => $usuari->getRutaImatge()
     ]);
   }
 

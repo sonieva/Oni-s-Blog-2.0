@@ -19,7 +19,6 @@ $error = getMessage('errorInici');
 $missatge = getMessage('missatgeInici');
 
 include_once 'view/components/toasters.php';
-
 ?>
 
 <div class="titol-inici">

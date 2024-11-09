@@ -106,7 +106,7 @@ $isAdmin = $userLogged && $_SESSION['usuari']->esAdmin();
                 <i class="fa-solid fa-users-gear"></i>Gestió d'usuaris
               </a>
             <?php endif; ?>
-            <a href="controller/user.controller.php?action=logout">
+            <a href="auth/logout.php">
               <i class="fa-solid fa-right-from-bracket"></i>Sortir
             </a>
           <?php else: ?>
@@ -114,7 +114,7 @@ $isAdmin = $userLogged && $_SESSION['usuari']->esAdmin();
             <a href="view/auth/login.view.php">
               <i class="fa-solid fa-right-to-bracket"></i>Iniciar sessio
             </a>
-            <a href="view/auth/register.view.php">
+            <a href="view/auth/signup.view.php">
               <i class="fa-solid fa-user-plus"></i>Crear compte
             </a>
           <?php endif; ?>

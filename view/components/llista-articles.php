@@ -34,7 +34,7 @@ $offset = ($paginaActual - 1) * $articlesPerPagina;
 $articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId() : null, $offset, $articlesPerPagina, $ordenaPer);
 ?>
 
-<?php include 'pagination-control.php'; ?>
+<?php if (!empty($articles)) include 'pagination-control.php'; ?>
 
 <!-- Llista dels articles. -->
 <div class="llistat-articles">
@@ -91,7 +91,7 @@ $articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId()
 </div>
 
 <!-- Es tornen a incloure els botons de paginació per tenir-los també a la part inferior de la pàgina. -->
-<?php include 'pagination-control.php'; ?>
+<?php if (!empty($articles)) include 'pagination-control.php'; ?>
 
 <!-- Modal per a mostrar el contingut complet de l'article. S'inicialitza ocult. -->
 <div id="articleModal" class="modal" style="display: none;">

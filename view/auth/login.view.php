@@ -5,8 +5,13 @@
 require_once '../../config/Config.php';
 Config::setTitol('Login');
 Config::setArchiusCSS(['forms']);
-Config::setArchiusJS(['toggle-password', 'remove-autocomplete']);
+Config::setArchiusJS(['toggle-password', 'remove-autocomplete', 'auth-popup']);
 
+session_start();
+
+if (isset($_SESSION['usuari'])) {
+  header('Location: /');
+}
 
 // S'inclou el component del header.
 include '../components/header.php';
@@ -41,7 +46,7 @@ include_once '../components/toasters.php'
 
   <?php include '../components/form-errors.php'; ?>
 
-  <form action="controller/user.controller.php?action=login" method="POST">
+  <form action="auth/login.php" method="POST">
     <!-- Camp per introduir el correu electrònic, s'omple automàticament si hi ha dades disponibles. -->
     <label for="email">Correu electrònic</label>
     <div class="input">
@@ -67,7 +72,6 @@ include_once '../components/toasters.php'
 
     <!-- Mostrar reCAPTCHA només si els intents de login superen el límit -->
     <?php if ($_SESSION['intentsLogin'] >= 3): ?>
-      <!-- reCAPTCHA -->
       <div class="recaptcha">
         <div class="g-recaptcha" data-sitekey="6Lcw6HIqAAAAAGq0Okq5wzhOsDfiAmGs5b_O09rI"></div>
       </div>
@@ -76,7 +80,19 @@ include_once '../components/toasters.php'
     <!-- Botó per enviar el formulari de login. -->
     <button type="submit">Entrar</button>
   </form>
-
+  
   <!-- Enllaç per a aquells usuaris que no tenen un compte i volen registrar-se. -->
-  <p>No tens compte? <a href="view/auth/register.view.php">Registra't</a></p>
+  <p>No tens compte? <a href="view/auth/signup.view.php">Registra't</a></p>
+
+  <h4 class="social-auth">També pots iniciar sessio amb</h4>
+
+  <div class="social-auth-container">
+    <a href="auth/google.php" class="google-auth">
+      <i class="fa-brands fa-google"></i>
+    </a>
+    <a onclick="authPopup('github')" class="github-auth">
+      <i class="fa-brands fa-github"></i>
+    </a>
+  </div>
+
 </div>
