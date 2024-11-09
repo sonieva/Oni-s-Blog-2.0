@@ -2,7 +2,7 @@
 // Santi Onieva
 
 // S'inclou la classe UsuariDAO per poder obtenir informació sobre els autors dels articles.
-require_once '../model/Usuari/UsuariDAO.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Usuari/UsuariDAO.php';
 
 class Article {
   private ?string $id;

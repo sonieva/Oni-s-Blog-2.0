@@ -122,4 +122,14 @@ function getMessages($key): ?array {
 function generarTokenRecuperacio(): string {
   return bin2hex(random_bytes(32));
 }
+
+function usuariLogat(): void {
+  if (!isset($_SESSION['usuari'])) {
+    // Estableix el codi de resposta HTTP 403 Forbidden
+    http_response_code(403);
+
+    header('Location: ../view/errors/403.html');
+    exit();
+}
+}
 ?>

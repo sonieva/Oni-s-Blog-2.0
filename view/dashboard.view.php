@@ -1,5 +1,10 @@
 <?php
 // Santi Onieva
+require_once '../model/Usuari/Usuari.php';
+
+require_once '../utils/utils.php';
+
+usuariLogat();
 
 require_once '../config/Config.php';
 // Estableix el títol de la pàgina a "Dashboard"
@@ -7,17 +12,11 @@ Config::setTitol('Dashboard');
 Config::setArchiusCSS(['dashboard', 'forms', 'llista-articles', 'modal', 'article']);
 Config::setArchiusJS(['article-preview', 'btn-imatge', 'delete-article', 'modal', 'show-add-article']);
 
-require_once '../model/Usuari/Usuari.php';
 
-session_start();
-
-// Comprova si l'usuari està identificat, si no, el redirigeix a la pàgina principal
-if (!isset($_SESSION['usuari'])) {
-  header('Location: ..');
-}
 
 // Inclou el capçal de la pàgina
 include 'components/header.php';
+
 
 // Comprova si està en mode d'edició per actualitzar un article
 $editMode = ($_SESSION['editMode']) ?? false;

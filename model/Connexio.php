@@ -1,23 +1,33 @@
 <?php
 // Santi Onieva
+require __DIR__ . '/../vendor/autoload.php';
+
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
 
 class Connexio {
   // Propietat estàtica per a emmagatzemar la instància única de la classe.
   private static $instance = null;
   // Propietat per a emmagatzemar l'objecte PDO.
-  private $pdo;
+  private $pdo; 
 
   // Dades de configuració per a la connexió a la base de dades.
-  private $host = 'db';
-  private $dbName = 'Pt04_Santi_Onieva';
-  private $user = 'root';
-  private $password = 'p@ssw0rd';
+  private $host;
+  private $dbName;
+  private $user;
+  private $password;
 
   // Constructor privat per evitar la creació d'instàncies directament.
   private function __construct() {
     try {
+      $this->host = $_ENV['DB_HOST'];
+      $this->dbName = $_ENV['DB_NAME'];
+      $this->user = $_ENV['DB_USER'];
+      $this->password = $_ENV['DB_PASSWORD'];
       // Es crea una nova connexió PDO amb les credencials de la base de dades.
-      $this->pdo = new PDO("mysql:host=$this->host;dbname=$this->dbName", $this->user, $this->password);
+      $this->pdo = new PDO("mysql:host=$this->host;dbname=$this->dbName;charset=utf8mb4", $this->user, $this->password);
       // S'estableix l'atribut per llançar excepcions en cas d'errors de connexió.
       $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {

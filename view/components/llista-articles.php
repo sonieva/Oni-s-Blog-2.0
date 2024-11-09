@@ -2,7 +2,7 @@
 // Santi Onieva
 
 // Inclou el model per accedir als articles.
-require_once '../model/Article/ArticleDAO.php';
+require_once  $_SERVER['DOCUMENT_ROOT'] . '/model/Article/ArticleDAO.php';
 
 // Es determina si l'usuari està a la pàgina del dashboard per mostrar els articles de l'usuari o tots.
 $isDashboard = str_contains($_SERVER['REQUEST_URI'], 'dashboard');
@@ -51,10 +51,10 @@ $articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId()
 
         <!-- Si l'usuari està al dashboard, es mostren botons per eliminar i editar l'article. -->
         <?php if ($isDashboard): ?>
-          <a class="btn-delete" onclick="deleteArticle(<? echo $article->getId() ?>)">
+          <a class="btn-delete" onclick="deleteArticle(<?= $article->getId() ?>)">
             <i class="fa-solid fa-trash-alt"></i>
           </a>
-          <a class="btn-edit" href="controller/article.controller.php?action=update&id=<? echo $article->getId() ?>">
+          <a class="btn-edit" href="controller/article.controller.php?action=update&id=<?= $article->getId() ?>">
             <i class="fa-solid fa-edit"></i>
           </a>
         <?php endif; ?>
@@ -78,7 +78,7 @@ $articles = $articleDAO->getArticles($isDashboard ? $_SESSION['usuari']->getId()
         <h2><?= $article->getTitol() ?></h2>
 
         <p>
-          <?= strlen($article->getCos()) > 100 ? rtrim(substr($article->getCos(), 0, 100)) . '...' : $article->getCos() ?>
+          <?= strlen($article->getCos()) > 100 ? rtrim(substr(htmlspecialchars_decode($article->getCos()), 0, 100)) . '...' : $article->getCos() ?>
         </p>
 
         <!-- Si el cos és més llarg de 100 caràcters, es mostra un enllaç per a llegir l'article complet. -->

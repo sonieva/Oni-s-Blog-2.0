@@ -2,7 +2,7 @@
 // Santi Onieva
 
 // S'inclouen les dependències necessàries per a la connexió amb la base de dades i la classe Article.
-require_once '../model/Connexio.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Connexio.php';
 require_once 'Article.php';
 
 class ArticleDAO {

@@ -7,6 +7,7 @@ Config::setTitol('Login');
 Config::setArchiusCSS(['forms']);
 Config::setArchiusJS(['toggle-password', 'remove-autocomplete']);
 
+
 // S'inclou el component del header.
 include '../components/header.php';
 
@@ -18,16 +19,13 @@ if (!isset($_SESSION['intentsLogin'])) {
 if (isset($_SESSION['dadesLogin'])) {
   // Si existeixen, es recupera l'email de les dades de login i es neteja la sessió.
   $email = $_SESSION['dadesLogin']['email'];
-  $password = '';
   unset($_SESSION['dadesLogin']);
-} else if (isset($_COOKIE['email']) && isset($_COOKIE['password'])) {
+} else if (isset($_COOKIE['email'])) {
   // Si no hi ha dades de login a la sessió, es comprova si hi ha una cookie amb l'email.
   $email = $_COOKIE['email'];
-  $password = $_COOKIE['password'];
 } else {
   // Si no hi ha ni dades de sessió ni cookie, es deixa l'email buit.
   $email = '';
-  $password = '';
 }
 
 // Es comprova si hi ha errors de login emmagatzemats en la sessió.
@@ -54,7 +52,7 @@ include_once '../components/toasters.php'
     <!-- Camp per introduir la contrasenya. -->
     <label for="password">Contrasenya</label>
     <div class="input">
-      <input <?php if (!empty($password)) echo 'class="autocompleted"' ?> type="password" name="password" required value="<?= $password ?>">
+      <input <?php if (!empty($password)) echo 'class="autocompleted"' ?> type="password" name="password" required>
       <i class="fa-solid fa-lock" id="toggle-password"></i>
     </div>
 
@@ -65,7 +63,7 @@ include_once '../components/toasters.php'
     </div>
 
     <!-- Enllaç per recuperar la contrasenya. -->
-    <p>Has olvidat la contrasenya? <a href="view/auth/correu-recuperacio.view.php">Recupera-la</a></p>
+    <p>Has olvidat la contrasenya? <a href="view/auth/recuperacio.view.php">Recupera-la</a></p>
 
     <!-- Mostrar reCAPTCHA només si els intents de login superen el límit -->
     <?php if ($_SESSION['intentsLogin'] >= 3): ?>

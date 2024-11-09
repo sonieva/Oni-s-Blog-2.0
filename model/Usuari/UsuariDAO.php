@@ -1,7 +1,7 @@
 <?php
 // Santi Onieva
 
-require_once '../model/Connexio.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Connexio.php';
 require_once 'Usuari.php';
 
 class UsuariDAO {

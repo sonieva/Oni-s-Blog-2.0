@@ -2,16 +2,16 @@
 // Santi Onieva
 
 // Es requereix el fitxer de la classe Usuari.
-require_once $_SERVER['DOCUMENT_ROOT'] . BASE_PATH . '/model/Usuari/Usuari.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Usuari/Usuari.php';
 
 // Si la sessió no està iniciada, s'inicia.
 if (session_status() == PHP_SESSION_NONE) session_start();
 
 // S'inclou el fitxer de funcions utils.php.
-require_once $_SERVER['DOCUMENT_ROOT'] . BASE_PATH . '/utils/utils.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/utils.php';
 
 // Es requereix el fitxer per controlar la durada de la sessió.
-require_once $_SERVER['DOCUMENT_ROOT'] . BASE_PATH . '/config/session-lifetime.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config/session-lifetime.php';
 
 // Es defineix si l'usuari està identificat a partir de la sessió.
 $userLogged = isset($_SESSION['usuari']);
@@ -25,9 +25,7 @@ $isAdmin = $userLogged && $_SESSION['usuari']->esAdmin();
   <!-- Metadades bàsiques i configuració de la vista. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Es defineix la ruta base per a tots els enllaços relatius. -->
-  <base href="<?= BASE_PATH . '/' ?>">
+  <base href="/">
 
   <!-- Títol de la pàgina dinàmic, depenent del valor que es passa a Config. -->
   <title>Oni's Blog 2.0 | <?= Config::getTitol() ?></title>
@@ -36,19 +34,19 @@ $isAdmin = $userLogged && $_SESSION['usuari']->esAdmin();
   <link rel="icon" href="assets/images/logo.png" type="image/x-icon">
 
   <!-- Enllaços als estils i fonts utilitzats. -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/css" />
 
   <?php foreach (Config::getArchiusCSS() as $arxiu): ?>
-    <link rel="stylesheet" href="assets/css/<?= $arxiu ?>.css">
+    <link rel="stylesheet" href="assets/css/<?= $arxiu ?>.css" type="text/css">
   <?php endforeach; ?>
 
-  <link rel="stylesheet" href="assets/css/toaster.css">
-  <link rel="stylesheet" href="assets/css/header.css">
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/toaster.css" type="text/css">
+  <link rel="stylesheet" href="assets/css/header.css" type="text/css">
+  <link rel="stylesheet" href="assets/css/styles.css" type="text/css">
 
   <?php foreach (Config::getArchiusJS() as $arxiu): ?>
-    <script defer src="assets/js/<?= $arxiu ?>.js"></script>
+    <script defer src="assets/js/<?= $arxiu ?>.js" type="application/javascript"></script>
   <?php endforeach; ?>
 
   <script defer src="assets/js/toaster.js"></script>

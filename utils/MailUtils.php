@@ -1,12 +1,13 @@
 <?php
 
-require_once '../lib/PHPMailer/PHPMailer.php';
-require_once '../lib/PHPMailer/SMTP.php';
-require_once '../lib/PHPMailer/Exception.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
+// use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__. '/../');
+$dotenv->load();
 
 class MailUtils {
   private static function preparaCorreu($correuDesti): ?PHPMailer {
@@ -16,13 +17,13 @@ class MailUtils {
       $mail->isSMTP();
       $mail->isHTML(true);
       $mail->CharSet = 'UTF-8';
-      $mail->Host = 'smtp.gmail.com';
+      $mail->Host = 'mailsrv2.dondominio.com.';
       $mail->Port = 587;
       $mail->SMTPAuth = true;
       $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-      $mail->Username = 's.onieva@sapalomera.cat';
-      $mail->Password = 'lkks vexu xzkg jqtl';
-      $mail->setFrom('noreply@oni.es', 'Oni\'s Blog');
+      $mail->Username = $_ENV['MAIL_USER'];
+      $mail->Password = $_ENV['MAIL_PASSWORD'];
+      $mail->setFrom($_ENV['MAIL_USER'], 'Admin');
       $mail->addAddress($correuDesti);
       
       return $mail;

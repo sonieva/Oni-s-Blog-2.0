@@ -1,0 +1,17 @@
+# Obligar a utilitzar SSL
+RewriteEngine On
+RewriteBase /
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://oni.cat/ [R,L]
+
+
+AddDefaultCharset UTF-8
+AddType text/css .css
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.css$">
+    Header set Content-Type "text/css; charset=UTF-8"
+  </FilesMatch>
+</IfModule>
+
+ErrorDocument 403 view/errors/403.html

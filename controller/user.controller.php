@@ -24,6 +24,9 @@ if (isset($_GET['action']) && ($_SERVER['REQUEST_METHOD'] === 'POST' || in_array
     case 'reset_password_mail':
       enviarCorreuRecuperacio($_POST['correuRecuperacio']);
       break;
+    case 'reset_password_sms':
+      enviarSMSRecuperacio($_POST['telefonRecuperacio']);
+      break;
     case 'reset_password':
       resetPassword($_POST['token'], $_POST['novaPassword'], $_POST['novaPassword2']);
       break;
@@ -73,7 +76,6 @@ function login($email, $password, $recordar, $recaptchaResponse) {
       // Si s'ha seleccionat "recordar", es guarda una cookie amb l'email durant 30 dies
       if ($recordar) {
         setcookie('email', $email, time() + 60 * 60 * 24 * 30, '/');
-        setcookie('password', $password, time() + 60 * 60 * 24 * 30, '/');
       }
 
       unset($_SESSION['intentsLogin']);
@@ -239,22 +241,22 @@ function enviarCorreuRecuperacio($correuRecuperacio): void {
   }
 
   if (empty($correuRecuperacio)) {
-    addMessage('errorsCorreuRecuperacio', 'Has d\'omplir el camp correu electrònic');
+    addMessage('errorsRecuperacio', 'Has d\'omplir el camp correu electrònic');
   }
 
   if (!filter_var($correuRecuperacio, FILTER_VALIDATE_EMAIL)) {
-    addMessage('errorsCorreuRecuperacio', 'El correu electrònic no és vàlid');
+    addMessage('errorsRecuperacio', 'El correu electrònic no és vàlid');
   }
 
   $usuariDAO = new UsuariDAO();
   $usuari = $usuariDAO->getUsuariPerEmail($correuRecuperacio);
 
   if (!$usuari) {
-    addMessage('errorsCorreuRecuperacio', 'No existeix cap usuari amb aquest correu electrònic');
+    addMessage('errorsRecuperacio', 'No existeix cap usuari amb aquest correu electrònic');
   }
 
-  if (!empty($_SESSION['errorsCorreuRecuperacio'])) {
-    header('Location: ../view/auth/correu-recuperacio.view.php');
+  if (!empty($_SESSION['errorsRecuperacio'])) {
+    header('Location: ../view/auth/recuperacio.view.php');
     exit();
   }
 
@@ -275,8 +277,14 @@ function enviarCorreuRecuperacio($correuRecuperacio): void {
 
   if (empty($_SESSION['errorCorreu'])) setMessage('missatgeCorreu', 'Correu de recuperació enviat correctament');
 
-  header('Location: ../view/auth/correu-recuperacio.view.php');
+  header('Location: ../view/auth/recuperacio.view.php');
   exit();
+}
+
+function enviarSMSRecuperacio($telefonRecuperacio): void {
+  require_once '../utils/SMSUtils.php';
+
+  SMSUtils::enviarSMS($telefonRecuperacio, 'Has sol·licitat un canvi de contrasenya. Accedeix al següent enllaç per restablir-la: http://localhost/view/auth/reset-password.view.php');
 }
 
 function resetPassword($token, $newPassword, $confirmPassword): void {
@@ -319,8 +327,8 @@ function resetPassword($token, $newPassword, $confirmPassword): void {
 
   if ($usuari->getExpiracioToken() < new DateTime('now')) {
     unset($_SESSION['errorsResetPassword']);
-    addMessage('errorsCorreuRecuperacio', 'El token ha expirat, torna a sol·licitar el correu de recuperació');
-    header('Location: ../view/auth/correu-recuperacio.view.php');
+    addMessage('errorsRecuperacio', 'El token ha expirat, torna a sol·licitar el correu de recuperació');
+    header('Location: ../view/auth/recuperacio.view.php');
     exit();
   }
 
