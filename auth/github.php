@@ -8,7 +8,7 @@ require_once '../model/Usuari/UsuariDAO.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
-$githubHybridauth = new Hybridauth\Provider\GitHub([
+$provider = new Hybridauth\Provider\GitHub([
   'callback' => 'https://oni.cat/auth/github.php',
   'keys' => [
     'id' => $_ENV['GITHUB_CLIENT_ID'],
@@ -17,9 +17,9 @@ $githubHybridauth = new Hybridauth\Provider\GitHub([
 ]);
 
 try {
-  $githubHybridauth->authenticate();
+  $provider->authenticate();
 
-  $userProfile = $githubHybridauth->getUserProfile();
+  $userProfile = $provider->getUserProfile();
 
   $alies = $userProfile->displayName;
   $email = $userProfile->email;
@@ -38,7 +38,7 @@ try {
     $_SESSION['usuari'] = $usuari;
   }
 
-  $githubHybridauth->disconnect();
+  $provider->disconnect();
 
   echo "
   <script>
