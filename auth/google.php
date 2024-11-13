@@ -1,6 +1,6 @@
 <?php
 // Requerir autoload de Composer y cargar las variables de entorno
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once '../vendor/autoload.php';
 
 use League\OAuth2\Client\Provider\Google;
 

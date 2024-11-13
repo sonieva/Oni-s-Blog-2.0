@@ -1,9 +1,7 @@
 <?php
 // Santi Onieva
 
-// S'inicia la sessió per gestionar la informació de l'usuari i els missatges.
-session_start();
-
+require_once '../model/Usuari/Usuari.php';
 require_once '../model/Article/ArticleDAO.php';
 require_once '../utils/utils.php';
 
@@ -81,7 +79,16 @@ function modificarArticle($id): void {
     header('Location: ../view/dashboard.view.php');
     exit();
   }
-  
+
+  $articleDAO = new ArticleDAO();
+  $article = $articleDAO->getArticlePerId($id);
+
+  if ($article->getAutor() !== $_SESSION['usuari']->getId()) {
+    setMessage('errorDashboard', 'No tens permisos per modificar aquest article');
+    header('Location: ../view/dashboard.view.php');
+    exit();
+  }
+
   // Si la petició no és de tipus POST, s'activa el mode edició.
   if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     $_SESSION['editMode'] = true;
@@ -101,8 +108,6 @@ function modificarArticle($id): void {
     exit();
   }
 
-  $_SESSION['errorAdd'] = [];
-
   // Es netegen i es comproven els camps rebuts.
   $titol = htmlspecialchars(trim($_POST['titol'])) ?? '';
   $cos = htmlspecialchars(trim($_POST['cos'])) ?? '';
@@ -110,7 +115,7 @@ function modificarArticle($id): void {
 
   // Es comprova que el títol i el cos no estiguin buits.
   if (empty($titol) || empty($cos)) {
-    $_SESSION['errorAdd'][] = 'Falten camps per omplir';
+    addMessage('errorAdd', 'Falten camps per omplir');
   }
   
   // Es valida la imatge si n'hi ha una de pujada.
@@ -164,6 +169,12 @@ function eliminarArticle($id): void {
 
   $articleDAO = new ArticleDAO();
   $article = $articleDAO->getArticlePerId($id);
+
+  if ($article->getAutor() !== $_SESSION['usuari']->getId()) {
+    setMessage('errorDashboard', 'No tens permisos per eliminar aquest article');
+    header('Location: ../view/dashboard.view.php');
+    exit();
+  }
 
   // S'intenta eliminar l'article i la seva imatge, i es mostra un missatge en funció del resultat.
   if ($articleDAO->eliminar($id)) {

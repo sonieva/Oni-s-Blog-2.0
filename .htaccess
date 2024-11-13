@@ -4,8 +4,6 @@ RewriteBase /
 RewriteCond %{SERVER_PORT} 80
 RewriteRule ^(.*)$ https://oni.cat/ [R,L]
 
-
-AddDefaultCharset UTF-8
 AddType text/css .css
 
 <IfModule mod_headers.c>

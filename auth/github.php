@@ -1,7 +1,7 @@
 <?php
 // Santi Onieva
 
-require __DIR__ . '/../vendor/autoload.php';
+require '../vendor/autoload.php';
 require_once '../model/Usuari/Usuari.php';
 require_once '../model/Usuari/UsuariDAO.php';
 
@@ -9,7 +9,7 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
 $provider = new Hybridauth\Provider\GitHub([
-  'callback' => 'https://oni.cat/auth/github.php',
+  'callback' => $_ENV['GITHUB_REDIRECT_URI'],
   'keys' => [
     'id' => $_ENV['GITHUB_CLIENT_ID'],
     'secret' => $_ENV['GITHUB_CLIENT_SECRET']

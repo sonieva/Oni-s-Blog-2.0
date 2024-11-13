@@ -94,5 +94,4 @@ include_once '../components/toasters.php'
       <i class="fa-brands fa-github"></i>
     </a>
   </div>
-
 </div>
