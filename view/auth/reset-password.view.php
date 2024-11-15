@@ -11,6 +11,10 @@ Config::setTitol('Restablir contrasenya');
 Config::setArchiusCSS(['forms']);
 Config::setArchiusJS(['toggle-password']);
 
+require_once '../../utils/utils.php';
+
+usuariNoEstaLogat();
+
 include '../components/header.php';
 
 $errors = getMessages('errorsResetPassword');

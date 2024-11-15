@@ -1,6 +1,11 @@
 <?php
 // Santi Onieva
 
+require '../vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
+
 require_once '../model/Usuari/Usuari.php';
 require_once '../model/Usuari/UsuariDAO.php';
 require_once '../utils/utils.php';
@@ -24,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   if ($_SESSION['intentsLogin'] >= 3) {
-    $recaptchaSecret = '6Lcw6HIqAAAAACeQJvXacNE7hruTlKAt2YLmVcwC';
+    $recaptchaSecret = $_ENV['RECAPTCHA_SECRET_KEY'];
     
     // Realiza la petición a la API de reCAPTCHA
     $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$recaptchaSecret&response=$recaptchaResponse");

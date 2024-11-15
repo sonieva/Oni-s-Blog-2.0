@@ -228,4 +228,18 @@ i.fa-unlock {
       background-color: #242424;
     }
   }
+
+  a.reddit-auth {
+    background-color: #ff6d38;
+    &:hover {
+      background-color: #ff5700;
+    }
+  }
+
+  a.discord-auth {
+    background-color: #7a94f3;
+    &:hover {
+      background-color: #5865f2;
+    }
+  }
 }

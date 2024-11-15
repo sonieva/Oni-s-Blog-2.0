@@ -7,11 +7,9 @@ Config::setTitol('Registre');
 Config::setArchiusCSS(['forms']);
 Config::setArchiusJS(['register-alies', 'toggle-password']);
 
-session_start();
+require_once '../../utils/utils.php';
 
-if (isset($_SESSION['usuari'])) {
-  header('Location: ../..');
-}
+usuariNoEstaLogat();
 
 // S'inclou el component del header.
 include '../components/header.php';

@@ -20,22 +20,22 @@ class Discord extends OAuth2
     /**
      * {@inheritdoc}
      */
-    protected $scope = 'identify email';
+    protected $scope = 'email';
 
     /**
      * {@inheritdoc}
      */
-    protected $apiBaseUrl = 'https://discordapp.com/api/';
+    protected $apiBaseUrl = 'https://discord.com/api';
 
     /**
      * {@inheritdoc}
      */
-    protected $authorizeUrl = 'https://discordapp.com/api/oauth2/authorize';
+    protected $authorizeUrl = 'https://discord.com/oauth2/authorize';
 
     /**
      * {@inheritdoc}
      */
-    protected $accessTokenUrl = 'https://discordapp.com/api/oauth2/token';
+    protected $accessTokenUrl = 'https://discord.com/api/oauth2/token';
 
     /**
      * {@inheritdoc}

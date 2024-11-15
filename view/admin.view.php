@@ -7,11 +7,15 @@ Config::setArchiusJS(['delete-user']);
 
 require_once '../model/Usuari/Usuari.php';
 
-session_start();
+require_once '../utils/utils.php';
 
-// Comprova si l'usuari està identificat, si no, el redirigeix a la pàgina principal
-if (!isset($_SESSION['usuari'])) {
-  header('Location: ..');
+usuariEstaLogat();
+
+if (!$_SESSION['usuari']->esAdmin()) {
+  http_response_code(403);
+
+  header('Location: ../view/errors/403.html');
+  exit();
 }
 
 // Inclou el capçal de la pàgina

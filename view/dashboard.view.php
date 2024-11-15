@@ -4,7 +4,7 @@ require_once '../model/Usuari/Usuari.php';
 
 require_once '../utils/utils.php';
 
-usuariLogat();
+usuariEstaLogat();
 
 require_once '../config/Config.php';
 // Estableix el títol de la pàgina a "Dashboard"

@@ -5,11 +5,9 @@ require_once '../../config/Config.php';
 Config::setTitol('Restablir contrasenya');
 Config::setArchiusCSS(['forms']);
 
-session_start(); // S'inicia la sessió.
+require_once '../../utils/utils.php';
 
-if (isset($_SESSION['usuari'])) {
-  header('Location: ../..');
-}
+usuariNoEstaLogat();
 
 include '../components/header.php';
 

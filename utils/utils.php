@@ -123,13 +123,20 @@ function generarTokenRecuperacio(): string {
   return bin2hex(random_bytes(32));
 }
 
-function usuariLogat(): void {
+function usuariEstaLogat(): void {
   if (!isset($_SESSION['usuari'])) {
     // Estableix el codi de resposta HTTP 403 Forbidden
     http_response_code(403);
 
     header('Location: ../view/errors/403.html');
     exit();
+  }
 }
+
+function usuariNoEstaLogat(): void {
+  if (isset($_SESSION['usuari'])) {
+    header('Location: /');
+    exit();
+  }
 }
 ?>

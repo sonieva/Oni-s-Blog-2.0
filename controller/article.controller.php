@@ -83,7 +83,7 @@ function modificarArticle($id): void {
   $articleDAO = new ArticleDAO();
   $article = $articleDAO->getArticlePerId($id);
 
-  if ($article->getAutor() !== $_SESSION['usuari']->getId()) {
+  if ($article->getAutor()->getId() !== $_SESSION['usuari']->getId()) {
     setMessage('errorDashboard', 'No tens permisos per modificar aquest article');
     header('Location: ../view/dashboard.view.php');
     exit();
@@ -170,7 +170,7 @@ function eliminarArticle($id): void {
   $articleDAO = new ArticleDAO();
   $article = $articleDAO->getArticlePerId($id);
 
-  if ($article->getAutor() !== $_SESSION['usuari']->getId()) {
+  if ($article->getAutor()->getId() !== $_SESSION['usuari']->getId()) {
     setMessage('errorDashboard', 'No tens permisos per eliminar aquest article');
     header('Location: ../view/dashboard.view.php');
     exit();

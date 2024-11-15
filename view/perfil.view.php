@@ -11,7 +11,7 @@ Config::setArchiusJS(['edit-alies', 'edit-nom', 'edit-foto-perfil']);
 require_once '../model/Usuari/Usuari.php';
 require_once '../utils/utils.php';
 
-usuariLogat();
+usuariEstaLogat();
 
 // Inclou el capçal de la pàgina
 include 'components/header.php';

@@ -7,12 +7,9 @@ Config::setArchiusCSS(['forms']);
 Config::setArchiusJS(['toggle-password']);
 
 require_once '../../model/Usuari/Usuari.php';
+require_once '../../utils/utils.php';
 
-session_start();
-
-if (!isset($_SESSION['usuari'])) {
-  header('Location: ../..');
-}
+usuariEstaLogat();
 
 include '../components/header.php';
 

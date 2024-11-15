@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $newPassword = $_POST['novaPassword'];
   $confirmPassword = $_POST['novaPassword2'];
 
-  usuariLogat();
+  usuariEstaLogat();
 
   if (empty($oldPassword) || empty($newPassword) || empty($confirmPassword)) {
     addMessage('errorChangePassword', 'Has d\'omplir tots els camps');

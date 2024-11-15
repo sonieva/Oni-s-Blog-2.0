@@ -1,17 +1,19 @@
 <?php
 // Santi Onieva
 
+require '../../vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
+$dotenv->load();
+
 // S'inclou el fitxer de configuració i s'estableix el títol de la pàgina a "Login".
 require_once '../../config/Config.php';
 Config::setTitol('Login');
 Config::setArchiusCSS(['forms']);
 Config::setArchiusJS(['toggle-password', 'remove-autocomplete', 'auth-popup']);
 
-session_start();
+require_once '../../utils/utils.php';
 
-if (isset($_SESSION['usuari'])) {
-  header('Location: /');
-}
+usuariNoEstaLogat();
 
 // S'inclou el component del header.
 include '../components/header.php';
@@ -73,7 +75,7 @@ include_once '../components/toasters.php'
     <!-- Mostrar reCAPTCHA només si els intents de login superen el límit -->
     <?php if ($_SESSION['intentsLogin'] >= 3): ?>
       <div class="recaptcha">
-        <div class="g-recaptcha" data-sitekey="6Lcw6HIqAAAAAGq0Okq5wzhOsDfiAmGs5b_O09rI"></div>
+        <div class="g-recaptcha" data-sitekey=<?= $_ENV['RECAPTCHA_SITE_KEY'] ?>></div>
       </div>
     <?php endif; ?>
 
@@ -90,8 +92,14 @@ include_once '../components/toasters.php'
     <a href="auth/google.php" class="google-auth">
       <i class="fa-brands fa-google"></i>
     </a>
-    <a onclick="authPopup('github')" class="github-auth">
+    <a onclick="authPopup('GitHub')" class="github-auth">
       <i class="fa-brands fa-github"></i>
+    </a>
+    <a onclick="authPopup('Reddit')" class="reddit-auth">
+      <i class="fa-brands fa-reddit"></i>
+    </a>
+    <a onclick="authPopup('Discord')" class="discord-auth">
+      <i class="fa-brands fa-discord"></i>
     </a>
   </div>
 </div>
