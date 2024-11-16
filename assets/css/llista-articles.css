@@ -23,7 +23,7 @@
   justify-content: center; /* Centra els elements horitzontalment */
   gap: 1rem; /* Espai entre els elements de la paginació */
 
-  form {
+  div {
     padding: 1rem; /* Espai interior del formulari */
     
     label {
@@ -31,7 +31,7 @@
       color: #251b13; /* Color del text del label */
     }
     
-    label[for='ordenar'] {
+    label[for='ordenaPer'] {
       padding-right: 10px; /* Espai a la dreta del label */
     }
 

@@ -10,7 +10,7 @@ setlocale(LC_ALL, 'ca_ES.UTF-8');
 include_once 'config/Config.php';
 Config::setTitol('Inici');
 Config::setArchiusCSS(['llista-articles', 'article', 'modal']);
-Config::setArchiusJS(['modal']);
+Config::setArchiusJS(['modal', 'buscar-articles']);
 
 // Inclou el capçal de la pàgina
 include 'view/components/header.php';

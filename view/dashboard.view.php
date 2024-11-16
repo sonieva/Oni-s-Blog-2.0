@@ -10,9 +10,7 @@ require_once '../config/Config.php';
 // Estableix el títol de la pàgina a "Dashboard"
 Config::setTitol('Dashboard');
 Config::setArchiusCSS(['dashboard', 'forms', 'llista-articles', 'modal', 'article']);
-Config::setArchiusJS(['article-preview', 'btn-imatge', 'delete-article', 'modal', 'show-add-article']);
-
-
+Config::setArchiusJS(['article-preview', 'btn-imatge', 'delete-article', 'modal', 'show-add-article', 'buscar-articles']);
 
 // Inclou el capçal de la pàgina
 include 'components/header.php';

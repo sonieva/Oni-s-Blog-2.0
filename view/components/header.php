@@ -46,7 +46,7 @@ $isAdmin = $userLogged && $_SESSION['usuari']->esAdmin();
   <link rel="stylesheet" href="assets/css/styles.css" type="text/css">
 
   <?php foreach (Config::getArchiusJS() as $arxiu): ?>
-    <script defer src="assets/js/<?= $arxiu ?>.js" type="application/javascript"></script>
+    <script defer src="assets/js/<?= $arxiu ?>.js"></script>
   <?php endforeach; ?>
 
   <script defer src="assets/js/toaster.js"></script>

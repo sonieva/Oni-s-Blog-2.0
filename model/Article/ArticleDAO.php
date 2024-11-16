@@ -120,7 +120,7 @@ class ArticleDAO {
   }
 
   // Obté el nombre total d'articles, amb la possibilitat de filtrar per autor.
-  public function countArticles($idAutor = null): int {
+  public function countArticles(int $idAutor = null): int {
     $sql = $idAutor ? 
       "SELECT COUNT(*) FROM articles WHERE autor = :autor" : 
       "SELECT COUNT(*) FROM articles";
@@ -151,11 +151,47 @@ class ArticleDAO {
   }
 
   // Elimina un article de la base de dades a partir del seu ID.
-  public function eliminar($id): bool {
+  public function eliminar(int $id): bool {
     $sentenciaEliminar = $this->pdo->prepare("DELETE FROM articles WHERE id = :id");
     $sentenciaEliminar->bindParam(':id', $id, PDO::PARAM_INT);
     
     // S'executa la sentència d'eliminació.
     return $sentenciaEliminar->execute();
+  }
+
+  public function buscarArticles(string $query, int $offset, int $limit, string $ordenaPer, ?int $userId = null): array {
+    $ordenaPer = explode('-', $ordenaPer);
+
+    $sql = "SELECT * FROM articles WHERE (titol LIKE :query OR cos LIKE :query)";
+    if ($userId !== null) {
+        $sql .= " AND autor = :userId"; // Filtrar por autor si es el dashboard del usuario
+    }
+    $sql .= " ORDER BY " . $ordenaPer[0] . ' ' . $ordenaPer[1];
+    $sql .= " LIMIT :offset, :limit";
+
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindValue(':query', '%' . $query . '%', PDO::PARAM_STR);
+    if ($userId !== null) {
+        $stmt->bindValue(':userId', $userId, PDO::PARAM_INT);
+    }
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $articles = [];
+
+    while ($article = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $articles[] = new Article(
+            $article['titol'], 
+            $article['cos'],  
+            $article['autor'], 
+            $article['ruta_imatge'], 
+            new DateTime($article['creat']), 
+            isset($article['modificat']) ? new DateTime($article['modificat']) : null, 
+            $article['id']
+        );
+    }
+
+    return $articles;
   }
 }
