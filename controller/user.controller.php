@@ -82,7 +82,7 @@ function enviarSMSRecuperacio($telefonRecuperacio): void {
 function eliminarUsuari($id) {
   if (!isset($_SESSION['usuari'])) {
     setMessage('errorLogin', 'No estàs identificat');
-    header('Location: ../view/auth/login.view.php');
+    header('Location: ../login');
     exit();
   }
 

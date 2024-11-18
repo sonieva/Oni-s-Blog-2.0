@@ -67,5 +67,5 @@ $errors = getMessages('errorsRegister');
   </form>
 
   <!-- Enllaç per a aquells usuaris que ja tenen un compte i volen iniciar sessió. -->
-  <p>Ja tens compte? <a href="view/auth/login.view.php">Inicia sessió</a></p>
+  <p>Ja tens compte? <a href="login">Inicia sessió</a></p>
 </div>

@@ -4,9 +4,10 @@
 require '../vendor/autoload.php';
 require_once '../model/Usuari/Usuari.php';
 require_once '../model/Usuari/UsuariDAO.php';
+require_once '../utils/utils.php';
 
 if (!isset($_GET['provider']) && !isset($_GET['code']) && !isset($_GET['state'])) {
-  header('Location: ../view/auth/login.view.php');
+  header('Location: ../login');
   exit();
 }
 
@@ -55,7 +56,7 @@ try {
 
   $userProfile = $adapter->getUserProfile();
 
-  $alies = $userProfile->displayName;
+  $alies = generarAliesAleatori();
   $email = $userProfile->email ?? 'No proporcionat';
   $nomComplet = ($userProfile->firstName !== null && $userProfile->lastName !== null) ? $userProfile->firstName . ' ' . $userProfile->lastName : null;
   $rutaImatge = $userProfile->photoURL;
@@ -67,7 +68,7 @@ try {
     $nouUsuari = new Usuari($alies, $email, 'SocialAuth', $nomComplet, null, null, null, $rutaImatge);
     $usuariDAO->inserir($nouUsuari);
 
-    $_SESSION['usuari'] = $usuari;
+    $_SESSION['usuari'] = $nouUsuari;
   } else {
     $_SESSION['usuari'] = $usuari;
   }

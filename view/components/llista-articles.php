@@ -6,8 +6,12 @@ $isDashboard = str_contains($_SERVER['REQUEST_URI'], 'dashboard');
 ?>
 
 <div class="search-container">
-  <input type="text" id="search-bar" placeholder="Busca articles..."/>
+  <div class="search-box">
+    <input type="text" id="search-bar" placeholder="Busca articles..."/>
+    <i class="fa fa-search search-icon"></i>
+  </div>
 </div>
+
 
 <div class="pagination-control">
   <div class="pagination-order" <?php if (!$isDashboard) echo 'shadow' ?>>

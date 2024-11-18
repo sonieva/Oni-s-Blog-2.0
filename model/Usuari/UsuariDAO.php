@@ -102,6 +102,32 @@ class UsuariDAO {
     );
   }
 
+  public function getUsuariPerAliesOEmail(string $user): ?Usuari {
+    $sentencia = $this->pdo->prepare("SELECT * FROM usuaris WHERE alies = :user OR email = :user");
+
+    // Executa la consulta.
+    $sentencia->execute(['user' => $user]);
+
+    // Comprova si hi ha algun resultat.
+    if ($sentencia->rowCount() === 0) {
+      return null;
+    }
+
+    // Obté el resultat i retorna un objecte Usuari.
+    $resultat = $sentencia->fetch();
+    return new Usuari(
+      $resultat['alies'], 
+      $resultat['email'], 
+      $resultat['password'], 
+      $resultat['nom_complet'], 
+      $resultat['id'],
+      $resultat['token_recuperacio'],
+      isset($resultat['expiracio_token']) ? new DateTime($resultat['expiracio_token']) : null,
+      $resultat['ruta_imatge'],
+      $resultat['es_admin']
+    );
+  }
+
   // Obté un usuari de la base de dades pel seu token de recuperació.
   public function getUsuariPerToken(string $token): ?Usuari {
     $sentencia = $this->pdo->prepare("SELECT * FROM usuaris WHERE token_recuperacio = :token");

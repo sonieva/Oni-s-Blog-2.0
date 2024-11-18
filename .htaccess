@@ -4,13 +4,9 @@ RewriteBase /
 RewriteCond %{SERVER_PORT} 80
 RewriteRule ^(.*)$ https://oni.cat/ [R,L]
 
-AddType text/css .css
-
-<IfModule mod_headers.c>
-  <FilesMatch "\.css$">
-    Header set Content-Type "text/css; charset=UTF-8"
-  </FilesMatch>
-</IfModule>
+RewriteRule ^login$ /view/auth/login.view.php [L]
+RewriteRule ^signup$ /view/auth/signup.view.php [L]
 
 ErrorDocument 403 /view/errors/403.html
+ErrorDocument 401 /view/errors/403.html
 ErrorDocument 404 /view/errors/404.html

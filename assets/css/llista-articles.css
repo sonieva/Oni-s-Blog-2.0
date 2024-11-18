@@ -128,3 +128,46 @@
 .pagination-buttons.shadow {
   box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px; /* Afegeix ombra per a donar profunditat */
 }
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Espacio superior para separar del contenido siguiente */
+}
+
+.search-box {
+  position: relative; /* Contenedor relativo para la posición de la lupa */
+  display: flex;
+  align-items: center;
+}
+
+#search-bar {
+  width: 300px; /* Ancho de la barra de búsqueda */
+  padding: 10px 15px 10px 40px; /* Espacio interno, con más espacio a la izquierda para la lupa */
+  border: 2px solid #f15b2a; /* Borde naranja para hacer juego con la página */
+  border-radius: 25px; /* Bordes redondeados */
+  font-size: 16px; /* Tamaño de la fuente */
+  outline: none; /* Elimina el borde por defecto al enfocar */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera para destacar */
+  transition: all 0.3s ease; /* Suave transición para cambios */
+}
+
+/* Cambia el borde y la sombra cuando el input está enfocado */
+#search-bar:focus {
+  border-color: #d94c1a; /* Color del borde más oscuro al enfocar */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra un poco más destacada */
+}
+
+/* Placeholder estilitzat */
+#search-bar::placeholder {
+  color: #888; /* Color suave para el texto del placeholder */
+  font-style: italic; /* Hace que el texto del placeholder sea cursivo */
+}
+
+.search-icon {
+  position: absolute; /* Posición absoluta para situar la lupa */
+  left: 15px; /* Alinea la lupa hacia la izquierda del input */
+  font-size: 18px; /* Tamaño de la lupa */
+  color: #888; /* Color de la lupa */
+  pointer-events: none; /* Hace que la lupa no interfiera con el input */
+}

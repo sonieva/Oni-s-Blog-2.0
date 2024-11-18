@@ -6,7 +6,7 @@ $maxTempsInactivitat = 2400;
 
 // Es comprova si existeix la variable de sessió 'ultimaActivitat' i si hi ha un usuari loguejat.
 // També es verifica que l'usuari no es trobi a la pàgina de login.
-if (isset($_SESSION['ultimaActivitat']) && isset($_SESSION['usuari']) && (!isset($_SERVER['HTTP_REFERER']) || !str_contains($_SERVER['HTTP_REFERER'], 'login.view.php'))) {
+if (isset($_SESSION['ultimaActivitat']) && isset($_SESSION['usuari']) && (!isset($_SERVER['HTTP_REFERER']) || !str_contains($_SERVER['HTTP_REFERER'], 'login'))) {
     // Es calcula el temps d'inactivitat restant.
     $tempsInactivitat = time() - $_SESSION['ultimaActivitat'];
 
@@ -19,8 +19,8 @@ if (isset($_SESSION['ultimaActivitat']) && isset($_SESSION['usuari']) && (!isset
         unset($_SESSION['usuari']);
 
         // Es redirigeix a la pàgina de login si no s'hi troba actualment.
-        if (!str_contains($_SERVER['REQUEST_URI'], 'login.view.php')) {
-            header('Location: auth/login.view.php');
+        if (!str_contains($_SERVER['REQUEST_URI'], 'login')) {
+            header('Location: login');
             exit();
         }
     }

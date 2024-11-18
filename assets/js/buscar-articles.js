@@ -36,20 +36,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Función para buscar artículos y mostrar resultados
   function buscarArticulos(query, page, perPage, orderBy) {
-      const url = `/api/find-articles.php?q=${encodeURIComponent(query)}&page=${page}&articlesPerPagina=${perPage}&ordenaPer=${orderBy}&isDashboard=${isDashboard}`;
-      fetch(url)
-          .then(response => response.json())
-          .then(data => {
-              if (data.error) {
-                  console.error('Error en la búsqueda:', data.error);
-                  return;
-              }
-              mostrarResultados(data.articulos);
-              generarPaginacion(data.totalPaginas, page);
-          })
-          .catch(error => {
-              console.error('Error en la búsqueda:', error);
-          });
+    const url = `/api/find-articles.php?q=${encodeURIComponent(query)}&page=${page}&articlesPerPagina=${perPage}&ordenaPer=${orderBy}&isDashboard=${isDashboard}`;
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          console.error('Error en la búsqueda:', data.error);
+          return;
+        }
+        mostrarResultados(data.articulos);
+        generarPaginacion(data.totalPaginas, page);
+      })
+      .catch(error => {
+        console.error('Error en la búsqueda:', error);
+      });
   }
 
   // Mostrar los resultados de la búsqueda en tiempo real

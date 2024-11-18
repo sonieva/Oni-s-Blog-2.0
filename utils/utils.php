@@ -139,4 +139,51 @@ function usuariNoEstaLogat(): void {
     exit();
   }
 }
+
+function generarAliesAleatori(): string {
+  $noms = [
+    "Gat", "Gos", "Lleó", "Tigre", "Elefant", "Girafa", "Cavall", "Vaca", "Ovella", "Cabra",
+    "Conill", "Porquet", "Àguila", "Falcó", "Colom", "Peix", "Granota", "Serp", "Ratpenat", "Cérvol",
+    "Pingüí", "Dofí", "Foqueta", "Orca", "Balena", "Cigne", "Ànec", "Gall", "Gallina", "Oca",
+    "Guineu", "Ós", "Cangur", "Panda", "Eriçó", "Esquirol", "Ratolí", "Rata", "Castor", "Hipopòtam",
+    "Rinoceront", "Iguana", "Camell", "Dromedari", "Cama", "Gavina", "Gavot", "Pingüí", "Pollet",
+    "Tauró", "Medusa", "Calamar", "Pop", "Cranc", "Llagosta", "Escorpí",
+    "Mussol", "Óliba", "Bufo", "Aligot", "Corb", "Gaig", "Lloro", "Periquito", "Serpent", "Tortuga",
+    "Sargantana", "Llangardaix", "Cocodril", "Aligot", "Faisà", "Tucà", "Ocellaire", "Agaporni", "Papagai", "Periquito",
+    "Vespa", "Abella", "Formiga", "Escarabat", "Libèl·lula", "Papallona", "Mosca", "Mosquit", "Cuca",
+    "Formiguer", "Aranya", "Escorpí", "Marieta", "Saltamartí", "Centpeus", "Milpeus",
+    "Grill", "Cargol", "Medusa", "Corall", "Anemona", "Oruga", "Termita",
+    "Tisoreta", "Pagell", "Rèmora", "Manta", "Bagre", "Carpa", "Truita", "Rèmora",
+    "Tenca", "Perca", "Sardina", "Verat", "Lluç", "Moll", "Salpa", "Dorada", "Orada", "Anguila",
+    "Clotxina", "Gamba", "Escamarlà", "Cloïssa", "Musclo", "Navalla", "Pop", "Sípia",
+    "Calamaret", "Sepieta", "Tintorera", "Caiman", "Caimaní"
+  ];
+
+  $adjectius = [
+    "Ràpid", "Lent", "Fort", "Feble", "Intel·ligent", "Tonto", "Gran", "Petit", "Enorme", "Mínim",
+    "Bonic", "Lleig", "Brillant", "Fosc", "Clar", "Pesat", "Lleuger", "Calent", "Fred", "Tíbid",
+    "Sec", "Humit", "Llis", "Rugós", "Fresc", "Vell", "Jove", "Nou", "Antic", "Mandrós",
+    "Actiu", "Audaz", "Tímid", "Valent", "Covard", "Savi", "Ignorant", "Pacífic", "Agressiu", "Dòcil",
+    "Rebel", "Feliç", "Trist", "Alegre", "Melancòlic", "Sà", "Malalt", "Tranquil", "Nerviós", "Confiat",
+    "Desconfiat", "Curiós", "Indiferent", "Fidel", "Infidel", "Lleial", "Traïdor", "Just", "Injust",
+    "Obert", "Tancat", "Generós", "Garrepa", "Amable", "Groller", "Cortès", "Descortès", "Optimista", "Pessimista",
+    "Honest", "Deshonest", "Prudent", "Imprudent", "Responsable", "Irresponsable", "Puntual", "Impuntual", "Constant", "Inconstant",
+    "Ambiciós", "Humil", "Extravagant", "Modest", "Fiable", "Insegur", "Ferm", "Àgil", "Maladroit", "Dinàmic",
+    "Passiu", "Creatiu", "Rutinari", "Idealista", "Realista", "Simpatí", "Antipàtic", "Natural", "Artificial", "Llarg",
+    "Curt", "Ample", "Estret", "Rodó", "Quadrat", "Esvelt", "Gruixut", "Perfecte", "Imperfecte", "Interessant",
+    "Avorrit", "Útil", "Inútil", "Positiu", "Negatiu", "Agraït", "Ingratit", "Variable", "Durador", "Efímer",
+    "Permanent", "Transitori", "Agradable", "Desagradable", "Pràctic", "Teòric", "Flexible", "Rígid", "Solitari", "Acompanyat",
+    "Poblat", "Despoblat", "Civilitzat", "Salvatge", "Urbà", "Rural", "Industrial", "Artesanal", "Barat", "Car",
+    "Luxós", "Senzill", "Net", "Brut", "Ordenat", "Desordenat", "Tardà", "Complex", "Senzill", "Profund",
+    "Superficial", "Expansiu", "Retraït", "Eficaç", "Ineficaç", "Càlid", "Gèlid", "Solejat", "Ennuvolat", "Ventós",
+    "Templat", "Cru", "Nutritiu", "Insalubre", "Saborós", "Insípid", "Fluid", "Dens", "Complicat", "Fàcil",
+    "Divertit", "Monòton", "Exòtic", "Comú", "Viu", "Mort", "Estressant", "Relaxant", "Plen", "Buit",
+    "Estudiós", "Gandul", "Precís", "Imprecís", "Formal", "Informal", "Diplomàtic", "Directe", "Atractiu", "Repulsiu",
+    "Provocador", "Divers", "Homogeni", "Transparent", "Opac", "Sòlid", "Voluble", "Extrovertit", "Introvertit", "Eufòric",
+    "Complaent", "Estricte", "Detallista", "Descuidat", "Pròsper", "Pobre", "Sofisticat", "Tosco", "Carinyós", "Apàtic"
+  ];
+
+  return $noms[array_rand($noms)] . '-' . $adjectius[array_rand($adjectius)] . '-' . rand(1, 999);
+}
+
 ?>

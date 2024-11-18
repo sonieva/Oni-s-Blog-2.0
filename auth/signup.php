@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       'email' => $email,
     ];
     
-    header('Location: ../view/auth/signup.view.php');
+    header('Location: ../signup');
     exit();
   }  
   else {
@@ -72,5 +72,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 }
 
-header('Location: ../view/auth/signup.view.php');
+header('Location: ../signup');
 exit();

@@ -13,13 +13,13 @@ require_once '../utils/utils.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Es recullen les dades enviades per POST
-  $email = $_POST['email'];
+  $username = $_POST['username'];
   $password = $_POST['password'];
   $recordar = isset($_POST['recordar']);
   $recaptchaResponse = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : null;
 
-  // Es comprova si l'email està buit i s'afegeix un error si cal
-  if (empty($email)) {
+  // Es comprova si l'emailAlies està buit i s'afegeix un error si cal
+  if (empty($username)) {
     addMessage('errorsLogin', 'El correu electrònic és obligatori');
   }
 
@@ -40,19 +40,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
   }
 
-  // Si tant l'email com la contrasenya no estan buits, es continua amb la validació
+  // Si tant l'emailAlies com la contrasenya no estan buits, es continua amb la validació
   if (empty($_SESSION['errorsLogin'])) {
     $usuariDAO = new UsuariDAO();
-    $usuari = $usuariDAO->getUsuariPerEmail($email);
+    $usuari = $usuariDAO->getUsuariPerAliesOEmail($username);
 
-    // Si no es troba cap usuari amb aquest email, es mostra un missatge d'error
+    // Si no es troba cap usuari amb aquest emailAlies, es mostra un missatge d'error
     if ($usuari && password_verify($password, $usuari->getPassword())) {
       // Si la contrasenya és correcta, es guarda l'usuari a la sessió
       $_SESSION['usuari'] = $usuari;
 
-      // Si s'ha seleccionat "recordar", es guarda una cookie amb l'email durant 30 dies
+      // Si s'ha seleccionat "recordar", es guarda una cookie amb l'emailAlies durant 30 dies
       if ($recordar) {
-        setcookie('email', $email, time() + 60 * 60 * 24 * 30, '/');
+        setcookie('username', $username, time() + 60 * 60 * 24 * 30, '/');
       }
 
       unset($_SESSION['intentsLogin']);
@@ -69,11 +69,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Si hi ha errors, es guarden les dades introduïdes a la sessió per a poder reutilitzar-les
   if (!empty($_SESSION['errorsLogin'])) {
     $_SESSION['dadesLogin'] = [
-      'email' => $email,
+      'username' => $username,
     ];
     $_SESSION['intentsLogin'] += 1;
   }
 }
 
-header('Location: ../view/auth/login.view.php');
+header('Location: ../login');
 exit();

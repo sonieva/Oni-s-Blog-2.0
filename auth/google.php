@@ -1,6 +1,7 @@
 <?php
 // Requerir autoload de Composer y cargar las variables de entorno
 require_once '../vendor/autoload.php';
+require_once '../utils/utils.php';
 
 use League\OAuth2\Client\Provider\Google;
 
@@ -11,9 +12,9 @@ session_start();
 
 // Crear la instancia del proveedor de Google OAuth
 $provider = new Google([
-    'clientId'     => $_ENV['GOOGLE_CLIENT_ID'],
-    'clientSecret' => $_ENV['GOOGLE_CLIENT_SECRET'],
-    'redirectUri'  => $_ENV['GOOGLE_REDIRECT_URI'],
+  'clientId'     => $_ENV['GOOGLE_CLIENT_ID'],
+  'clientSecret' => $_ENV['GOOGLE_CLIENT_SECRET'],
+  'redirectUri'  => $_ENV['GOOGLE_REDIRECT_URI'],
 ]);
 
 if (empty($_GET['code'])) {
@@ -47,7 +48,7 @@ if (empty($_GET['code'])) {
 
       // Obtener el correo electrónico y el nombre del usuario
       $email = $googleUserData['email'];
-      $alies = $googleUserData['given_name'];
+      $alies = generarAliesAleatori();
       $nomComplet = $googleUserData['name'];
       $rutaImatge = $googleUserData['picture']; 
 

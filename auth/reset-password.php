@@ -69,5 +69,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 }
 
-header('Location: ../view/auth/login.view.php');
+header('Location: ../login');
 exit();

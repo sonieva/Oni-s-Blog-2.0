@@ -25,11 +25,11 @@ if (!isset($_SESSION['intentsLogin'])) {
 // Es comprova si hi ha dades de login emmagatzemades en la sessió.
 if (isset($_SESSION['dadesLogin'])) {
   // Si existeixen, es recupera l'email de les dades de login i es neteja la sessió.
-  $email = $_SESSION['dadesLogin']['email'];
+  $username = $_SESSION['dadesLogin']['username'];
   unset($_SESSION['dadesLogin']);
-} else if (isset($_COOKIE['email'])) {
+} else if (isset($_COOKIE['username'])) {
   // Si no hi ha dades de login a la sessió, es comprova si hi ha una cookie amb l'email.
-  $email = $_COOKIE['email'];
+  $email = $_COOKIE['username'];
 } else {
   // Si no hi ha ni dades de sessió ni cookie, es deixa l'email buit.
   $email = '';
@@ -50,10 +50,10 @@ include_once '../components/toasters.php'
 
   <form action="auth/login.php" method="POST">
     <!-- Camp per introduir el correu electrònic, s'omple automàticament si hi ha dades disponibles. -->
-    <label for="email">Correu electrònic</label>
+    <label for="username">Correu electrònic o nom d'usuari</label>
     <div class="input">
-      <input <?php if (!empty($email)) echo 'class="autocompleted"' ?> type="email" name="email" required autocomplete="off" value="<?= $email ?>">
-      <i class="fa-solid fa-at"></i>
+      <input <?php if (!empty($username)) echo 'class="autocompleted"' ?> type="text" name="username" required autocomplete="off" value="<?= $email ?>">
+      <i class="fa-solid fa-user"></i>
     </div>
 
     <!-- Camp per introduir la contrasenya. -->
@@ -84,7 +84,7 @@ include_once '../components/toasters.php'
   </form>
   
   <!-- Enllaç per a aquells usuaris que no tenen un compte i volen registrar-se. -->
-  <p>No tens compte? <a href="view/auth/signup.view.php">Registra't</a></p>
+  <p>No tens compte? <a href="signup">Registra't</a></p>
 
   <h4 class="social-auth">També pots iniciar sessio amb</h4>
 

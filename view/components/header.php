@@ -33,6 +33,8 @@ $isAdmin = $userLogged && $_SESSION['usuari']->esAdmin();
   <!-- Icona de la pàgina. -->
   <link rel="icon" href="assets/images/logo.png" type="image/x-icon">
 
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+
   <!-- Enllaços als estils i fonts utilitzats. -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" type="text/css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/css" />
@@ -111,10 +113,10 @@ $isAdmin = $userLogged && $_SESSION['usuari']->esAdmin();
             </a>
           <?php else: ?>
             <!-- Si l'usuari no està identificat, es mostren opcions per iniciar sessió o crear un compte. -->
-            <a href="view/auth/login.view.php">
+            <a href="login">
               <i class="fa-solid fa-right-to-bracket"></i>Iniciar sessio
             </a>
-            <a href="view/auth/signup.view.php">
+            <a href="signup">
               <i class="fa-solid fa-user-plus"></i>Crear compte
             </a>
           <?php endif; ?>
