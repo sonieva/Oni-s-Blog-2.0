@@ -54,14 +54,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['usuari'])) {
     }
 
     if (!empty($_SESSION['errorPerfil'])) {
-      header('Location: ../view/perfil.view.php');
+      header('Location: /perfil');
       exit();
     }
 
     $userOld = $_SESSION['usuari'];
 
     if ($userOld->getRutaImatge()) {
-      unlink('../' . $userOld->getRutaImatge());
+      unlink($_SERVER['DOCUMENT_ROOT'] . $userOld->getRutaImatge());
     }
 
     $userOld->setRutaImatge(substr($rutaDesti,3));

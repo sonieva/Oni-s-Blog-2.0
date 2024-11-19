@@ -97,10 +97,10 @@ $isAdmin = $userLogged && $_SESSION['usuari']->esAdmin();
         <div id="dropdown" class="dropdown-content">
           <?php if ($userLogged): ?>
             <!-- Si l'usuari està identificat, es mostren enllaços al perfil, al dashboard i per sortir de la sessió. -->
-            <a href="view/perfil.view.php">
+            <a href="perfil">
               <i class="fa-solid fa-user-gear"></i>Perfil
             </a>
-            <a href="view/dashboard.view.php">
+            <a href="dashboard">
               <i class="fa-solid fa-gauge-high"></i>Dashboard
             </a>
             <?php if ($isAdmin): ?>

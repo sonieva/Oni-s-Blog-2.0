@@ -17,7 +17,7 @@ include 'components/header.php';
 
 
 // Comprova si està en mode d'edició per actualitzar un article
-$editMode = ($_SESSION['editMode']) ?? false;
+$editMode = isset($_SESSION['editMode']) ? $_SESSION['editMode'] : false; unset($_SESSION['editMode']);
 $missatge = getMessage('missatgeDashboard');
 $error = getMessage('errorDashboard');
 $errors = getMessages('errorAdd');

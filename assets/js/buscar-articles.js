@@ -5,32 +5,42 @@ document.addEventListener('DOMContentLoaded', function () {
   const paginationContainerBottom = document.getElementById('pagination-container-bottom');
   const orderSelect = document.getElementById('ordenaPer'); // Cambiado para obtener el select específico por id
   const perPageSelect = document.getElementById('articlesPerPagina');
-  const isDashboard = window.location.href.includes('dashboard.view.php'); // Verificar si la URL contiene 'dashboard.view.php'
+  const isDashboard = window.location.href.includes('dashboard'); // Verificar si la URL contiene 'dashboard.view.php'
+
+  // Obtener las preferencias del usuario de las cookies
+  const cookies = document.cookie.split(';').map(cookie => cookie.trim());
+  const perPageCookie = cookies.find(cookie => cookie.startsWith('articlesPerPagina='));
+  const orderCookie = cookies.find(cookie => cookie.startsWith('ordenaPer='));
+
+  if (perPageCookie) perPageSelect.value = perPageCookie.split('=')[1];
+  if (orderCookie) orderSelect.value = orderCookie.split('=')[1];
   
   let currentPage = 1;
-  let articlesPerPage = perPageSelect ? parseInt(perPageSelect.value) : 6;
+  let articlesPerPagina = perPageSelect ? parseInt(perPageSelect.value) : 6;
   let ordenaPer = orderSelect ? orderSelect.value : 'creat-asc';
 
   // Función para manejar la búsqueda en tiempo real y la paginación
   searchBar.addEventListener('input', debounce(function () {
       currentPage = 1; // Reiniciar a la primera página en cada nueva búsqueda
-      buscarArticulos(searchBar.value.trim(), currentPage, articlesPerPage, ordenaPer);
+      buscarArticulos(searchBar.value.trim(), currentPage, articlesPerPagina, ordenaPer);
   }, 300));
 
   // Evento para cambiar el orden de los artículos
   if (orderSelect) {
     orderSelect.addEventListener('change', function () {
         ordenaPer = this.value;
-        buscarArticulos(searchBar.value.trim(), currentPage, articlesPerPage, ordenaPer);
+        document.cookie = `ordenaPer=${ordenaPer}; path=/`; // Guardar la preferencia del usuario en una cookie
+        buscarArticulos(searchBar.value.trim(), currentPage, articlesPerPagina, ordenaPer);
     });
   }
 
   // Evento para cambiar el número de artículos por página
   if (perPageSelect) {
     perPageSelect.addEventListener('change', function () {
-        articlesPerPage = parseInt(this.value);
+        articlesPerPagina = parseInt(this.value);
+        document.cookie = `articlesPerPagina=${articlesPerPagina}; path=/`; // Guardar la preferencia del usuario en una cookie
         currentPage = 1; // Reiniciar a la primera página
-        buscarArticulos(searchBar.value.trim(), currentPage, articlesPerPage, ordenaPer);
+        buscarArticulos(searchBar.value.trim(), currentPage, articlesPerPagina, ordenaPer);
     });
 }
 
@@ -72,6 +82,13 @@ document.addEventListener('DOMContentLoaded', function () {
       articleElement.innerHTML = `
         <figure>
           <img src="${articulo.ruta_imatge}" alt="${articulo.titol}">
+          ${isDashboard ? `
+            <a class="btn-delete" onclick="deleteArticle(${articulo.id})">
+              <i class="fa-solid fa-trash-alt"></i>
+            </a>
+            <a class="btn-edit" href="controller/article.controller.php?action=update&id=${articulo.id}">
+              <i class="fa-solid fa-edit"></i>
+            </a>` : ''}
         </figure>
         <div class="article-info">
           <small class="article-date">Publicat ${articulo.creat}</small>
@@ -133,14 +150,14 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
       button.addEventListener('click', () => {
         currentPage = page; // Actualizamos la página actual
-        buscarArticulos(searchBar.value.trim(), currentPage, articlesPerPage, ordenaPer); // Actualizamos artículos
+        buscarArticulos(searchBar.value.trim(), currentPage, articlesPerPagina, ordenaPer); // Actualizamos artículos
       });
     }
 
     return button;
   }
 
-  buscarArticulos('', currentPage, articlesPerPage, ordenaPer);
+  buscarArticulos('', currentPage, articlesPerPagina, ordenaPer);
 });
 
 

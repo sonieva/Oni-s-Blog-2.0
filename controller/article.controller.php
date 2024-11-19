@@ -24,7 +24,7 @@ if (isset($_GET['action'])) {
   }
 } else {
   // Si no es rep cap acció, es redirigeix a la vista del dashboard.
-  header('Location: ../view/dashboard.view.php');
+  header('Location: /dashboard');
   exit();
 }
 
@@ -48,7 +48,7 @@ function afegirArticle($titol, $cos, $imatge): void {
 
   // Si hi ha errors, es redirigeix de nou al dashboard.
   if (!empty($_SESSION['errorAdd'])) {
-    header('Location: ../view/dashboard.view.php');
+    header('Location: /dashboard');
     exit();
   }
 
@@ -67,7 +67,7 @@ function afegirArticle($titol, $cos, $imatge): void {
   }
 
   // Es redirigeix de nou al dashboard.
-  header('Location: ../view/dashboard.view.php');
+  header('Location: /dashboard');
   exit();
 }
 
@@ -76,7 +76,7 @@ function modificarArticle($id): void {
   // Es comprova que l'ID de l'article és vàlid.
   if (!isset($id) || empty($id) || !is_numeric($id)) {
     setMessage('errorDashboard', 'No s\'ha trobat l\'article a modificar');
-    header('Location: ../view/dashboard.view.php');
+    header('Location: /dashboard');
     exit();
   }
 
@@ -85,7 +85,7 @@ function modificarArticle($id): void {
 
   if ($article->getAutor()->getId() !== $_SESSION['usuari']->getId()) {
     setMessage('errorDashboard', 'No tens permisos per modificar aquest article');
-    header('Location: ../view/dashboard.view.php');
+    header('Location: /dashboard');
     exit();
   }
 
@@ -104,7 +104,7 @@ function modificarArticle($id): void {
       'imatge' => $article->getRutaImatge()
     ];
     
-    header('Location: ../view/dashboard.view.php');
+    header('Location: /dashboard');
     exit();
   }
 
@@ -135,7 +135,7 @@ function modificarArticle($id): void {
       'cos' => $_POST['cos'],
       'imatge' => $articleOld->getRutaImatge()
     ];
-    header('Location: ../view/dashboard.view.php');
+    header('Location: /dashboard');
     exit();
   }
 
@@ -154,7 +154,7 @@ function modificarArticle($id): void {
   }
 
   // Es redirigeix de nou al dashboard.
-  header('Location: ../view/dashboard.view.php');
+  header('Location: /dashboard');
   exit();
 }
 
@@ -163,7 +163,7 @@ function eliminarArticle($id): void {
   // Es comprova que l'ID de l'article és vàlid.
   if (!isset($id) || empty($id) || !is_numeric($id)) {
     setMessage('errorDashboard', 'No s\'ha trobat l\'article a eliminar');
-    header('Location: ../view/dashboard.view.php');
+    header('Location: /dashboard');
     exit();
   }
 
@@ -172,7 +172,7 @@ function eliminarArticle($id): void {
 
   if ($article->getAutor()->getId() !== $_SESSION['usuari']->getId()) {
     setMessage('errorDashboard', 'No tens permisos per eliminar aquest article');
-    header('Location: ../view/dashboard.view.php');
+    header('Location: /dashboard');
     exit();
   }
 
@@ -185,7 +185,7 @@ function eliminarArticle($id): void {
   }
 
   // Es redirigeix de nou al dashboard.
-  header('Location: ../view/dashboard.view.php');
+  header('Location: /dashboard');
   exit();
 }
 ?>

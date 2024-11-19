@@ -24,6 +24,16 @@ if (inputFotoPerfil) {
   inputFotoPerfil.addEventListener('change', () => {
     const file = inputFotoPerfil.files[0];
     if (file) {
+      if (!file.type.startsWith('image/')) {
+        alert('El fitxer seleccionat no és una imatge.');
+        return;
+      }
+
+      if (!file.type.split('/')[1].match(/jpe?g|png|gif|webp/)) {
+        alert('El fitxer seleccionat no és un format d\'imatge vàlid.');
+        return;
+      }
+      
       const reader = new FileReader();
 
       reader.onload = function (e) {
