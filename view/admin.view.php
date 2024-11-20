@@ -55,7 +55,7 @@ include_once 'components/toasters.php';
             <td <?php if (!$usuari->getNomComplet()) echo 'class="no-configurat"' ?>><?= $usuari->getNomComplet() ?? 'No configurat' ?></td>
             <td><?= $usuari->getEmail() ?></td>
             <td class="accions">
-              <a <?= ($_SESSION['usuari']->getId() === $usuari->getId()) ? 'class="disabled"' : "onclick='deleteUsuari(" . $usuari->getId() . ")'" ?>>
+              <a <?= ($_SESSION['usuari']->getId() === $usuari->getId()) ? 'class="disabled"' : "onclick='deleteUsuari(" . $usuari->getId() . ")' title='Eliminar'" ?>>
                 <i class="fas fa-trash-alt"></i>
               </a>
             </td>

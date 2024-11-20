@@ -1,6 +1,7 @@
 <?php
 // Santi Onieva
 require __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../utils/Logger.php';
 
 use Dotenv\Dotenv;
 
@@ -30,7 +31,10 @@ class Connexio {
       $this->pdo = new PDO("mysql:host=$this->host;dbname=$this->dbName;charset=utf8mb4", $this->user, $this->password);
       // S'estableix l'atribut per llançar excepcions en cas d'errors de connexió.
       $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+      Logger::log("Connexió a la base de dades creada correctament", TipusLog::DATABASE_LOG, LogLevel::INFO);
     } catch (PDOException $e) {
+      Logger::log("Error al conectar a la base de dades " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
       // En cas d'error, es mostra un missatge i es deté l'execució.
       die("Error al conectar a la base de dades: " . $e->getMessage());
     }

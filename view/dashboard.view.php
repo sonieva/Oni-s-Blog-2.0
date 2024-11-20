@@ -15,9 +15,13 @@ Config::setArchiusJS(['article-preview', 'btn-imatge', 'delete-article', 'modal'
 // Inclou el capçal de la pàgina
 include 'components/header.php';
 
-
 // Comprova si està en mode d'edició per actualitzar un article
 $editMode = isset($_SESSION['editMode']) ? $_SESSION['editMode'] : false; unset($_SESSION['editMode']);
+if (isset($_SESSION['articleUpdate'])) {
+  $articleUpdate = $_SESSION['articleUpdate'];
+  unset($_SESSION['articleUpdate']);
+}
+
 $missatge = getMessage('missatgeDashboard');
 $error = getMessage('errorDashboard');
 $errors = getMessages('errorAdd');
@@ -53,19 +57,19 @@ include_once 'components/toasters.php'
 
         <?php include 'components/form-errors.php'; ?>
 
-        <form action="controller/article.controller.php?action=<?= ($editMode) ? 'update&id=' . $_SESSION['articleUpdate']['id'] : 'add&autor=' . $_SESSION['usuari']->getId() ?>" method="POST" id="form-afegir" enctype="multipart/form-data">
+        <form action="controller/article.controller.php?action=<?= ($editMode) ? 'update&id=' . $articleUpdate['id'] : 'add&autor=' . $_SESSION['usuari']->getId() ?>" method="POST" id="form-afegir" enctype="multipart/form-data">
           <label for="titol">Títol</label>
           <div class="input">
-            <input type="text" name="titol" id="titolArticle" required value="<?php if (isset($_SESSION['articleUpdate'])) echo $_SESSION['articleUpdate']['titol'] ?>">
+            <input type="text" name="titol" id="titolArticle" required value="<?php if (isset($articleUpdate)) echo $articleUpdate['titol'] ?>">
           </div>
 
           <label for="cos">Cos</label>
-          <textarea name="cos" rows="10" id="cosArticle" required><?php if (isset($_SESSION['articleUpdate'])) echo $_SESSION['articleUpdate']['cos'] ?></textarea>
+          <textarea name="cos" rows="10" id="cosArticle" required><?php if (isset($articleUpdate)) echo $articleUpdate['cos'] ?></textarea>
 
           <label for="imatge">Imatge</label>
           <div class="imatge">
             <button type="button" class="btn-imatge" id="btn-imatge">Examinar</button>
-            <p id="nom-imatge"><?php if (isset($_SESSION['articleUpdate'])) echo substr($_SESSION['articleUpdate']['imatge'], 9) ?></p>
+            <p id="nom-imatge"><?php if (isset($articleUpdate)) echo substr($articleUpdate['imatge'], 9) ?></p>
           </div>
           <input type="file" name="imatge" id="imatge-input" <?php if (!$editMode) echo 'required' ?>>
 
@@ -76,24 +80,24 @@ include_once 'components/toasters.php'
       <div class="vista-previa">
         <article>
           <figure>
-            <img src="<?= ($editMode && isset($_SESSION['articleUpdate'])) ? substr($_SESSION['articleUpdate']['imatge'], 1) : BASE_PATH . '/assets/images/placeholder-article.png' ?>" alt="Imatge no disponible" id="imatge-preview" />
+            <img src="<?= ($editMode && isset($articleUpdate)) ? substr($articleUpdate['imatge'], 1) : BASE_PATH . '/assets/images/placeholder-article.png' ?>" alt="Imatge no disponible" id="imatge-preview" />
           </figure>
 
           <div class="article-body" id="article-body">
-            <h2 id="titol-preview"><?= ($editMode && isset($_SESSION['articleUpdate'])) ? $_SESSION['articleUpdate']['titol'] : 'Títol de l\'article' ?></h2>
+            <h2 id="titol-preview"><?= ($editMode && isset($articleUpdate)) ? $articleUpdate['titol'] : 'Títol de l\'article' ?></h2>
             <p id="cos-preview">
-              <?php if ($editMode && isset($_SESSION['articleUpdate'])) {
-                if (strlen($_SESSION['articleUpdate']['cos']) > 100) {
-                  echo substr($_SESSION['articleUpdate']['cos'], 0, 100) . '...';
+              <?php if ($editMode && isset($articleUpdate)) {
+                if (strlen($articleUpdate['cos']) > 100) {
+                  echo substr($articleUpdate['cos'], 0, 100) . '...';
                 } else {
-                  echo $_SESSION['articleUpdate']['cos'];
+                  echo $articleUpdate['cos'];
                 }
               } else {
                 echo 'Cos de l\'article';
               }
               ?>
             </p>
-            <?php if ($editMode && isset($_SESSION['articleUpdate']) && strlen($_SESSION['articleUpdate']['cos']) > 100): ?>
+            <?php if ($editMode && isset($articleUpdate) && strlen($articleUpdate['cos']) > 100): ?>
               <a class="read-more-preview" id="continua-llegint-preview">
                 Continua llegint <i class="fa-solid fa-arrow-right"></i>
               </a>
@@ -101,7 +105,7 @@ include_once 'components/toasters.php'
           </div>
         </article>
       </div>
-      <?php unset($_SESSION['articleUpdate']); ?>
+      <?php unset($articleUpdate); ?>
     </div>
   </div>
 

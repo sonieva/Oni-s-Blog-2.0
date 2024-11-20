@@ -18,33 +18,34 @@ $userId = $isDashboard ? $_SESSION['usuari']->getId() : null;
 $articleDAO = new ArticleDAO();
 
 try {
-    $offset = ($page - 1) * $articlesPerPage;
-    // Busca artículos con paginación, orden y filtro por usuario si estamos en el dashboard
-    $articles = $articleDAO->buscarArticles($query, $offset, $articlesPerPage, $ordenaPer, $userId);
-    $totalArticles = $articleDAO->countArticles($userId); // Contar artículos para el usuario si estamos en el dashboard
-    $totalPaginas = ceil($totalArticles / $articlesPerPage);
+  $offset = ($page - 1) * $articlesPerPage;
+  // Busca artículos con paginación, orden y filtro por usuario si estamos en el dashboard
+  $articles = $articleDAO->buscarArticles($query, $offset, $articlesPerPage, $ordenaPer, $userId);
+  $totalArticles = $articleDAO->countArticles($userId); // Contar artículos para el usuario si estamos en el dashboard
+  $totalPaginas = ceil($totalArticles / $articlesPerPage);
 
-    $resultados = [
-        'articulos' => [],
-        'totalPaginas' => $totalPaginas
+  $resultados = [
+    'articulos' => [],
+    'totalPaginas' => $totalPaginas,
+    'numArticulos' => ($userId) ? $totalArticles : null,
+  ];
+
+  foreach ($articles as $article) {
+    $resultados['articulos'][] = [
+      'id' => $article->getId(),
+      'titol' => $article->getTitol(),
+      'cos' => $article->getCos(),
+      'creat' => $article->getDataCreacio()->format('j/m/o'),
+      'modificat' => $article->getDataModificacio() ? $article->getDataModificacio()->format('j/m/o') : null,
+      'ruta_imatge' => $article->getRutaImatge(),
+      'autor' => $article->getAutor()->getAlies(),
     ];
+  }
 
-    foreach ($articles as $article) {
-        $resultados['articulos'][] = [
-            'id' => $article->getId(),
-            'titol' => $article->getTitol(),
-            'cos' => $article->getCos(),
-            'creat' => $article->getDataCreacio()->format('j/m/o'),
-            'modificat' => $article->getDataModificacio() ? $article->getDataModificacio()->format('j/m/o') : null,
-            'ruta_imatge' => $article->getRutaImatge(),
-            'autor' => $article->getAutor()->getAlies(),
-        ];
-    }
-
-    header('Content-Type: application/json');
-    echo json_encode($resultados);
+  header('Content-Type: application/json');
+  echo json_encode($resultados);
 
 } catch (Exception $e) {
-    header('Content-Type: application/json');
-    echo json_encode(['error' => 'Error en la búsqueda: ' . $e->getMessage()]);
+  header('Content-Type: application/json');
+  echo json_encode(['error' => 'Error en la búsqueda: ' . $e->getMessage()]);
 }

@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   if (!empty($_SESSION['errorsResetPassword'])) {
-    header('Location: ../view/auth/reset-password.view.php');
+    header('Location: /reset-password');
     exit();
   }
 
@@ -42,14 +42,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   if (!empty($_SESSION['errorsResetPassword'])) {
-    header('Location: ../view/auth/reset-password.view.php');
+    header('Location: /reset-password');
     exit();
   }
 
   if ($usuari->getExpiracioToken() < new DateTime('now')) {
     unset($_SESSION['errorsResetPassword']);
     addMessage('errorsRecuperacio', 'El token ha expirat, torna a sol·licitar el correu de recuperació');
-    header('Location: ../view/auth/recuperacio.view.php');
+    header('Location: /recuperacio');
     exit();
   }
 
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   if (!empty($_SESSION['errorsResetPassword'])) {
-    header('Location: ../view/auth/reset-password.view.php');
+    header('Location: /reset-password');
     exit();
   }
 }

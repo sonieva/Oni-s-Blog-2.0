@@ -41,16 +41,16 @@ if (empty($_GET['code'])) {
   // Optional: Now you have a token you can look up a users profile data
   try {
 
-      // We got an access token, let's now get the owner details
-      $googleUser = $provider->getResourceOwner($token);
+    // We got an access token, let's now get the owner details
+    $googleUser = $provider->getResourceOwner($token);
 
-      $googleUserData = $googleUser->toArray();
+    $googleUserData = $googleUser->toArray();
 
-      // Obtener el correo electrónico y el nombre del usuario
-      $email = $googleUserData['email'];
-      $alies = generarAliesAleatori();
-      $nomComplet = $googleUserData['name'];
-      $rutaImatge = $googleUserData['picture']; 
+    // Obtener el correo electrónico y el nombre del usuario
+    $email = $googleUserData['email'];
+    $alies = generarAliesAleatori();
+    $nomComplet = $googleUserData['name'];
+    $rutaImatge = descarregarImatgePerfil($googleUserData['picture'], $alies);
 
       // Conexión a la base de datos
     require_once '../model/Usuari/Usuari.php';
@@ -60,13 +60,13 @@ if (empty($_GET['code'])) {
     $usuari = $usuariDAO->getUsuariPerEmail($email);
 
     if (!$usuari) {
-        // Registrar un nuevo usuario
-        $nouUsuari = new Usuari($alies, $email, 'SocialAuth', $nomComplet, null, null, null, $rutaImatge, false);
-        $usuariDAO->inserir($nouUsuari);
-        $_SESSION['usuari'] = $nouUsuari; // Inicia la sessió automàticament
+      // Registrar un nuevo usuario
+      $nouUsuari = new Usuari($alies, $email, 'SocialAuth', $nomComplet, null, null, null, $rutaImatge, false);
+      $usuariDAO->inserir($nouUsuari);
+      $_SESSION['usuari'] = $nouUsuari; // Inicia la sessió automàticament
     } else {
-        // Iniciar sesión con el usuario existente
-        $_SESSION['usuari'] = $usuari;
+      // Iniciar sesión con el usuario existente
+      $_SESSION['usuari'] = $usuari;
     }
 
     // Redirigir al perfil del usuario o a la página principal
@@ -74,9 +74,7 @@ if (empty($_GET['code'])) {
     exit();
 
   } catch (Exception $e) {
-
-      // Failed to get user details
-      exit('Something went wrong: ' . $e->getMessage());
-
+    // Failed to get user details
+    exit('Something went wrong: ' . $e->getMessage());
   }
 }

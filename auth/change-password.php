@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   // Si hi ha errors, es redirigeix de nou al perfil.
   if (!empty($_SESSION['errorChangePassword'])) {
-    header('Location: ../view/auth/change-password.view.php');
+    header('Location: /change-password');
     exit();
   }
 
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   if (!empty($_SESSION['errorChangePassword'])) {
-    header('Location: ../view/auth/change-password.view.php');
+    header('Location: /change-password');
     exit();
   }
 }

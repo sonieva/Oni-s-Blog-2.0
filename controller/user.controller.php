@@ -12,9 +12,6 @@ if (isset($_GET['action']) && ($_SERVER['REQUEST_METHOD'] === 'POST' || $_GET['a
     case 'reset_password_mail':
       enviarCorreuRecuperacio($_POST['correuRecuperacio']);
       break;
-    case 'reset_password_sms':
-      enviarSMSRecuperacio($_POST['telefonRecuperacio']);
-      break;
     case 'delete':
       eliminarUsuari($_GET['id']);
       break;
@@ -48,7 +45,7 @@ function enviarCorreuRecuperacio($correuRecuperacio): void {
   }
 
   if (!empty($_SESSION['errorsRecuperacio'])) {
-    header('Location: ../view/auth/recuperacio.view.php');
+    header('Location: /recuperacio');
     exit();
   }
 
@@ -59,24 +56,14 @@ function enviarCorreuRecuperacio($correuRecuperacio): void {
   $usuari->setExpiracioToken($expiry);
   $usuariDAO->modificar($usuari);
 
-  $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? "https" : "http";
-  $host = $_SERVER['HTTP_HOST'];
-  $resetLink = "$protocol://$host" . BASE_PATH . "/view/auth/reset-password.view.php?token=$token";
-
   require_once '../utils/MailUtils.php';
 
-  MailUtils::enviarCorreuRecuperacio($correuRecuperacio, $resetLink);
+  MailUtils::enviarCorreuRecuperacio($correuRecuperacio, $token);
 
-  if (empty($_SESSION['errorCorreu'])) setMessage('missatgeCorreu', 'Correu de recuperació enviat correctament');
+  if (empty($_SESSION['errorRecuperacio'])) setMessage('missatgeCorreu', 'Correu de recuperació enviat correctament');
 
-  header('Location: ../view/auth/recuperacio.view.php');
+  header('Location: /recuperacio');
   exit();
-}
-
-function enviarSMSRecuperacio($telefonRecuperacio): void {
-  require_once '../utils/SMSUtils.php';
-
-  // SMSUtils::enviarSMS($telefonRecuperacio, 'Has sol·licitat un canvi de contrasenya. Accedeix al següent enllaç per restablir-la: http://localhost/view/auth/reset-password.view.php');
 }
 
 function eliminarUsuari($id) {
@@ -97,7 +84,19 @@ function eliminarUsuari($id) {
 
   if (!$usuari) {
     setMessage('errorAdmin', 'No s\'ha trobat cap usuari amb aquest ID');
-    header('Location: ../view/admin.view.php');
+    header('Location: /admin');
+    exit();
+  }
+
+  if ($usuari->getId() === $_SESSION['usuari']->getId()) {
+    setMessage('errorAdmin', 'No pots eliminar el teu propi usuari');
+    header('Location: /admin');
+    exit();
+  }
+
+  if ($usuari->esAdmin()) {
+    setMessage('errorAdmin', 'No pots eliminar un usuari administrador');
+    header('Location: /admin');
     exit();
   }
 
@@ -107,7 +106,7 @@ function eliminarUsuari($id) {
     setMessage('errorAdmin', 'Error al eliminar l\'usuari');
   }
 
-  header('Location: ../view/admin.view.php');
+  header('Location: /admin');
   exit();
 }
 

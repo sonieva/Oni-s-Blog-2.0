@@ -186,4 +186,64 @@ function generarAliesAleatori(): string {
   return $noms[array_rand($noms)] . '-' . $adjectius[array_rand($adjectius)] . '-' . rand(1, 999);
 }
 
+function descarregarImatgePerfil($url, $alies): ?string {
+  $ch = curl_init($url);
+
+  // Configurar opciones de cURL para descargar el archivo
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+
+  // Ejecutar cURL y almacenar la respuesta
+  $imatge = curl_exec($ch);
+
+  // if (curl_errno($ch)) {
+  //     echo 'Error al descargar la imagen: ' . curl_error($ch);
+  //     curl_close($ch);
+  //     exit();
+  // }
+
+  // Obtener información de la URL y el encabezado Content-Type
+  $contentType = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
+  $infoImatge = pathinfo($url);
+  curl_close($ch);
+
+  // Determinar la extensión del archivo desde el Content-Type o desde la URL
+  $extensio = '';
+  if (isset($infoImatge['extensio'])) {
+      $extensio = $infoImatge['extensio'];
+  } else {
+      // Obtener la extensión desde el tipo de contenido
+      if ($contentType == 'image/jpeg') {
+          $extensio = 'jpg';
+      } elseif ($contentType == 'image/png') {
+          $extensio = 'png';
+      } elseif ($contentType == 'image/gif') {
+          $extensio = 'gif';
+      }
+  }
+
+  $alies = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $alies);
+    
+  // Reemplazar caracteres especiales con sus equivalentes
+  $alies = strtr($alies, [
+      'á' => 'a', 'Á' => 'A',
+      'é' => 'e', 'É' => 'E',
+      'í' => 'i', 'Í' => 'I',
+      'ó' => 'o', 'Ó' => 'O',
+      'ú' => 'u', 'Ú' => 'U',
+      'ñ' => 'n', 'Ñ' => 'N',
+      'ü' => 'u', 'Ü' => 'U',
+  ]);
+
+  // Crear el nombre del archivo con la extensión adecuada
+  $nombreArchivo = $alies . '.' . $extensio;
+  $rutaImatge = '/uploads/profiles/' . $nombreArchivo;
+  $rutaDesti = $_SERVER['DOCUMENT_ROOT'] . $rutaImatge;
+
+  // Guardar la imagen en la ruta especificada
+  file_put_contents($rutaDesti, $imatge);
+
+  return $rutaImatge;
+}
+
 ?>

@@ -1,8 +1,19 @@
 <?php
+// Santi Onieva
+
 if (isset($_GET['token'])) {
   $token = $_GET['token'];
+  
+  require_once '../../model/Usuari/UsuariDAO.php';
+  $usuariDAO = new UsuariDAO();
+  $usuari = $usuariDAO->getUsuariPerToken($token);
+  
+  if (!$usuari) {
+    header('Location: /');
+    exit();
+  }
 } else {
-  header('Location: ../view/inici.view.php');
+  header('Location: /');
   exit();
 }
 

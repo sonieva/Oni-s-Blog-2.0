@@ -70,7 +70,7 @@ include_once '../components/toasters.php'
     </div>
 
     <!-- Enllaç per recuperar la contrasenya. -->
-    <p>Has olvidat la contrasenya? <a href="view/auth/recuperacio.view.php">Recupera-la</a></p>
+    <p>Has olvidat la contrasenya? <a href="recuperacio">Recupera-la</a></p>
 
     <!-- Mostrar reCAPTCHA només si els intents de login superen el límit -->
     <?php if ($_SESSION['intentsLogin'] >= 3): ?>

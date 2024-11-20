@@ -32,7 +32,7 @@ include_once 'components/toasters.php'
     <div class="container-foto-perfil">
       <img src="<?= ($usuari->getRutaImatge()) ?? 'assets/images/placeholder-usuari.png' ?>" alt="Foto de perfil" class="foto-perfil" id="foto-perfil">
       <input type="file" id="input-foto-perfil" class="input-foto-perfil" accept="image/*">
-      <button class="edit-icon" id="edit-icon">
+      <button class="edit-icon" id="edit-icon" title="Editar">
         <i class="fas fa-pencil-alt"></i>
       </button>
     </div>
@@ -46,7 +46,7 @@ include_once 'components/toasters.php'
       <strong>Nom complet: </strong>
       <span id="nom-text"><?= $usuari->getNomComplet() ?? 'No configurat' ?></span>
       <input type="text" class="perfil-input" id="nom-input">
-      <button class="btn-edit-perfil" id="btn-edit-nom-perfil">
+      <button class="btn-edit-perfil" id="btn-edit-nom-perfil" title="Editar">
         <i class="fas fa-pencil"></i>
       </button>
     </p>
@@ -56,7 +56,7 @@ include_once 'components/toasters.php'
       <strong>Alies: </strong>
       <span id="alies-text"><?= $usuari->getAlies() ?></span>
       <input type="text" class="perfil-input" id="alies-input">
-      <button class="btn-edit-perfil" id="btn-edit-alies-perfil">
+      <button class="btn-edit-perfil" id="btn-edit-alies-perfil" title="Editar">
         <i class="fas fa-pencil"></i>
       </button>
       <span id="alies-status" class="alies-status-icon"></span> <!-- Contenedor del icono -->
@@ -67,7 +67,7 @@ include_once 'components/toasters.php'
       <strong>Contrasenya: </strong>
       <?php if ($usuari->getPassword() != 'SocialAuth'): ?>
         <?=  str_repeat('•', 10) ?>
-        <a href="view/auth/change-password.view.php" class="btn-edit-perfil">
+        <a href="change-password" class="btn-edit-perfil" title="Editar">
           <i class="fas fa-pencil"></i>
         </a>
       <?php else: ?>

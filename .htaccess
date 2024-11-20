@@ -4,10 +4,17 @@ RewriteBase /
 RewriteCond %{SERVER_PORT} 80
 RewriteRule ^(.*)$ https://oni.cat/ [R,L]
 
-RewriteRule ^login$ /view/auth/login.view.php [L]
-RewriteRule ^signup$ /view/auth/signup.view.php [L]
-RewriteRule ^perfil$ /view/perfil.view.php [L]
+RewriteRule ^admin$ /view/admin.view.php [L]
 RewriteRule ^dashboard$ /view/dashboard.view.php [L]
+RewriteRule ^perfil$ /view/perfil.view.php [L]
+
+RewriteRule ^change-password$ /view/auth/change-password.view.php [L]
+RewriteRule ^login$ /view/auth/login.view.php [L]
+RewriteRule ^recuperacio$ /view/auth/recuperacio.view.php [L]
+RewriteRule ^reset-password$ /view/auth/reset-password.view.php [L]
+RewriteRule ^logout$ /auth/logout.php [L]
+RewriteRule ^signup$ /view/auth/signup.view.php [L]
+
 
 ErrorDocument 403 /view/errors/403.html
 ErrorDocument 401 /view/errors/403.html

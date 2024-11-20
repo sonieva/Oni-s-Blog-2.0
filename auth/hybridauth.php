@@ -59,7 +59,7 @@ try {
   $alies = generarAliesAleatori();
   $email = $userProfile->email ?? 'No proporcionat';
   $nomComplet = ($userProfile->firstName !== null && $userProfile->lastName !== null) ? $userProfile->firstName . ' ' . $userProfile->lastName : null;
-  $rutaImatge = $userProfile->photoURL;
+  $rutaImatge = descarregarImatgePerfil($userProfile->photoURL, $alies);
 
   $usuariDAO = new UsuariDAO();
   $usuari = $usuariDAO->getUsuariPerEmail($email);

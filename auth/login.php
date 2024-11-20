@@ -5,10 +5,10 @@ require '../vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
-
 require_once '../model/Usuari/Usuari.php';
 require_once '../model/Usuari/UsuariDAO.php';
 require_once '../utils/utils.php';
+require_once '../utils/Logger.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -57,6 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       unset($_SESSION['intentsLogin']);
       
+      Logger::log("L'usuari $username ha iniciat sessió", TipusLog::GENERAL_LOG, LogLevel::INFO);
+
       // Es redirigeix a la pàgina principal
       header('Location: ..');
       exit();

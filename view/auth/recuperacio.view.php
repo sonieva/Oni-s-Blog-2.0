@@ -2,7 +2,7 @@
 // Santi Onieva
 
 require_once '../../config/Config.php';
-Config::setTitol('Restablir contrasenya');
+Config::setTitol('Enviar correu recuperació');
 Config::setArchiusCSS(['forms']);
 
 require_once '../../utils/utils.php';
@@ -12,8 +12,8 @@ usuariNoEstaLogat();
 include '../components/header.php';
 
 $errors = getMessages('errorsRecuperacio');
-$error = getMessage('errorCorreu');
-$missatge = getMessage('missatgeCorreu');
+$error = getMessage('errorRecuperacio');
+$missatge = getMessage('missatgeRecuperacio');
 
 include_once '../components/toasters.php'
 ?>
@@ -32,14 +32,4 @@ include_once '../components/toasters.php'
 
     <button type="submit">Enviar coreu de recuperació</button>
   </form>
-
-  <!-- <form action="controller/user.controller.php?action=reset_password_sms" method="POST">
-    <label for="telefonRecuperacio">Telèfon mòbil</label>
-    <div class="input">
-      <input type="text" name="telefonRecuperacio" required>
-      <i class="fa-solid fa-mobile"></i>
-    </div>
-
-    <button type="submit">Enviar SMS de recuperació</button>
-  </form> -->
 </div>

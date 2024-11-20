@@ -3,7 +3,6 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
-// use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__. '/../');
@@ -29,12 +28,12 @@ class MailUtils {
       return $mail;
 
     } catch (Exception $e) {
-      setMessage('errorCorreu', "Error al configurar el correu: {$e->getMessage()}");
+      setMessage('errorRecuperacio', "Error al configurar el correu: {$e->getMessage()}");
       return null;
     }
   }
 
-  public static function enviarCorreuRecuperacio($correuDesti, $resetLink): void {
+  public static function enviarCorreuRecuperacio($correuDesti, $token): void {
     $mail = self::preparaCorreu($correuDesti);
 
     if (!$mail) {
@@ -43,6 +42,11 @@ class MailUtils {
 
     try {
       $template = file_get_contents('../templates/reset-password.html');
+
+      $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? "https" : "http";
+      $host = $_SERVER['HTTP_HOST'];
+      $resetLink = "$protocol://$host" . BASE_PATH . "/reset-password?token=$token";
+
       $htmlBody = str_replace('{{reset_link}}', $resetLink, $template);
 
       $mail->Subject = 'Recuperació de contrasenya';
@@ -50,7 +54,7 @@ class MailUtils {
 
       $mail->send();
     } catch (Exception $e) {
-      setMessage('errorCorreu', "Error al enviar el correu: {$e->getMessage()}");
+      setMessage('errorRecuperacio', "Error al enviar el correu: " . $e->getMessage());
     }
 }
 }

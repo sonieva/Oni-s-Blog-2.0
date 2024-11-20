@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
           console.error('Error en la búsqueda:', data.error);
           return;
         }
-        mostrarResultados(data.articulos);
+        mostrarResultados(data.articulos, data.numArticulos);
         generarPaginacion(data.totalPaginas, page);
       })
       .catch(error => {
@@ -63,11 +63,11 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Mostrar los resultados de la búsqueda en tiempo real
-  function mostrarResultados(articulos) {
+  function mostrarResultados(articulos, numArticulos) {
     articlesContainer.innerHTML = ''; // Limpiar los resultados anteriores
 
     if (articulos.length === 0) {
-      if (isDashboard) {
+      if (isDashboard && numArticulos === 0) {
         articlesContainer.innerHTML = '<h2 class="no-articles">Encara no has publicat cap article</h2>';
         return;
       }
@@ -83,10 +83,10 @@ document.addEventListener('DOMContentLoaded', function () {
         <figure>
           <img src="${articulo.ruta_imatge}" alt="${articulo.titol}">
           ${isDashboard ? `
-            <a class="btn-delete" onclick="deleteArticle(${articulo.id})">
+            <a class="btn-delete" onclick="deleteArticle(${articulo.id})" title="Eliminar">
               <i class="fa-solid fa-trash-alt"></i>
             </a>
-            <a class="btn-edit" href="controller/article.controller.php?action=update&id=${articulo.id}">
+            <a class="btn-edit" href="controller/article.controller.php?action=update&id=${articulo.id}" title="Editar">
               <i class="fa-solid fa-edit"></i>
             </a>` : ''}
         </figure>

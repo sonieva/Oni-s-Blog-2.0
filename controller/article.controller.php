@@ -127,6 +127,10 @@ function modificarArticle($id): void {
   $articleDAO = new ArticleDAO();
   $articleOld = $articleDAO->getArticlePerId($id);
 
+  if ($articleOld->getAutor()->getId() !== $_SESSION['usuari']->getId()) {
+    addMessage('errorAdd', 'No tens permisos per modificar aquest article');
+  }
+
   // Si hi ha errors, es manté la informació a la sessió i es redirigeix.
   if (!empty($_SESSION['errorAdd'])) {
     $_SESSION['articleUpdate'] = [
