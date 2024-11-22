@@ -22,21 +22,39 @@ class Connexio {
 
   // Constructor privat per evitar la creació d'instàncies directament.
   private function __construct() {
-    try {
-      $this->host = $_ENV['DB_HOST'];
-      $this->dbName = $_ENV['DB_NAME'];
-      $this->user = $_ENV['DB_USER'];
-      $this->password = $_ENV['DB_PASSWORD'];
-      // Es crea una nova connexió PDO amb les credencials de la base de dades.
-      $this->pdo = new PDO("mysql:host=$this->host;dbname=$this->dbName;charset=utf8mb4", $this->user, $this->password);
-      // S'estableix l'atribut per llançar excepcions en cas d'errors de connexió.
-      $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $this->host = $_ENV['DB_HOST'];
+    $this->dbName = $_ENV['DB_NAME'];
+    $this->user = $_ENV['DB_USER'];
+    $this->password = $_ENV['DB_PASSWORD'];
 
-      Logger::log("Connexió a la base de dades creada correctament", TipusLog::DATABASE_LOG, LogLevel::INFO);
-    } catch (PDOException $e) {
-      Logger::log("Error al conectar a la base de dades " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
-      // En cas d'error, es mostra un missatge i es deté l'execució.
-      die("Error al conectar a la base de dades: " . $e->getMessage());
+    $this->connectWithRetry();
+  }
+
+  private function connectWithRetry() {
+    $intents = 3; // Nombre màxim d'intents
+    $interval = 2; // Segons entre cada intent
+
+    for ($i = 0; $i < $intents; $i++) {
+      try {
+        // Es crea una nova connexió PDO amb les credencials de la base de dades.
+        $this->pdo = new PDO("mysql:host=$this->host;dbname=$this->dbName;charset=utf8mb4", $this->user, $this->password);
+        // S'estableix l'atribut per llançar excepcions en cas d'errors de connexió.
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Registre d'èxit
+        Logger::log("Connexió a la base de dades creada correctament", TipusLog::DATABASE_LOG, LogLevel::INFO);
+        return; // Si la connexió és correcta, surt del bucle
+      } catch (PDOException $e) {
+        Logger::log("Error al conectar a la base de dades, intent #" . ($i + 1) . ": " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
+
+        // Si és l'últim intent, es llança l'error
+        if ($i === $intents - 1) {
+          die("Error al conectar a la base de dades després de $intents intents: " . $e->getMessage());
+        }
+
+        // Espera abans de tornar a intentar la connexió
+        sleep($interval);
+      }
     }
   }
 

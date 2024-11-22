@@ -14,6 +14,7 @@ RewriteRule ^recuperacio$ /view/auth/recuperacio.view.php [L]
 RewriteRule ^reset-password$ /view/auth/reset-password.view.php [L]
 RewriteRule ^logout$ /auth/logout.php [L]
 RewriteRule ^signup$ /view/auth/signup.view.php [L]
+RewriteRule ^signup-verification$ /view/auth/signup-verification.view.php [L]
 
 
 ErrorDocument 403 /view/errors/403.html

@@ -56,5 +56,26 @@ class MailUtils {
     } catch (Exception $e) {
       setMessage('errorRecuperacio', "Error al enviar el correu: " . $e->getMessage());
     }
-}
+  }
+
+  public static function enviarCorreuVerificacio($correuDesti, $codi): void {
+    $mail = self::preparaCorreu($correuDesti);
+
+    if (!$mail) {
+      return;
+    }
+
+    try {
+      $template = file_get_contents('../templates/verify-email.html');
+
+      $htmlBody = str_replace('{{codi_verificacio}}', $codi, $template);
+
+      $mail->Subject = 'Verificació de correu electrònic';
+      $mail->Body = $htmlBody;
+
+      $mail->send();
+    } catch (Exception $e) {
+      setMessage('errorRegistre', "Error al enviar el correu: " . $e->getMessage());
+    }
+  }
 }
