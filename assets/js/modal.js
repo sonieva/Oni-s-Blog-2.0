@@ -32,6 +32,26 @@ function closeModal() {
   document.getElementById('articleModal').style.display = 'none';
 }
 
+function shareQRArticle(id) {
+  fetch(`api/get-article-qr.php?id=${id}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.error) {
+        alert(data.error);
+        return;
+      }
+
+      document.getElementById('qr-image').src = data.qr; 
+  })
+
+  document.getElementById('share-article-modal').style.display = 'flex';
+}
+
+function closeQRModal() {
+  document.getElementById('qr-image').src = '';
+  document.getElementById('share-article-modal').style.display = 'none';
+}
+
 // Event listener per tancar el modal quan es fa clic fora del seu contingut
 window.addEventListener('click', function(event) {
   // Si l'usuari fa clic fora del modal (és a dir, a la capa de fons), es tanca el modal

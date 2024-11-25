@@ -30,9 +30,6 @@ if (isset($_GET['action'])) {
 
 // Funció per afegir un nou article.
 function afegirArticle($titol, $cos, $imatge): void {
-  // Es crea un array per emmagatzemar els possibles errors.
-  $_SESSION['errorAdd'] = [];
-
   // Es comprova que l'autor existeix i és vàlid.
   if (!isset($_GET['autor']) || empty($_GET['autor'] || !is_numeric($_GET['autor']))) {
     addMessage('errorAdd', 'No s\'ha pogut trobar l\'autor de l\'article');

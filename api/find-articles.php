@@ -21,7 +21,7 @@ try {
   $offset = ($page - 1) * $articlesPerPage;
   // Busca artículos con paginación, orden y filtro por usuario si estamos en el dashboard
   $articles = $articleDAO->buscarArticles($query, $offset, $articlesPerPage, $ordenaPer, $userId);
-  $totalArticles = $articleDAO->countArticles($userId); // Contar artículos para el usuario si estamos en el dashboard
+  $totalArticles = $articleDAO->countArticles($userId, $query); // Contar artículos para el usuario si estamos en el dashboard
   $totalPaginas = ceil($totalArticles / $articlesPerPage);
 
   $resultados = [

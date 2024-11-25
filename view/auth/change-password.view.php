@@ -25,19 +25,19 @@ $errors = getMessages('errorChangePassword');
     <label for="old-password">Contrasenya antiga</label>
     <div class="input">
       <input type="password" name="antigaPassword" required>
-      <i class="fa-solid fa-lock" id="toggle-old-password"></i>
+      <i class="fa-solid fa-lock" id="toggle-old-password" title="Mostrar contrasenya"></i>
     </div>
 
     <label for="new-password">Nova contrasenya</label>
     <div class="input">
       <input type="password" name="novaPassword" required>
-      <i class="fa-solid fa-lock" id="toggle-password"></i>
+      <i class="fa-solid fa-lock" id="toggle-password" title="Mostrar contrasenya"></i>
     </div>
 
     <label for="new-password2">Contrasenya antiga</label>
     <div class="input">
       <input type="password" name="novaPassword2" required>
-      <i class="fa-solid fa-lock" id="toggle-password2"></i>
+      <i class="fa-solid fa-lock" id="toggle-password2" title="Mostrar contrasenya"></i>
     </div>
 
     <button type="submit">Canviar contrasenya</button>

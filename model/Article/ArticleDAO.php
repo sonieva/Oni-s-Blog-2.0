@@ -112,52 +112,6 @@ class ArticleDAO {
     return $articles;
   }
 
-  // Obté una llista d'articles, amb la possibilitat de filtrar per autor i aplicar paginació.
-  public function getArticles($idAutor = null, $offet = 0, $articlesPerPagina = 6, $ordenaPer = 'creat-desc'): array {
-    $articles = [];
-    
-    try {
-      $ordenaPer = explode('-', $ordenaPer);
-  
-      $sql = $idAutor ? 
-        "SELECT * FROM articles WHERE autor = :autor ORDER BY $ordenaPer[0] $ordenaPer[1] LIMIT :offset, :articlesPerPagina"  : 
-        "SELECT * FROM articles ORDER BY $ordenaPer[0] $ordenaPer[1] LIMIT :offset, :articlesPerPagina";
-  
-      $sentencia = $this->pdo->prepare($sql);
-  
-      // S'afegeix el paràmetre d'autor si es proporciona.
-      if ($idAutor) {
-          $sentencia->bindParam(':autor', $idAutor, PDO::PARAM_INT);
-      }
-  
-      // S'afegeixen els paràmetres de paginació.
-      $sentencia->bindParam(':offset', $offet, PDO::PARAM_INT);
-      $sentencia->bindParam(':articlesPerPagina', $articlesPerPagina, PDO::PARAM_INT);
-  
-      // S'executa la consulta.
-      $sentencia->execute();
-  
-      // Es crea una llista d'objectes Article amb els resultats obtinguts.
-      while ($article = $sentencia->fetch(PDO::FETCH_ASSOC)) {
-        $articles[] = new Article(
-          $article['titol'], 
-          $article['cos'],  
-          $article['autor'], 
-          $article['ruta_imatge'], 
-          new DateTime($article['creat']), 
-          isset($article['modificat']) ? new DateTime($article['modificat']) : null, 
-          $article['id']
-        );
-      }
-
-      Logger::log("Articles obtinguts correctament al metode getArticles de ArticleDAO", TipusLog::DATABASE_LOG, LogLevel::INFO);
-    } catch (PDOException $e) {
-      Logger::log("Error en el metode getArticles de ArticleDAO: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
-    }
-
-    return $articles;
-  }
-
   public function buscarArticles(string $query, int $offset, int $limit, string $ordenaPer, ?int $userId = null): array {
     $articles = [];
     
@@ -206,17 +160,19 @@ class ArticleDAO {
   }
 
   // Obté el nombre total d'articles, amb la possibilitat de filtrar per autor.
-  public function countArticles(int $idAutor = null): int {
+  public function countArticles(int $idAutor = null, string $query): int {
     try {
       $sql = $idAutor ? 
-        "SELECT COUNT(*) FROM articles WHERE autor = :autor" : 
-        "SELECT COUNT(*) FROM articles";
+        "SELECT COUNT(*) FROM articles WHERE autor = :autor AND (titol LIKE :query OR cos LIKE :query)" : 
+        "SELECT COUNT(*) FROM articles WHERE (titol LIKE :query OR cos LIKE :query)";
       $sentencia = $this->pdo->prepare($sql);
   
       // S'afegeix el paràmetre d'autor si es proporciona.
       if ($idAutor) {
         $sentencia->bindParam(':autor', $idAutor, PDO::PARAM_INT);
       }
+
+      $sentencia->bindValue(':query', '%' . $query . '%', PDO::PARAM_STR);
   
       // S'executa la consulta i es retorna el nombre d'articles.
       $sentencia->execute();

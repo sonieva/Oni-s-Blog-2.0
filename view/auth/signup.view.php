@@ -52,14 +52,14 @@ $errors = getMessages('errorsRegister');
     <label for="password">Contrasenya</label>
     <div class="input">
       <input type="password" name="password" minlength="8" required>
-      <i class="fa-solid fa-lock" id="toggle-password"></i>
+      <i class="fa-solid fa-lock" id="toggle-password" title="Mostrar contrasenya"></i>
     </div>
 
     <!-- Camp per repetir la contrasenya. -->
     <label for="password2">Repeteix contrasenya</label>
     <div class="input">
       <input type="password" name="password2" required>
-      <i class="fa-solid fa-lock" id="toggle-password2"></i>
+      <i class="fa-solid fa-lock" id="toggle-password2" title="Mostrar contrasenya"></i>
     </div>
 
     <!-- Botó per enviar el formulari de registre. -->

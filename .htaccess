@@ -7,6 +7,7 @@ RewriteRule ^(.*)$ https://oni.cat/ [R,L]
 RewriteRule ^admin$ /view/admin.view.php [L]
 RewriteRule ^dashboard$ /view/dashboard.view.php [L]
 RewriteRule ^perfil$ /view/perfil.view.php [L]
+RewriteRule ^article-viewer$ /view/article-viewer.view.php [L]
 
 RewriteRule ^change-password$ /view/auth/change-password.view.php [L]
 RewriteRule ^login$ /view/auth/login.view.php [L]

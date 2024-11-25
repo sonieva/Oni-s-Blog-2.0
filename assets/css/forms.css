@@ -119,7 +119,8 @@ i.fa-unlock {
   text-align: center;
 }
 
-.form-login button {
+.form-login button,
+.form-registre button {
   margin-bottom: 10px;
 }
 
@@ -242,4 +243,10 @@ i.fa-unlock {
       background-color: #5865f2;
     }
   }
+}
+
+.form-verificacio-email h5 {
+  text-align: center;
+  margin: 10px;
+  font-weight: normal;
 }

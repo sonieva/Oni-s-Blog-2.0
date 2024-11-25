@@ -14,11 +14,13 @@ function handlePasswordToggle(event) {
     passwordInput.type = 'text';
     // Canvia la icona de 'fa-lock' a 'fa-unlock'
     icon.classList.replace('fa-lock', 'fa-unlock');
+    icon.title = 'Ocultar contrasenya';
   } else if (passwordInput) {
     // Si no, torna a canviar el tipus de l'input a 'password' per amagar la contrasenya
     passwordInput.type = 'password';
     // Canvia la icona de 'fa-unlock' a 'fa-lock'
     icon.classList.replace('fa-unlock', 'fa-lock');
+    icon.title = 'Mostrar contrasenya';
   }
 }
 

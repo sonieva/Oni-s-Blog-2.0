@@ -60,7 +60,7 @@ include_once '../components/toasters.php'
     <label for="password">Contrasenya</label>
     <div class="input">
       <input <?php if (!empty($password)) echo 'class="autocompleted"' ?> type="password" name="password" required>
-      <i class="fa-solid fa-lock" id="toggle-password"></i>
+      <i class="fa-solid fa-lock" id="toggle-password" title="Mostrar contrasenya"></i>
     </div>
 
     <!-- Checkbox per recordar l'usuari en futurs inicis de sessió. -->

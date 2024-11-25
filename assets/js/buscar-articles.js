@@ -99,6 +99,9 @@ document.addEventListener('DOMContentLoaded', function () {
           <h2>${articulo.titol}</h2>
           <p>${articulo.cos.length > 100 ? articulo.cos.substring(0, 100) + '...' : articulo.cos}</p>
           ${articulo.cos.length > 100 ? `<a class="read-more" onclick="loadArticle(${articulo.id})">Continua llegint <i class="fa-solid fa-arrow-right"></i></a>` : ''}
+          <a class="share-article" onclick="shareQRArticle(${articulo.id})" title="Comparteix QR">
+            <i class="fa-solid fa-qrcode"></i>
+          </a>
         </div>
       `;
       articlesContainer.appendChild(articleElement);
@@ -132,8 +135,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Crear el botón de página siguiente, si no estamos en la última página
-    const nextButtonTop = crearBotonPaginacion('next', paginaActual + 1, paginaActual === totalPaginas);
-    const nextButtonBottom = crearBotonPaginacion('next', paginaActual + 1, paginaActual === totalPaginas);
+    const nextButtonTop = crearBotonPaginacion('next', paginaActual + 1, paginaActual === totalPaginas || totalPaginas === 0);
+    const nextButtonBottom = crearBotonPaginacion('next', paginaActual + 1, paginaActual === totalPaginas || totalPaginas === 0);
 
     paginationContainerTop.appendChild(nextButtonTop);
     paginationContainerBottom.appendChild(nextButtonBottom);

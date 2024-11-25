@@ -42,13 +42,13 @@ $errors = getMessages('errorsResetPassword');
     <label for="new-password">Nova contrasenya</label>
     <div class="input">
       <input type="password" name="novaPassword" minlength="8" required>
-      <i class="fa-solid fa-lock" id="toggle-password"></i>
+      <i class="fa-solid fa-lock" id="toggle-password" title="Mostrar contrasenya"></i>
     </div>
 
     <label for="new-password2">Confirma nova contrasenya</label>
     <div class="input">
       <input type="password" name="novaPassword2" minlength="8" required>
-      <i class="fa-solid fa-lock" id="toggle-password2"></i>
+      <i class="fa-solid fa-lock" id="toggle-password2" title="Mostrar contrasenya"></i>
     </div>
 
     <button type="submit">Restablir contrasenya</button>

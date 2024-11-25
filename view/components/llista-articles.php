@@ -52,3 +52,13 @@ $isDashboard = str_contains($_SERVER['REQUEST_URI'], 'dashboard');
     <p id="modal-body"></p>
   </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<div id="share-article-modal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeQRModal()">&times;</span>
+    <h2 class="modal-title">Escaneja el QR</h2>
+    <img src="" alt="QR Code" id="qr-image">
+  </div>
+</div>
