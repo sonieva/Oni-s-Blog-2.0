@@ -5,6 +5,7 @@ require '../vendor/autoload.php';
 require_once '../model/Usuari/Usuari.php';
 require_once '../model/Usuari/UsuariDAO.php';
 require_once '../utils/utils.php';
+require_once '../utils/Logger.php';
 
 if (!isset($_GET['provider']) && !isset($_GET['code']) && !isset($_GET['state'])) {
   header('Location: ../login');
@@ -74,15 +75,14 @@ try {
   }
 
   $adapter->disconnect();
-
-  echo "
-  <script>
-    if (window.opener.closeAuthWindow) {
-      window.opener.location.href = '/';
-      window.opener.closeAuthWindow();
-    }
-  </script>";
 } catch (Exception $e) {
-  echo 'Error: ' . $e->getMessage();
-  exit();
+  Logger::log('Error al autenticar amb ' . $provider . ': ' . $e->getMessage(), TipusLog::ERROR_LOG, LogLevel::ERROR);
 }
+
+echo "
+<script>
+  if (window.opener.closeAuthWindow) {
+    window.opener.location.href = '/';
+    window.opener.closeAuthWindow();
+  }
+</script>";

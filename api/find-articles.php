@@ -3,6 +3,7 @@
 
 require_once '../model/Article/ArticleDAO.php';
 require_once '../model/Usuari/Usuari.php';
+require_once '../utils/Logger.php';
 
 session_start(); // Necesitamos la sesión para obtener el usuario autenticado
 
@@ -46,6 +47,7 @@ try {
   echo json_encode($resultados);
 
 } catch (Exception $e) {
+  Logger::log('Error en la búsqueda: ' . $e->getMessage());
   header('Content-Type: application/json');
   echo json_encode(['error' => 'Error en la búsqueda: ' . $e->getMessage()]);
 }

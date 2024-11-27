@@ -30,12 +30,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if ($_SESSION['intentsLogin'] >= 3) {
     $recaptchaSecret = $_ENV['RECAPTCHA_SECRET_KEY'];
+    $errors = false;
     
     // Realiza la petición a la API de reCAPTCHA
-    $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$recaptchaSecret&response=$recaptchaResponse");
-    $responseKeys = json_decode($response, true);
+    try {
+      $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$recaptchaSecret&response=$recaptchaResponse");
+      $responseKeys = json_decode($response, true);
+    } catch (Exception $e) {
+      Logger::log("Error al validar el reCAPTCHA: " . $e->getMessage(), TipusLog::GENERAL_LOG, LogLevel::ERROR);
+      $errors = true;
+    }
 
-    if (!$responseKeys["success"]) {
+    if ($errors || !$responseKeys["success"]) {
       addMessage('errorsLogin', "La verificació de reCAPTCHA ha fallat. Si us plau, intenta-ho de nou");
     }
   }
@@ -57,8 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       unset($_SESSION['intentsLogin']);
       
-      Logger::log("L'usuari $username ha iniciat sessió", TipusLog::GENERAL_LOG, LogLevel::INFO);
-
       // Es redirigeix a la pàgina principal
       header('Location: ..');
       exit();

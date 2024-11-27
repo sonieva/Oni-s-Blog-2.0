@@ -16,7 +16,9 @@ Config::setArchiusJS(['article-preview', 'btn-imatge', 'delete-article', 'modal'
 include 'components/header.php';
 
 // Comprova si està en mode d'edició per actualitzar un article
-$editMode = isset($_SESSION['editMode']) ? $_SESSION['editMode'] : false; unset($_SESSION['editMode']);
+$editMode = (isset($_SESSION['editMode']) || isset($_SESSION['articleUpdate'])) ? true : false; 
+unset($_SESSION['editMode']);
+
 if (isset($_SESSION['articleUpdate'])) {
   $articleUpdate = $_SESSION['articleUpdate'];
   unset($_SESSION['articleUpdate']);

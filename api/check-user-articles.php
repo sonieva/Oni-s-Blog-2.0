@@ -10,9 +10,9 @@ header('Content-Type: application/json');
 
 // Es comprova si s'ha proporcionat un ID d'usuari a través del paràmetre GET.
 if (!isset($_GET['id']) || empty($_GET['id'])) {
-    // Si no s'ha proporcionat l'ID, s'envia un missatge d'error en format JSON i es finalitza l'execució.
-    echo json_encode(['error' => 'ID d\'usuari no proporcionat']);
-    exit();
+  // Si no s'ha proporcionat l'ID, s'envia un missatge d'error en format JSON i es finalitza l'execució.
+  echo json_encode(['error' => 'ID d\'usuari no proporcionat']);
+  exit();
 }
 
 // Es crea una instància de la classe ArticleDAO per obtenir els articles de l'usuari corresponent a l'ID proporcionat.

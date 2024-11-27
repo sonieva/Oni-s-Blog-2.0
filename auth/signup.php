@@ -51,7 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       
       header('Location: /signup');
       exit();
-    } else {
+    } 
+    else {
       $_SESSION['usuariPerValidar'] = new Usuari($alies, $email, password_hash($password, PASSWORD_DEFAULT));
       $_SESSION['codiVerificacio'] = random_int(100000, 999999);
 

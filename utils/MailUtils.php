@@ -1,6 +1,7 @@
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once 'Logger.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -16,7 +17,7 @@ class MailUtils {
       $mail->isSMTP();
       $mail->isHTML(true);
       $mail->CharSet = 'UTF-8';
-      $mail->Host = 'mailsrv2.dondominio.com.';
+      $mail->Host = 'mailsrv2.dondominio.com';
       $mail->Port = 587;
       $mail->SMTPAuth = true;
       $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
@@ -28,7 +29,7 @@ class MailUtils {
       return $mail;
 
     } catch (Exception $e) {
-      setMessage('errorRecuperacio', "Error al configurar el correu: {$e->getMessage()}");
+      Logger::log("Error al preparar el correu: " . $e->getMessage(), TipusLog::ERROR_LOG, LogLevel::ERROR);
       return null;
     }
   }
@@ -54,7 +55,7 @@ class MailUtils {
 
       $mail->send();
     } catch (Exception $e) {
-      setMessage('errorRecuperacio', "Error al enviar el correu: " . $e->getMessage());
+      Logger::log("Error al enviar el correu de recuperacio de contrasenya: " . $e->getMessage(), TipusLog::ERROR_LOG, LogLevel::ERROR);
     }
   }
 
@@ -75,7 +76,7 @@ class MailUtils {
 
       $mail->send();
     } catch (Exception $e) {
-      setMessage('errorRegistre', "Error al enviar el correu: " . $e->getMessage());
+      Logger::log("Error al enviar el correu de verificacio del compte: " . $e->getMessage(), TipusLog::ERROR_LOG, LogLevel::ERROR);
     }
   }
 }

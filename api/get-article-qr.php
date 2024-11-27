@@ -3,9 +3,8 @@
 
 use chillerlan\QRCode\{QRCode, QROptions};
 
-require_once __DIR__ . '/../vendor/autoload.php';
-
-// S'importen les classes necesaries.
+require_once '../vendor/autoload.php';
+require_once '../utils/Logger.php';
 require_once '../model/Article/ArticleDAO.php';
 
 // S'estableix el tipus de contingut de la resposta com a JSON.
@@ -36,6 +35,7 @@ try{
     'qr' => $qrcode,
   ]);
 } catch (Exception $e) {
+  Logger::log('Error al generar el QR: ' . $e->getMessage());
   echo json_encode(['error' => $e->getMessage()]);
   exit();
 }
