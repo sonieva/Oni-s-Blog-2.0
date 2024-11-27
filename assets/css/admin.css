@@ -7,7 +7,6 @@
   box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
 
   hr {
-    /* Estil del separador amb un gradient */
     border: none;
     height: 2px;
     background: linear-gradient(to right, #d2691e, #ff7f50, #d2691e);
@@ -16,10 +15,14 @@
 
   .llista-usuaris {
     text-align: center;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     table {
       width: 100%;
       border-collapse: collapse;
+      min-width: 700px;
 
       td, th {
         border: 1px solid #b7b7b7;
@@ -27,6 +30,9 @@
       }
 
       thead {
+        position: sticky;
+        top: 0;
+        z-index: 1;
         background-color: #D2691E;
         color: white;
       }
@@ -81,6 +87,5 @@
         }
       }
     }
-
   }
 }

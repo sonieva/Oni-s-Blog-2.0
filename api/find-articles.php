@@ -5,7 +5,7 @@ require_once '../model/Article/ArticleDAO.php';
 require_once '../model/Usuari/Usuari.php';
 require_once '../utils/Logger.php';
 
-session_start(); // Necesitamos la sesión para obtener el usuario autenticado
+session_start();
 
 $query = isset($_GET['q']) ? $_GET['q'] : '';
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -20,19 +20,18 @@ $articleDAO = new ArticleDAO();
 
 try {
   $offset = ($page - 1) * $articlesPerPage;
-  // Busca artículos con paginación, orden y filtro por usuario si estamos en el dashboard
   $articles = $articleDAO->buscarArticles($query, $offset, $articlesPerPage, $ordenaPer, $userId);
-  $totalArticles = $articleDAO->countArticles($userId, $query); // Contar artículos para el usuario si estamos en el dashboard
-  $totalPaginas = ceil($totalArticles / $articlesPerPage);
+  $totalArticles = $articleDAO->countArticles($userId, $query);
+  $totalPagines = ceil($totalArticles / $articlesPerPage);
 
-  $resultados = [
-    'articulos' => [],
-    'totalPaginas' => $totalPaginas,
-    'numArticulos' => ($userId) ? $totalArticles : null,
+  $resultats = [
+    'articles' => [],
+    'totalPagines' => $totalPagines,
+    'numArticlesUsuari' => ($userId) ? $articleDAO->countArticles($userId, '') : null,
   ];
 
   foreach ($articles as $article) {
-    $resultados['articulos'][] = [
+    $resultats['articles'][] = [
       'id' => $article->getId(),
       'titol' => $article->getTitol(),
       'cos' => $article->getCos(),
@@ -44,10 +43,10 @@ try {
   }
 
   header('Content-Type: application/json');
-  echo json_encode($resultados);
+  echo json_encode($resultats);
 
 } catch (Exception $e) {
-  Logger::log('Error en la búsqueda: ' . $e->getMessage());
+  Logger::log('Error en la cerca: ' . $e->getMessage());
   header('Content-Type: application/json');
-  echo json_encode(['error' => 'Error en la búsqueda: ' . $e->getMessage()]);
+  echo json_encode(['error' => 'Error en la cerca: ' . $e->getMessage()]);
 }
