@@ -122,7 +122,8 @@
     color: white; /* Color del text dels enllaços */
     padding: 8px 10px; /* Espai interior als enllaços */
     text-decoration: none; /* Elimina el subratllat dels enllaços */
-    display: block; /* Els enllaços ocupen tota l'amplada del contenidor */
+    display: flex; /* Els enllaços ocupen tota l'amplada del contenidor */
+    align-items: center; /* Centra els elements verticalment */
   }
 
   .dropdown-content .admin-link {

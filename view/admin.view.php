@@ -56,10 +56,10 @@ include_once 'components/toasters.php';
             <td <?php if (!$usuari->getNomComplet()) echo 'class="no-configurat"' ?>><?= $usuari->getNomComplet() ?? 'No configurat' ?></td>
             <td><?= $usuari->getEmail() ?></td>
             <td class="accions">
-              <a <?= ($_SESSION['usuari']->getId() === $usuari->getId()) ? 'class="disabled"' : "onclick='deleteUsuari(" . $usuari->getId() . ")' title='Eliminar'" ?>>
+              <a <?= ($usuari->esAdmin()) ? 'class="disabled"' : "onclick='deleteUsuari(" . $usuari->getId() . ")' title='Eliminar'" ?>>
                 <i class="fas fa-trash-alt"></i>
               </a>
-              <a <?= ($_SESSION['usuari']->getId() === $usuari->getId() || $usuari->esAdmin()) ? 'class="disabled"' : "onclick='ferAdmin(" . $usuari->getId() . ")' title='Fer admin'" ?>>
+              <a <?= ($usuari->esAdmin()) ? 'class="disabled"' : "onclick='ferAdmin(" . $usuari->getId() . ")' title='Fer admin'" ?>>
                 <i class="fa-solid fa-user-tie"></i>
               </a>
             </td>
