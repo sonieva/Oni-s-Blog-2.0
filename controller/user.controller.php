@@ -6,7 +6,7 @@ require_once '../model/Usuari/UsuariDAO.php';
 require_once '../utils/utils.php';
 require_once '../config/Config.php';
 
-if (isset($_GET['action']) && ($_SERVER['REQUEST_METHOD'] === 'POST' || $_GET['action'] === 'delete')) {
+if (isset($_GET['action']) && ($_SERVER['REQUEST_METHOD'] === 'POST' || in_array($_GET['action'], ['delete', 'make_admin']))) {
   // S'utilitza un switch per determinar l'acció a executar.
   switch ($_GET['action']) {
     case 'reset_password_mail':
@@ -52,7 +52,7 @@ function enviarCorreuRecuperacio($correuRecuperacio): void {
     exit();
   }
 
-  $token = generarTokenRecuperacio();
+  $token = generarToken();
   $expiry = (new DateTime('now'))->add(new DateInterval('PT15M'));
 
   $usuari->setTokenRecuperacio($token);

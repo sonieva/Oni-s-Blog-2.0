@@ -1,4 +1,5 @@
 <?php
+// Santi Onieva
 
 enum TipusLog: int {
   case GENERAL_LOG = 1;

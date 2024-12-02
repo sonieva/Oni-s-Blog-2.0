@@ -1,5 +1,6 @@
 <?php
-// check-alies.php
+// Santi Onieva
+
 require_once '../model/Connexio.php';
 require_once '../utils/Logger.php';
 

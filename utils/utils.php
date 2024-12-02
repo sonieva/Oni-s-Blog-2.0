@@ -119,7 +119,7 @@ function getMessages($key): ?array {
   return null;
 }
 
-function generarTokenRecuperacio(): string {
+function generarToken(): string {
   return bin2hex(random_bytes(32));
 }
 

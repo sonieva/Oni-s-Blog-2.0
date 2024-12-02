@@ -55,8 +55,9 @@ class UsuariDAO {
           $resultat['email'], 
           $resultat['password'], 
           $resultat['nom_complet'], 
-          $resultat['id'], 
-          $resultat['token_recuperacio'], 
+          $resultat['id'],
+          $resultat['token_remember_me'],
+          $resultat['token_recuperacio'],
           isset($resultat['expiracio_token']) ? new DateTime($resultat['expiracio_token']) : null,
           $resultat['ruta_imatge'],
           $resultat['es_admin']
@@ -93,7 +94,8 @@ class UsuariDAO {
         $resultat['password'], 
         $resultat['nom_complet'], 
         $resultat['id'], 
-        $resultat['token_recuperacio'], 
+        $resultat['token_remember_me'],
+        $resultat['token_recuperacio'],
         isset($resultat['expiracio_token']) ? new DateTime($resultat['expiracio_token']) : null,
         $resultat['ruta_imatge'],
         $resultat['es_admin']
@@ -126,6 +128,7 @@ class UsuariDAO {
         $resultat['password'], 
         $resultat['nom_complet'], 
         $resultat['id'],
+        $resultat['token_remember_me'],
         $resultat['token_recuperacio'],
         isset($resultat['expiracio_token']) ? new DateTime($resultat['expiracio_token']) : null,
         $resultat['ruta_imatge'],
@@ -137,6 +140,7 @@ class UsuariDAO {
     }
   }
 
+  // Obté un usuari de la base de dades pel seu alies o correu electrònic.
   public function getUsuariPerAliesOEmail(string $user): ?Usuari {
     try {
       $sentencia = $this->pdo->prepare("SELECT * FROM usuaris WHERE alies = :user OR email = :user");
@@ -158,6 +162,7 @@ class UsuariDAO {
         $resultat['password'], 
         $resultat['nom_complet'], 
         $resultat['id'],
+        $resultat['token_remember_me'],
         $resultat['token_recuperacio'],
         isset($resultat['expiracio_token']) ? new DateTime($resultat['expiracio_token']) : null,
         $resultat['ruta_imatge'],
@@ -170,7 +175,7 @@ class UsuariDAO {
   }
 
   // Obté un usuari de la base de dades pel seu token de recuperació.
-  public function getUsuariPerToken(string $token): ?Usuari {
+  public function getUsuariPerTokenRecuperacio(string $token): ?Usuari {
     try {
       $sentencia = $this->pdo->prepare("SELECT * FROM usuaris WHERE token_recuperacio = :token");
   
@@ -191,6 +196,7 @@ class UsuariDAO {
         $resultat['password'], 
         $resultat['nom_complet'], 
         $resultat['id'], 
+        $resultat['token_remember_me'],
         $resultat['token_recuperacio'], 
         isset($resultat['expiracio_token']) ? new DateTime($resultat['expiracio_token']) : null,
         $resultat['ruta_imatge']
@@ -201,10 +207,43 @@ class UsuariDAO {
     }
   }
 
+  // Obté un usuari de la base de dades pel seu token remember me.
+  public function getUsuariPerTokenRememberMe(string $token): ?Usuari {
+    try {
+      $sentencia = $this->pdo->prepare("SELECT * FROM usuaris WHERE token_remember_me = :token");
+  
+      // Executa la consulta.
+      $sentencia->execute(['token' => $token]);
+  
+      if ($sentencia->rowCount() === 0) {
+        return null;
+      }
+  
+      // Obté el resultat de la consulta.
+      $resultat = $sentencia->fetch();
+      
+      // Retorna un objecte Usuari amb les dades recuperades.
+      return new Usuari(
+        $resultat['alies'], 
+        $resultat['email'], 
+        $resultat['password'], 
+        $resultat['nom_complet'], 
+        $resultat['id'], 
+        $resultat['token_remember_me'],
+        $resultat['token_recuperacio'], 
+        isset($resultat['expiracio_token']) ? new DateTime($resultat['expiracio_token']) : null,
+        $resultat['ruta_imatge']
+      );
+    } catch (PDOException $e) {
+      Logger::log("Error al obtenir l'usuari per token remember me: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
+      return null;
+    }
+  }
+
   // Modifica les dades d'un usuari existent a la base de dades.
   public function modificar(Usuari $usuari): bool {
     try {
-      $sentenciaModificar = $this->pdo->prepare("UPDATE usuaris SET alies = :alies, email = :email, password = :password, nom_complet = :nom_complet, token_recuperacio = :token_recuperacio, expiracio_token = :expiracio_token, ruta_imatge = :ruta_imatge, es_admin = :es_admin WHERE id = :id");
+      $sentenciaModificar = $this->pdo->prepare("UPDATE usuaris SET alies = :alies, email = :email, password = :password, nom_complet = :nom_complet, token_remember_me = :token_remember_me, token_recuperacio = :token_recuperacio, expiracio_token = :expiracio_token, ruta_imatge = :ruta_imatge, es_admin = :es_admin WHERE id = :id");
   
       // Executa la sentència d'actualització amb les dades de l'usuari i retorna el resultat.
       $resultat = $sentenciaModificar->execute([
@@ -213,6 +252,7 @@ class UsuariDAO {
         'password' => $usuari->getPassword(),
         'nom_complet' => ($usuari->getNomComplet()) ?? null,
         'id' => $usuari->getId(),
+        'token_remember_me' => $usuari->getTokenRememberMe(),
         'token_recuperacio' => $usuari->getTokenRecuperacio(),
         'expiracio_token' => ($usuari->getExpiracioToken()) ? $usuari->getExpiracioToken()->format('Y-m-d H:i:s') : null,
         'ruta_imatge' => $usuari->getRutaImatge(),

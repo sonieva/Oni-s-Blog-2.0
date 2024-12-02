@@ -1,7 +1,7 @@
 <?php
 // Santi Onieva
-require_once '../model/Usuari/Usuari.php';
 
+require_once '../model/Usuari/Usuari.php';
 require_once '../utils/utils.php';
 
 usuariEstaLogat();

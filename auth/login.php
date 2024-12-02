@@ -13,8 +13,8 @@ require_once '../utils/Logger.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Es recullen les dades enviades per POST
-  $username = $_POST['username'];
-  $password = $_POST['password'];
+  $username = trim($_POST['username']);
+  $password = trim($_POST['password']);
   $recordar = isset($_POST['recordar']);
   $recaptchaResponse = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : null;
 
@@ -53,14 +53,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Si no es troba cap usuari amb aquest emailAlies, es mostra un missatge d'error
     if ($usuari && password_verify($password, $usuari->getPassword())) {
-      // Si la contrasenya és correcta, es guarda l'usuari a la sessió
-      $_SESSION['usuari'] = $usuari;
-
       // Si s'ha seleccionat "recordar", es guarda una cookie amb l'emailAlies durant 30 dies
       if ($recordar) {
-        setcookie('username', $username, time() + 60 * 60 * 24 * 30, '/');
+        $token = generarToken();
+        setcookie('tokenRememberMe', $token, time() + 60 * 60 * 24 * 30, '/');
+        $usuari->setTokenRememberMe($token);
+        $usuariDAO->modificar($usuari);
       }
 
+      // Si la contrasenya és correcta, es guarda l'usuari a la sessió
+      $_SESSION['usuari'] = $usuari;
+      
       unset($_SESSION['intentsLogin']);
       setMessage('missatgeInici', 'Sessió iniciada correctament');
       

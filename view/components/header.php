@@ -53,8 +53,10 @@ $isAdmin = $userLogged && $_SESSION['usuari']->esAdmin();
 
   <script defer src="assets/js/toaster.js"></script>
   <script defer src="assets/js/navbar-dropdown.js"></script>
-
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  
+  <?php if (isset($_SESSION['intentsLogin']) && $_SESSION['intentsLogin'] >= 3): ?>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <?php endif; ?>
 </head>
 
 <body>

@@ -5,9 +5,9 @@ require_once '../model/Usuari/UsuariDAO.php';
 require_once '../utils/utils.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $oldPassword = $_POST['antigaPassword'];
-  $newPassword = $_POST['novaPassword'];
-  $confirmPassword = $_POST['novaPassword2'];
+  $oldPassword = trim($_POST['antigaPassword']);
+  $newPassword = trim($_POST['novaPassword']);
+  $confirmPassword = trim($_POST['novaPassword2']);
 
   usuariEstaLogat();
 

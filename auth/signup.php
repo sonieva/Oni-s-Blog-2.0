@@ -10,10 +10,10 @@ require_once '../utils/MailUtils.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
   if (!isset($_POST['codiVerificacio'])) {
-    $alies = (isset($_POST['alies'])) ? $_POST['alies'] : null;
-    $email = (isset($_POST['email'])) ? $_POST['email'] : null;
-    $password = (isset($_POST['password'])) ? $_POST['password'] : null;
-    $password2 = (isset($_POST['password2'])) ? $_POST['password2'] : null;
+    $alies =  trim($_POST['alies']);
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+    $password2 = trim($_POST['password2']);
 
     // Es comprova si hi ha algun camp buit.
     if (empty($alies) || empty($email) || empty($password) || empty($password2)) {

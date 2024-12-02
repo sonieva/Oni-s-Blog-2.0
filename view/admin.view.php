@@ -1,4 +1,5 @@
 <?php
+// Santi Onieva
 
 require_once '../config/Config.php';
 Config::setTitol('Gestió d\'usuaris');
@@ -58,7 +59,7 @@ include_once 'components/toasters.php';
               <a <?= ($_SESSION['usuari']->getId() === $usuari->getId()) ? 'class="disabled"' : "onclick='deleteUsuari(" . $usuari->getId() . ")' title='Eliminar'" ?>>
                 <i class="fas fa-trash-alt"></i>
               </a>
-              <a <?= ($_SESSION['usuari']->getId() === $usuari->getId()) ? 'class="disabled"' : "onclick='ferAdmin(" . $usuari->getId() . ")' title='Fer admin'" ?>>
+              <a <?= ($_SESSION['usuari']->getId() === $usuari->getId() || $usuari->esAdmin()) ? 'class="disabled"' : "onclick='ferAdmin(" . $usuari->getId() . ")' title='Fer admin'" ?>>
                 <i class="fa-solid fa-user-tie"></i>
               </a>
             </td>

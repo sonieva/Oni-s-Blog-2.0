@@ -7,6 +7,7 @@ $dotenv->load();
 
 // S'inclou el fitxer de configuració i s'estableix el títol de la pàgina a "Login".
 require_once '../../config/Config.php';
+require_once '../../model/Usuari/UsuariDAO.php';
 Config::setTitol('Login');
 Config::setArchiusCSS(['forms']);
 Config::setArchiusJS(['toggle-password', 'remove-autocomplete', 'auth-popup']);
@@ -27,9 +28,15 @@ if (isset($_SESSION['dadesLogin'])) {
   // Si existeixen, es recupera l'email de les dades de login i es neteja la sessió.
   $username = $_SESSION['dadesLogin']['username'];
   unset($_SESSION['dadesLogin']);
-} else if (isset($_COOKIE['username'])) {
+} else if (isset($_COOKIE['tokenRememberMe'])) {
+  $usuariDAO = new UsuariDAO();
+
   // Si no hi ha dades de login a la sessió, es comprova si hi ha una cookie amb l'email.
-  $username = $_COOKIE['username'];
+  $_SESSION['usuari'] = $usuariDAO->getUsuariPerTokenRememberMe($_COOKIE['tokenRememberMe']);
+  setMessage('missatgeInici', 'Benvingut de nou, ' . $_SESSION['usuari']->getNomComplet() ?? $_SESSION['usuari']->getAlies() . '!');
+  
+  header('Location: ../');
+  exit();
 } else {
   // Si no hi ha ni dades de sessió ni cookie, es deixa l'email buit.
   $username = '';

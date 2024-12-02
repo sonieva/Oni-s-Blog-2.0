@@ -2,90 +2,68 @@
 
 ## Descripció del projecte
 
-Oni's Blog 2.0 és una aplicació web centrada en la gestió i visualització d'articles sobre gats, on els usuaris poden registrar-se, iniciar sessió, afegir, editar i eliminar els seus propis articles. Els articles es poden visualitzar tant a la pàgina principal com al tauler de control de cada usuari. També inclou una vista prèvia interactiva dels articles abans de ser publicats, així com la capacitat de visualitzar-ne el contingut complet a través d'un diàleg modal.
+Oni's Blog 2.0 és una aplicació web centrada en la gestió i visualització d'articles sobre gats. Els usuaris poden registrar-se, iniciar sessió, afegir, editar i eliminar els seus propis articles. Els articles es poden visualitzar tant a la pàgina principal com al tauler de control de cada usuari. A més, inclou una vista prèvia interactiva dels articles i la possibilitat de visualitzar-ne el contingut complet a través d'un diàleg modal.
 
 ## Funcionalitats principals
 
-- **Registre i Autenticació d'Usuaris**: Els usuaris poden crear un compte, iniciar sessió i recordar les seves credencials mitjançant cookies.
-- **Gestió d'Articles**: Afegir, modificar i eliminar articles des del tauler de control (dashboard).
-- **Vista Prèvia**: Mentre es crea o edita un article, es pot veure una vista prèvia en temps real del títol, el cos i la imatge de l'article.
-- **Modal per a la lectura completa**: Els articles que sobrepassen els 100 caràcters es poden expandir per veure'ls completament en una finestra modal.
-- **Paginació**: Visualització dels articles amb paginació i opció per triar el nombre d'articles per pàgina.
-- **Sessió d'usuari amb temps de caducitat**: La sessió de l'usuari caduca després de 40 minuts d'inactivitat.
-- **Gestió d'imatges**: Suport per a la pujada d'imatges associades als articles, incloent validació d'extensions permeses.
-
-```
-onis-blog/
-│
-├── config/
-│   ├── Config.php
-│   ├── utils.php
-│   └── session-lifetime.php
-│
-├── controller/
-│   └── article.controller.php
-│   └── pagination.controller.php
-│
-├── model/
-│   ├── Connexio.php
-│   ├── Usuari/
-│   │   ├── Usuari.php
-│   │   └── UsuariDAO.php
-│   └── Article/
-│       ├── Article.php
-│       └── ArticleDAO.php
-|
-├── resources/
-│   └── Pt04_Santi_Onieva.sql
-│
-├── view/
-│   ├── auth/
-│   │   ├── login.view.php
-│   │   └── signup.view.php
-│   ├── components/
-│   │   ├── header.php
-│   │   ├── llista-articles.php
-│   │   └── pagination-buttons.php
-│   ├── inici.view.php
-│   ├── dashboard.view.php
-│   └── perfil.view.php
-│
-├── api/
-│   ├── get-article.php
-│   ├── update-profile.php
-│   └── preview-article.php
-│
-├── assets/
-│   ├── css/
-│   ├── images/
-│   └── js/
-│
-└── uploads/
-```
-
-
-## Credencials d'usuaris existents
-
-| Usuari | Correu electrònic            | Contrasenya     |
-|--------|------------------------------|-----------------|
-| admin  | admin@oni.es               | P@ssw0rd        |
-
-> **Nota**: Les contrasenyes es guarden de manera segura amb `password_hash()`.
+- **Registre i Autenticació d'Usuaris**: Registre d'usuaris, inici de sessió, autenticació amb Google, GitHub, Reddit o Discord (mitjançant HybridAuth) i opció de recordar credencials amb cookies.
+- **Gestió d'Articles**: Afegir, modificar i eliminar articles des del tauler de control de l'usuari.
+- **Vista Prèvia**: Vista prèvia interactiva del títol, cos i imatge d'un article abans de publicar-lo.
+- **Lectura Completa amb Modal**: Els articles llargs (més de 100 caràcters) es poden expandir per a una lectura completa en una finestra modal.
+- **Paginació i Ordenació**: Visualització dels articles amb opció de paginació i selecció del nombre d'articles per pàgina.
+- **Gestió d'Imatges**: Suport per a la pujada d'imatges associades als articles, incloent la validació d'extensions permeses.
+- **Recuperació i Confirmació de Contrasenya**: Possibilitat de recuperar la contrasenya amb un correu electrònic de recuperació.
+- **Canvi de Perfil**: Possibilitat de canviar la contrasenya, àlies, nom complet i foto de perfil.
+- **Gestió d'Usuaris per Administradors**: Pàgina de gestió d'usuaris per a administradors amb capacitat per eliminar usuaris.
+- **Barra de Cerca amb AJAX**: Cerca d'articles en temps real amb AJAX.
+- **Generació de QR**: Generació de codis QR per als articles, facilitant-ne l'accés des de dispositius mòbils.
 
 ## Requeriments
 
 - **PHP** 8.2 o superior
 - **MySQL** 8
 - **Servidor web** (Apache, Nginx, etc.)
-- **Docker** (Opcional, per a un desplegament fàcil amb Docker i Docker Compose)
+- **Composer**
 
-## Valors a cambiar
+## Instal·lació
 
-Per un funcionament correcte, cal cambiar els següents valors:
-- Connexio.php
-```php
-private $host = 'db'; // Cal posar la IP del servidor
-private $dbName = 'Pt04_Santi_Onieva';
-private $user = 'root'; // Si cal, s'ha de canviar l'usuari
-private $password = 'p@ssw0rd'; // i la contrasenya
-```
+1. **Clone el repositori**
+
+   ```bash
+   git clone <URL del repositori>
+   ```
+
+2. **Instal·la les dependències amb Composer**
+
+   ```bash
+   composer install
+   ```
+
+3. **Configuració de l'entorn**
+
+   - Renombrar el fitxer `.env.example` a `.env`.
+   - Omple les variables del `.env` amb els valors corresponents (exemple: credencials de la base de dades).
+
+4. **Importa la base de dades**
+
+   - Utilitza el fitxer SQL proporcionat per crear les taules necessàries a la teva base de dades MySQL.
+
+5. **Configura el servidor web**
+
+   - Assegura't que el servidor web apunti al directori principal del projecte.
+
+## Credencials d'Usuaris Existents
+
+| Usuari | Correu electrònic     | Contrasenya  |
+|--------|----------------------|--------------|
+| admin  | admin@oni.cat        | P@lete2103   |
+
+> **Nota**: Les contrasenyes es guarden de manera segura amb `password_hash()`.
+
+## Funcionalitats de Sessió
+
+- **Caducitat de Sessió**: La sessió d'usuari caduca després de 40 minuts d'inactivitat per motius de seguretat.
+
+## Contacte
+
+Per a més informació sobre el projecte, pots contactar amb **Santi Onieva** a través del correu **admin@oni.cat**.

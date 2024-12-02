@@ -6,7 +6,7 @@ if (isset($_GET['token'])) {
   
   require_once '../../model/Usuari/UsuariDAO.php';
   $usuariDAO = new UsuariDAO();
-  $usuari = $usuariDAO->getUsuariPerToken($token);
+  $usuari = $usuariDAO->getUsuariPerTokenRecuperacio($token);
   
   if (!$usuari) {
     header('Location: /');

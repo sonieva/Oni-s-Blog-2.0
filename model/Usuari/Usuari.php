@@ -8,18 +8,31 @@ class Usuari {
   private string $email;
   private string $password;
   private ?string $nom_complet;
+  private ?string $token_remember_me;
   private ?string $token_recuperacio;
   private ?DateTime $expiracio_token;
   private ?string $ruta_imatge;
   private bool $esAdmin;
 
   // Constructor que inicialitza un objecte Usuari amb els valors proporcionats.
-  public function __construct(string $alies, string $email, string $password, ?string $nom_complet = null, ?int $id = null, ?string $token_recuperacio = null, ?DateTime $expiracio_token = null, ?string $ruta_imatge = null, bool $esAdmin = false) {
+  public function __construct(
+    string $alies, 
+    string $email, 
+    string $password, 
+    ?string $nom_complet = null, 
+    ?int $id = null,
+    ?string $token_remember_me = null,
+    ?string $token_recuperacio = null, 
+    ?DateTime $expiracio_token = null, 
+    ?string $ruta_imatge = null,
+    bool $esAdmin = false
+  ) {
     $this->id = $id;
     $this->alies = $alies;
     $this->email = $email;
     $this->password = $password;
     $this->nom_complet = $nom_complet;
+    $this->token_remember_me = $token_remember_me;
     $this->token_recuperacio = $token_recuperacio;
     $this->expiracio_token = $expiracio_token;
     $this->ruta_imatge = $ruta_imatge;
@@ -69,6 +82,16 @@ class Usuari {
   // Estableix un nou nom complet per a l'usuari.
   public function setNomComplet($nom_complet) {
     $this->nom_complet = $nom_complet;
+  }
+
+  // Retorna el token de recorda'm de l'usuari.
+  public function getTokenRememberMe() {
+    return $this->token_remember_me;
+  }
+
+  // Estableix un nou token de recorda'm per a l'usuari.
+  public function setTokenRememberMe($token_remember_me) {
+    $this->token_remember_me = $token_remember_me;
   }
 
   // Retorna el token de recuperació de l'usuari.

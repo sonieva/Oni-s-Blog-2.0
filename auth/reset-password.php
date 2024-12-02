@@ -5,8 +5,8 @@ require_once '../model/Usuari/UsuariDAO.php';
 require_once '../utils/utils.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $newPassword = $_POST['novaPassword'];
-  $confirmPassword = $_POST['novaPassword2'];
+  $newPassword = trim($_POST['novaPassword']);
+  $confirmPassword = trim($_POST['novaPassword2']);
   $token = $_POST['token'];
   
   if (empty($newPassword) || empty($confirmPassword)) {
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   $usuariDAO = new UsuariDAO();
-  $usuari = $usuariDAO->getUsuariPerToken($token);
+  $usuari = $usuariDAO->getUsuariPerTokenRecuperacio($token);
 
   if (!$usuari) {
     addMessage('errorsResetPassword', 'No s\'ha trobat cap usuari amb aquest token');
