@@ -23,7 +23,7 @@ class MailUtils {
       $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
       $mail->Username = $_ENV['MAIL_USER'];
       $mail->Password = $_ENV['MAIL_PASSWORD'];
-      $mail->setFrom($_ENV['MAIL_USER'], 'Admin');
+      $mail->setFrom($_ENV['MAIL_USER'], 'Oni\'s Blog');
       $mail->addAddress($correuDesti);
       
       return $mail;

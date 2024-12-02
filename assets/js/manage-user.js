@@ -23,3 +23,9 @@ function deleteUsuari(id) {
     .catch(error => console.error(error));
   }
 }
+
+function ferAdmin(id) {
+  if (confirm("Segur que vols fer aquest usuari administrador?")) {
+    window.location.href = `controller/user.controller.php?action=make_admin&id=${id}`;
+  }
+}

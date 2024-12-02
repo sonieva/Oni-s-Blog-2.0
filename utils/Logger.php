@@ -38,7 +38,7 @@ class Logger {
       LogLevel::ERROR => 'ERROR',
     };
 
-    $logMessage = '[' . date('Y-m-d H:i:s') . ']:' . $level . ' - ' . $message . PHP_EOL;
+    $logMessage = '[' . date('Y-m-d H:i:s') . ']:' . $level . ' CALLER: ' . debug_backtrace()[1]['function'] . ' - ' . $message . PHP_EOL;
 
     file_put_contents($logFile, $logMessage, FILE_APPEND);
   }

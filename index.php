@@ -28,5 +28,3 @@ include_once 'view/components/toasters.php';
 <!-- Inclou el component que llista els articles publicats -->
 <?php include 'view/components/llista-articles.php'; ?>
 
-<!-- // Redirigeix l'usuari a la vista d'inici
-header("Location: view/inici.view.php"); -->

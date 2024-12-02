@@ -39,15 +39,15 @@ if (empty($_GET['code'])) {
     $googleUserData = $googleUser->toArray();
 
     $email = $googleUserData['email'];
-    $alies = generarAliesAleatori();
-    $nomComplet = $googleUserData['name'];
-    $rutaImatge = descarregarImatgePerfil($googleUserData['picture'], $alies);
-
-
+    
     $usuariDAO = new UsuariDAO();
     $usuari = $usuariDAO->getUsuariPerEmail($email);
-
+    
     if (!$usuari) {
+      $alies = generarAliesAleatori();
+      $nomComplet = $googleUserData['name'];
+      $rutaImatge = descarregarImatgePerfil($googleUserData['picture'], $alies);
+
       $nouUsuari = new Usuari($alies, $email, 'SocialAuth', $nomComplet, null, null, null, $rutaImatge, false);
       $usuariDAO->inserir($nouUsuari);
       $_SESSION['usuari'] = $nouUsuari;

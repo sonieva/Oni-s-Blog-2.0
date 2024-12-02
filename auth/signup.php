@@ -38,8 +38,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuariDAO = new UsuariDAO();
   
     // Es comprova si ja existeix un usuari amb aquest correu.
-    if ($usuariDAO->getUsuariPerEmail($email)) {
+    if ($usuariDAO->getUsuariPerAliesOEmail($email)) {
       addMessage('errorsRegister', 'Aquest correu ja està registrat');
+    }
+
+    if ($usuariDAO->getUsuariPerAliesOEmail($alies)) {
+      addMessage('errorsRegister', 'Aquest nom d\'usuari ja està en ús');
     }
 
     // Si hi ha errors de registre, es guarden les dades introduïdes a la sessió i es redirigeix al formulari de registre.

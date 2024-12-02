@@ -62,6 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
 
       unset($_SESSION['intentsLogin']);
+      setMessage('missatgeInici', 'Sessió iniciada correctament');
       
       // Es redirigeix a la pàgina principal
       header('Location: ..');

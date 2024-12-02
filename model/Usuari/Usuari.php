@@ -106,4 +106,9 @@ class Usuari {
     return $this->esAdmin;
   }
 
+  // Estableix si l'usuari és administrador o no.
+  public function setEsAdmin($esAdmin) {
+    $this->esAdmin = $esAdmin;
+  }
+
 }

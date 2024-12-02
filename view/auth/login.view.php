@@ -29,10 +29,10 @@ if (isset($_SESSION['dadesLogin'])) {
   unset($_SESSION['dadesLogin']);
 } else if (isset($_COOKIE['username'])) {
   // Si no hi ha dades de login a la sessió, es comprova si hi ha una cookie amb l'email.
-  $email = $_COOKIE['username'];
+  $username = $_COOKIE['username'];
 } else {
   // Si no hi ha ni dades de sessió ni cookie, es deixa l'email buit.
-  $email = '';
+  $username = '';
 }
 
 // Es comprova si hi ha errors de login emmagatzemats en la sessió.
@@ -52,7 +52,7 @@ include_once '../components/toasters.php'
     <!-- Camp per introduir el correu electrònic, s'omple automàticament si hi ha dades disponibles. -->
     <label for="username">Correu electrònic o nom d'usuari</label>
     <div class="input">
-      <input <?php if (!empty($username)) echo 'class="autocompleted"' ?> type="text" name="username" required autocomplete="off" value="<?= $email ?>">
+      <input <?php if (!empty($username)) echo 'class="autocompleted"' ?> type="text" name="username" required autocomplete="off" value="<?= $username ?>">
       <i class="fa-solid fa-user"></i>
     </div>
 

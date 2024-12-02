@@ -57,15 +57,16 @@ try {
 
   $userProfile = $adapter->getUserProfile();
 
-  $alies = generarAliesAleatori();
   $email = $userProfile->email ?? 'No proporcionat';
-  $nomComplet = ($userProfile->firstName !== null && $userProfile->lastName !== null) ? $userProfile->firstName . ' ' . $userProfile->lastName : null;
-  $rutaImatge = descarregarImatgePerfil($userProfile->photoURL, $alies);
-
+  
   $usuariDAO = new UsuariDAO();
   $usuari = $usuariDAO->getUsuariPerEmail($email);
-
+  
   if (!$usuari) {
+    $alies = generarAliesAleatori();
+    $nomComplet = ($userProfile->firstName !== null && $userProfile->lastName !== null) ? $userProfile->firstName . ' ' . $userProfile->lastName : null;
+    $rutaImatge = descarregarImatgePerfil($userProfile->photoURL, $alies);
+    
     $nouUsuari = new Usuari($alies, $email, 'SocialAuth', $nomComplet, null, null, null, $rutaImatge);
     $usuariDAO->inserir($nouUsuari);
 

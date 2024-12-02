@@ -3,7 +3,7 @@
 require_once '../config/Config.php';
 Config::setTitol('Gestió d\'usuaris');
 Config::setArchiusCSS(['admin']);
-Config::setArchiusJS(['delete-user']);
+Config::setArchiusJS(['manage-user']);
 
 require_once '../model/Usuari/Usuari.php';
 
@@ -57,6 +57,9 @@ include_once 'components/toasters.php';
             <td class="accions">
               <a <?= ($_SESSION['usuari']->getId() === $usuari->getId()) ? 'class="disabled"' : "onclick='deleteUsuari(" . $usuari->getId() . ")' title='Eliminar'" ?>>
                 <i class="fas fa-trash-alt"></i>
+              </a>
+              <a <?= ($_SESSION['usuari']->getId() === $usuari->getId()) ? 'class="disabled"' : "onclick='ferAdmin(" . $usuari->getId() . ")' title='Fer admin'" ?>>
+                <i class="fa-solid fa-user-tie"></i>
               </a>
             </td>
           </tr>

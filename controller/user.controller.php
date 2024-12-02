@@ -15,6 +15,9 @@ if (isset($_GET['action']) && ($_SERVER['REQUEST_METHOD'] === 'POST' || $_GET['a
     case 'delete':
       eliminarUsuari($_GET['id']);
       break;
+    case 'make_admin':
+      ferAdmin($_GET['id']);
+      break;
   }
 } else {
   http_response_code(403);
@@ -104,6 +107,46 @@ function eliminarUsuari($id) {
     setMessage('missatgeAdmin', 'Usuari eliminat correctament');
   } else {
     setMessage('errorAdmin', 'Error al eliminar l\'usuari');
+  }
+
+  header('Location: /admin');
+  exit();
+}
+
+function ferAdmin($id) {
+  if (!isset($_SESSION['usuari'])) {
+    setMessage('errorLogin', 'No estàs identificat');
+    header('Location: ../login');
+    exit();
+  }
+
+  if (!$_SESSION['usuari']->esAdmin()) {
+    setMessage('errorInici', 'No tens permisos per fer administradors');
+    header('Location: ..');
+    exit();
+  }
+
+  $usuariDAO = new UsuariDAO();
+  $usuari = $usuariDAO->getUsuariPerId($id);
+
+  if (!$usuari) {
+    setMessage('errorAdmin', 'No s\'ha trobat cap usuari amb aquest ID');
+    header('Location: /admin');
+    exit();
+  }
+
+  if ($usuari->esAdmin()) {
+    setMessage('errorAdmin', 'Aquest usuari ja és administrador');
+    header('Location: /admin');
+    exit();
+  }
+
+  $usuari->setEsAdmin(true);
+
+  if ($usuariDAO->modificar($usuari)) {
+    setMessage('missatgeAdmin', 'Usuari fet administrador correctament');
+  } else {
+    setMessage('errorAdmin', 'Error al fer administrador');
   }
 
   header('Location: /admin');

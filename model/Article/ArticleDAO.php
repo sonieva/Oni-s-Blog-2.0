@@ -31,8 +31,7 @@ class ArticleDAO {
         'ruta_imatge' => $article->getRutaImatge(),
       ]);
 
-      Logger::log("Article inserit correctament al metode inserir de ArticleDAO", TipusLog::DATABASE_LOG, LogLevel::INFO);
-
+      Logger::log("L'usuari ". $article->getAutor()->getAlies() ." ha inserit un nou article amb ID: " . $this->pdo->lastInsertId(), TipusLog::DATABASE_LOG, LogLevel::INFO);
       return $resultat;
     } catch (PDOException $e) {
       Logger::log("Error en el metode inserir de ArticleDAO: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
@@ -54,7 +53,6 @@ class ArticleDAO {
   
       $resultat = $sentencia->fetch();
 
-      Logger::log("Article obtingut correctament al metode getArticlePerId de ArticleDAO", TipusLog::DATABASE_LOG, LogLevel::INFO);
   
       // Crea un objecte Article amb les dades obtingudes de la base de dades.
       return new Article(
@@ -67,7 +65,7 @@ class ArticleDAO {
         $resultat['id']
       );
     } catch (PDOException $e) {
-      Logger::log("Error en el metode getArticlePerId de ArticleDAO: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
+      Logger::log("Error al obtenir l'article: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
       return null;
     }
   }
@@ -104,9 +102,8 @@ class ArticleDAO {
         );
       }
 
-      Logger::log("Articles obtinguts correctament al metode getAllArticles de ArticleDAO", TipusLog::DATABASE_LOG, LogLevel::INFO);
     } catch (PDOException $e) {
-      Logger::log("Error en el metode getAllArticles de ArticleDAO: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
+      Logger::log("Error al obtenir articles: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
     }
 
     return $articles;
@@ -151,9 +148,8 @@ class ArticleDAO {
         );
       }
 
-      Logger::log("Articles obtinguts correctament al metode buscarArticles de ArticleDAO", TipusLog::DATABASE_LOG, LogLevel::INFO);
     } catch (PDOException $e) {
-      Logger::log("Error en el metode buscarArticles de ArticleDAO: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
+      Logger::log("Error al cercar articles: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
     }
 
     return $articles;
@@ -178,10 +174,9 @@ class ArticleDAO {
       $sentencia->execute();
       $resultat = $sentencia->fetchColumn();
   
-      Logger::log("Nombre d'articles obtingut correctament al metode countArticles de ArticleDAO", TipusLog::DATABASE_LOG, LogLevel::INFO);
       return $resultat;
     } catch (PDOException $e) {
-      Logger::log("Error en el metode countArticles de ArticleDAO: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
+      Logger::log("Error al contar articles: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
       return 0;
     }
   }
@@ -200,10 +195,9 @@ class ArticleDAO {
         'ruta_imatge' => $article->getRutaImatge(),
       ]);
   
-      Logger::log("Article modificat correctament al metode modificar de ArticleDAO", TipusLog::DATABASE_LOG, LogLevel::INFO);
       return $resultat;
     } catch (PDOException $e) {
-      Logger::log("Error en el metode modificar de ArticleDAO: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
+      Logger::log("Error al modificar un article: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
       return false;
     }
   }
@@ -217,10 +211,9 @@ class ArticleDAO {
       // S'executa la sentència d'eliminació.
       $resultat = $sentenciaEliminar->execute();
 
-      Logger::log("Article eliminat correctament al metode eliminar de ArticleDAO", TipusLog::DATABASE_LOG, LogLevel::INFO);
       return $resultat;
     } catch (PDOException $e) {
-      Logger::log("Error en el metode eliminar de ArticleDAO: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
+      Logger::log("Error al eliminar l'article: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
       return false;
     }
   }

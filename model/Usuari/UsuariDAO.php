@@ -32,7 +32,7 @@ class UsuariDAO {
         'ruta_imatge' => $usuari->getRutaImatge()
       ]);
 
-      Logger::log("Usuari inserit correctament", TipusLog::DATABASE_LOG, LogLevel::INFO);
+      Logger::log("Usuari ". $usuari->getAlies() . " inserit correctament", TipusLog::DATABASE_LOG, LogLevel::INFO);
 
       return $resultat;
     } catch (PDOException $e) {
@@ -63,8 +63,6 @@ class UsuariDAO {
         );
       }
 
-      Logger::log("Usuaris obtinguts correctament al metode getUsuaris de UsuariDAO", TipusLog::DATABASE_LOG, LogLevel::INFO);
-  
     } catch (PDOException $e) {
       Logger::log("Error en el metode getUsuaris de UsuariDAO: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
     }
@@ -88,8 +86,6 @@ class UsuariDAO {
       // Obté el resultat de la consulta.
       $resultat = $sentencia->fetch();
       
-      Logger::log("Usuari obtingut correctament al metode getUsuariPerId a UsuariDAO", TipusLog::DATABASE_LOG, LogLevel::INFO);
-      
       // Retorna un objecte Usuari amb les dades recuperades.
       return new Usuari(
         $resultat['alies'], 
@@ -103,7 +99,7 @@ class UsuariDAO {
         $resultat['es_admin']
       );
     } catch (PDOException $e) {
-      Logger::log("Error en el metode getUsuariPerId de UsuariDAO: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
+      Logger::log("Error al obtenir l'usuari: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
       return null;
     }
   }
@@ -124,8 +120,6 @@ class UsuariDAO {
       // Obté el resultat i retorna un objecte Usuari.
       $resultat = $sentencia->fetch();
       
-      Logger::log("Usuari obtingut correctament al metode getUsuariPerEmail de UsuariDAO", TipusLog::DATABASE_LOG, LogLevel::INFO);
-      
       return new Usuari(
         $resultat['alies'], 
         $resultat['email'], 
@@ -138,7 +132,7 @@ class UsuariDAO {
         $resultat['es_admin']
       );
     } catch (PDOException $e) {
-      Logger::log("Error en el metode getUsuariPerEmail de UsuariDAO: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
+      Logger::log("Error al obtenir el usuari per email: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
       return null;
     }
   }
@@ -158,8 +152,6 @@ class UsuariDAO {
       // Obté el resultat i retorna un objecte Usuari.
       $resultat = $sentencia->fetch();
       
-      Logger::log("Usuari obtingut correctament al metode getUsuariPerAliesOEmail de UsuariDAO", TipusLog::DATABASE_LOG, LogLevel::INFO);
-      
       return new Usuari(
         $resultat['alies'], 
         $resultat['email'], 
@@ -172,7 +164,7 @@ class UsuariDAO {
         $resultat['es_admin']
       );
     } catch (PDOException $e) {
-      Logger::log("Error en el metode getUsuariPerAliesOEmail de UsuariDAO: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
+      Logger::log("Error al obtenir el usuari per alies o email: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
       return null;
     }
   }
@@ -192,8 +184,6 @@ class UsuariDAO {
       // Obté el resultat de la consulta.
       $resultat = $sentencia->fetch();
       
-      Logger::log("Usuari obtingut correctament al metode getUsuariPerToken de UsuariDAO", TipusLog::DATABASE_LOG, LogLevel::INFO);
-  
       // Retorna un objecte Usuari amb les dades recuperades.
       return new Usuari(
         $resultat['alies'], 
@@ -206,7 +196,7 @@ class UsuariDAO {
         $resultat['ruta_imatge']
       );
     } catch (PDOException $e) {
-      Logger::log("Error en el metode getUsuariPerToken de UsuariDAO: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
+      Logger::log("Error al obtenir l'usuari per token: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
       return null;
     }
   }
@@ -229,11 +219,9 @@ class UsuariDAO {
         'es_admin' => $usuari->esAdmin()
       ]);
       
-      Logger::log("Usuari modificat correctament al metode modificar de UsuariDAO", TipusLog::DATABASE_LOG, LogLevel::INFO);
-
       return $resultat;
     } catch (PDOException $e) {
-      Logger::log("Error en el metode modificar de UsuariDAO: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
+      Logger::log("Error al modificar el usuari: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
       return false;
     }
   }
@@ -246,11 +234,9 @@ class UsuariDAO {
       // Executa la sentència d'eliminació i retorna el resultat.
       $resultat = $sentenciaEliminar->execute(['id' => $id]);
 
-      Logger::log("Usuari eliminat correctament al metode eliminar de UsuariDAO", TipusLog::DATABASE_LOG, LogLevel::INFO);
-      
       return $resultat;
     } catch (PDOException $e) {
-      Logger::log("Error en el metode eliminar de UsuariDAO: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
+      Logger::log("Error al eliminar el usuari: " . $e->getMessage(), TipusLog::DATABASE_ERROR, LogLevel::ERROR);
       return false;
     }
   }
